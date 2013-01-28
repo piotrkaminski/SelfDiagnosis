@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+ 	<!-- Configurer that replaces ${...} placeholders with values from a properties 
+		file -->
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:self-diagnosis.properties</value>
+			</list>
+		</property>
+	</bean>
+ 
+	<!-- Contexts Configuration -->
+	<import resource="core/core-logic-context.xml"/>
+	<import resource="hibernate/hibernate-context.xml"/>		
+</beans>
