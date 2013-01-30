@@ -1,6 +1,5 @@
 package com.selfdiagnosis.core.dao;
 
-import java.io.File;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -17,35 +16,12 @@ public class ExampleDAOImpl extends BaseDAO implements ExampleDAO {
 	public TestEntity getTestEntity(Integer id) {
 		return (TestEntity) getObject(TestEntity.class, id);
 	}
-	
-	@Transactional(propagation = Propagation.REQUIRED)
-	public TestEntity getOrderFile(File file) {
-		Query query = getCurrentSession().createQuery("from OrderFile where location = :location and filename = :filename");
-		query.setParameter("location", file.getParent());
-        query.setParameter("filename", file.getName());
-		List result = query.list();
-		if (result.size() > 1) {
-			throw new DAOException("There is more then 1 file: " + result);
-		}
-		if (result.size() == 1) {
-			return (TestEntity) result.get(0);
-		}
-		return null;
-	}	
 
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void saveTestEntity(TestEntity testEntity) {
 		saveOrUpdate(testEntity);
 	}
-	
-	@Transactional(propagation = Propagation.REQUIRED)
-	public TestEntity saveTestEntity(File file) {
-		TestEntity orderFile = new TestEntity();
-		orderFile.setLocation(file.getParent());
-		orderFile.setFileName(file.getName());
-		Integer id = save(orderFile);
-		return getTestEntity(id);
-	}	
+
 	
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void delete(TestEntity testEntity) {

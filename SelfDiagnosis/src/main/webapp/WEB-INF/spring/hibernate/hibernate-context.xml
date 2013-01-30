@@ -27,7 +27,20 @@ http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
   <bean id="annotatedClasses" class="java.util.ArrayList">
     <constructor-arg index="0">
       <list>
+        <value>com.selfdiagnosis.core.entity.BodyPartEntity</value>
+        <value>com.selfdiagnosis.core.entity.DiseaseEntity</value>
+        <value>com.selfdiagnosis.core.entity.DiseaseSymptomEntity</value>
+        <value>com.selfdiagnosis.core.entity.DoctorSpecialtyEntity</value>
+        <value>com.selfdiagnosis.core.entity.SymptomEntity</value>
+        <value>com.selfdiagnosis.core.entity.SymptomTypeEntity</value>
         <value>com.selfdiagnosis.core.entity.TestEntity</value>
+        <value>com.selfdiagnosis.core.entity.TestFlagEntity</value>
+        <value>com.selfdiagnosis.core.entity.TestTypeEntity</value>
+        <value>com.selfdiagnosis.core.entity.TestUnitEntity</value>
+        <value>com.selfdiagnosis.core.entity.TreatmentEntity</value>
+        <value>com.selfdiagnosis.core.entity.UserEntity</value>
+        <value>com.selfdiagnosis.core.entity.UserTestEntity</value>
+        
       </list>
     </constructor-arg>
   </bean>	
