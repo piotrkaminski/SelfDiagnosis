@@ -25,7 +25,7 @@ public class UserTestEntity {
 	 */
 	@ManyToOne
 	@JoinColumn(name = "user_id", nullable = false)
-	private UserEntity user;
+	private SystemUserEntity user;
 	
 	/**
 	 * Related test
@@ -68,11 +68,11 @@ public class UserTestEntity {
 		this.id = id;
 	}
 
-	public UserEntity getUser() {
+	public SystemUserEntity getUser() {
 		return user;
 	}
 
-	public void setUser(UserEntity user) {
+	public void setUser(SystemUserEntity user) {
 		this.user = user;
 	}
 

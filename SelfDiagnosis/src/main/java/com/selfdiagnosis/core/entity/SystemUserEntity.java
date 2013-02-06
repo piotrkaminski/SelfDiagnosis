@@ -1,15 +1,19 @@
 package com.selfdiagnosis.core.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "User")
-public class UserEntity {
+@Table(name = "SystemUser")
+public class SystemUserEntity {
 	/**
 	 * Primary key
 	 */
@@ -33,32 +37,7 @@ public class UserEntity {
 	 * Email address name of the user
 	 */
 	@Column(name = "email", unique = false, nullable = true)
-	private String email;
-	
-	/**
-	 * Telephone number of the user
-	 */
-	@Column(name = "tel", unique = false, nullable = true)
-	private String tel;
-
-	/**
-	 * Zip code for user's address
-	 */
-	@Column(name = "zipCode", unique = false, nullable = true)
-	private String zipCode;
-	
-	/**
-	 * User's city
-	 */
-	@Column(name = "city", unique = false, nullable = true)
-	private String city;
-	
-	/**
-	 * User's address
-	 */
-	@Column(name = "address", unique = false, nullable = true)
-	private String address;
-
+	private String email;	
 	
 	/**
 	 * User's sign in date
@@ -90,6 +69,24 @@ public class UserEntity {
 	@Column(name = "birthDate", unique = false, nullable = true)
 	private Date birthDate;
 
+	/**
+	 * User's password
+	 */
+	@Column(name = "password", unique = false, nullable = true)
+	private String password; 
+	
+	/**
+	 * Flag if account is enabled
+	 */
+	@Column(name = "enabled", unique = false, nullable = false)
+	private Boolean enabled;
+	
+	@ManyToMany()
+	@JoinTable(name = "SystemUserSecurityRole", 
+		joinColumns = { @JoinColumn(name = "systemUser_id", referencedColumnName = "id") }, 
+		inverseJoinColumns = { @JoinColumn(name = "securityRole_id", referencedColumnName = "id") })
+	private List<SecurityRoleEntity> securityRoles;
+	
 	public Long getId() {
 		return id;
 	}
@@ -120,38 +117,6 @@ public class UserEntity {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getTel() {
-		return tel;
-	}
-
-	public void setTel(String tel) {
-		this.tel = tel;
-	}
-
-	public String getZipCode() {
-		return zipCode;
-	}
-
-	public void setZipCode(String zipCode) {
-		this.zipCode = zipCode;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
 	}
 
 	public Date getSignInDate() {
@@ -192,6 +157,30 @@ public class UserEntity {
 
 	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public List<SecurityRoleEntity> getSecurityRoles() {
+		return securityRoles;
+	}
+
+	public void setSecurityRoles(List<SecurityRoleEntity> securityRoles) {
+		this.securityRoles = securityRoles;
 	}
 
 }
