@@ -2,6 +2,7 @@ package com.selfdiagnosis.core.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -15,6 +16,7 @@ public class DiseaseSymptomEntity {
 	 * Primary key
 	 */
 	@Id
+	@GeneratedValue
 	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
 

@@ -1,14 +1,20 @@
 package com.selfdiagnosis.core.entity;
 
+import java.util.Collection;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "DoctorSpecialty")
-public class DoctorSpecialtyEntity {
+@Table(name = "Drug")
+public class DrugEntity {
+	
 	/**
 	 * Primary key
 	 */
@@ -18,17 +24,28 @@ public class DoctorSpecialtyEntity {
 	private Long id;
 	
 	/**
-	 * Name of the specialty
+	 * Name of the drug
 	 */
 	@Column(name = "name", unique = false, nullable = false)
 	private String name;
 	
 	/**
-	 * Description of the specialty
+	 * Description of the drug
 	 */
 	@Column(name = "description", unique = false, nullable = true)
 	private String description;
-
+	
+	/**
+	 * Drug's contraindications
+	 */
+	@ManyToMany
+	@JoinTable(
+			name = "DrugContraindication",
+			joinColumns = @JoinColumn(name = "drug_id"),
+			inverseJoinColumns = @JoinColumn(name = "contraindication_id"))
+	private Collection<ContraindicationEntity> contraindicationCollection;
+ 
+		
 	public Long getId() {
 		return id;
 	}
@@ -52,6 +69,5 @@ public class DoctorSpecialtyEntity {
 	public void setDescription(String description) {
 		this.description = description;
 	}
- 
 
 }

@@ -2,10 +2,14 @@ package com.selfdiagnosis.core.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name = "BodyPart")
@@ -14,6 +18,7 @@ public class BodyPartEntity {
 	 * Primary key
 	 */
 	@Id
+	@GeneratedValue
 	@Column(name = "id", unique = true, nullable = false)
 	private Integer id;
 	
@@ -21,6 +26,8 @@ public class BodyPartEntity {
 	 * Name of the test type
 	 */
 	@Column(name = "name", unique = false, nullable = false)
+	@Length(max=10)
+	@NotBlank
 	private String name;
 
 	/**

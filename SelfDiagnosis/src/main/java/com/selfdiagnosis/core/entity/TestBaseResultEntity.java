@@ -9,8 +9,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Test")
-public class TestEntity {
+@Table(name = "TestBaseResult")
+public class TestBaseResultEntity {
 	
 	/**
 	 * Primary key
@@ -21,23 +21,25 @@ public class TestEntity {
 	private Long id;
 	
 	/**
-	 * Name of the test
+	 * Type of the test - i.e. blood, urine etc.
 	 */
-	@Column(name = "name", unique = false, nullable = false)
-	private String name;
+	@ManyToOne
+	@JoinColumn(name = "test_id")
+	private TestEntity test;
 	
-	/**
-	 * Description of the test
-	 */
-	@Column(name = "description", unique = false, nullable = true)
-	private String description;
- 
 	/**
 	 * Type of the test - i.e. blood, urine etc.
 	 */
 	@ManyToOne
-	@JoinColumn(name = "testType_id")
-	private TestTypeEntity testType;
+	@JoinColumn(name = "ageRange_id")
+	private AgeRangeEntity ageRange;
+	
+	/**
+	 * Type of the test - i.e. blood, urine etc.
+	 */
+	@ManyToOne
+	@JoinColumn(name = "gender_id")
+	private GenderEntity gender;
 	
 	/**
 	 * Minimum correct value for the test
@@ -58,22 +60,7 @@ public class TestEntity {
 	@JoinColumn(name = "testUnit_id")
 	private TestUnitEntity testUnit;
 	
-	/**
-	 * For how many days, test result is valid
-	 */
-	@Column(name = "validForDays", unique = false, nullable = true)
-	private Integer validForDays;
-
-
 	
-	public TestTypeEntity getTestType() {
-		return testType;
-	}
-
-	public void setTestType(TestTypeEntity testType) {
-		this.testType = testType;
-	}
-
 	public TestUnitEntity getTestUnit() {
 		return testUnit;
 	}
@@ -89,22 +76,6 @@ public class TestEntity {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
 	}
 
 	public Double getMinimumValue() {
@@ -123,12 +94,28 @@ public class TestEntity {
 		this.maximumValue = maximumValue;
 	}
 
-	public Integer getValidForDays() {
-		return validForDays;
+	public TestEntity getTest() {
+		return test;
 	}
 
-	public void setValidForDays(Integer validForDays) {
-		this.validForDays = validForDays;
+	public void setTest(TestEntity test) {
+		this.test = test;
+	}
+
+	public AgeRangeEntity getAgeRange() {
+		return ageRange;
+	}
+
+	public void setAgeRange(AgeRangeEntity ageRange) {
+		this.ageRange = ageRange;
+	}
+
+	public GenderEntity getGender() {
+		return gender;
+	}
+
+	public void setGender(GenderEntity gender) {
+		this.gender = gender;
 	}
 
 }

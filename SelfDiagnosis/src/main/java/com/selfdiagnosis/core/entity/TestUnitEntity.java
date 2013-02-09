@@ -2,6 +2,7 @@ package com.selfdiagnosis.core.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -13,6 +14,7 @@ public class TestUnitEntity {
 	 * Primary key
 	 */
 	@Id
+	@GeneratedValue
 	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
 	

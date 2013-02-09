@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.selfdiagnosis.core.entity.TestEntity;
 
 @Repository
-public class ExampleDAOImpl extends BaseDAO implements ExampleDAO {
+public class ExampleDAOImpl extends BaseDAOImpl implements ExampleDAO {
 
 	@Transactional(propagation = Propagation.REQUIRED)
 	public TestEntity getTestEntity(Integer id) {
@@ -33,7 +33,7 @@ public class ExampleDAOImpl extends BaseDAO implements ExampleDAO {
 	 */
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
-	public List getAllTestEntities() {
+	public List<TestEntity> getAllTestEntities() {
 		Query query = getCurrentSession().createQuery("from TestEntity order by id desc");
 		return query.list();
 	}

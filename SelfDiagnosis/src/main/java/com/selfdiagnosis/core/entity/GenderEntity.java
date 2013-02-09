@@ -7,8 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "DoctorSpecialty")
-public class DoctorSpecialtyEntity {
+@Table(name="Gender")
+public class GenderEntity {
 	/**
 	 * Primary key
 	 */
@@ -18,16 +18,16 @@ public class DoctorSpecialtyEntity {
 	private Long id;
 	
 	/**
-	 * Name of the specialty
+	 * Name of the test
 	 */
 	@Column(name = "name", unique = false, nullable = false)
 	private String name;
 	
 	/**
-	 * Description of the specialty
+	 * Description of the test
 	 */
-	@Column(name = "description", unique = false, nullable = true)
-	private String description;
+	@Column(name = "shortName", unique = false, nullable = false)
+	private String shortName;
 
 	public Long getId() {
 		return id;
@@ -45,13 +45,12 @@ public class DoctorSpecialtyEntity {
 		this.name = name;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getShortName() {
+		return shortName;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setShortName(String shortName) {
+		this.shortName = shortName;
 	}
- 
 
 }

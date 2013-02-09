@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -17,6 +18,7 @@ public class DiseaseEntity {
 	 * Primary key
 	 */
 	@Id
+	@GeneratedValue
 	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
 	
@@ -44,9 +46,9 @@ public class DiseaseEntity {
 	 */
 	@ManyToMany
 	@JoinTable(
-			name = "DiseaseDoctorSpeciality",
+			name = "DiseaseDoctorSpecialty",
 			joinColumns = @JoinColumn(name = "disease_id"),
-			inverseJoinColumns = @JoinColumn(name = "doctorSpeciality_id"))
+			inverseJoinColumns = @JoinColumn(name = "doctorSpecialty_id"))
 	private Collection<DoctorSpecialtyEntity> doctorSpecialtyCollection;
 	
 

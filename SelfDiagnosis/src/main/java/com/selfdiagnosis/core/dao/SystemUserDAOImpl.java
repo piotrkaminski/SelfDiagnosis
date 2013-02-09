@@ -14,7 +14,7 @@ import com.selfdiagnosis.core.entity.SystemUserEntity;
  *
  */
 @Repository
-public class SystemUserDAOImpl extends BaseDAO implements SystemUserDAO {
+public class SystemUserDAOImpl extends BaseDAOImpl implements SystemUserDAO {
 	
 	
 	@Override

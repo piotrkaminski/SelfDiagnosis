@@ -27,20 +27,28 @@ http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
   <bean id="annotatedClasses" class="java.util.ArrayList">
     <constructor-arg index="0">
       <list>
+        <value>com.selfdiagnosis.core.entity.AgeRangeEntity</value>
         <value>com.selfdiagnosis.core.entity.BodyPartEntity</value>
+        <value>com.selfdiagnosis.core.entity.ContraindicationEntity</value>
         <value>com.selfdiagnosis.core.entity.DiseaseEntity</value>
         <value>com.selfdiagnosis.core.entity.DiseaseSymptomEntity</value>
         <value>com.selfdiagnosis.core.entity.DoctorSpecialtyEntity</value>
+        <value>com.selfdiagnosis.core.entity.DrugEntity</value>
+        <value>com.selfdiagnosis.core.entity.GenderEntity</value>
+        <value>com.selfdiagnosis.core.entity.SecurityRoleEntity</value>
         <value>com.selfdiagnosis.core.entity.SymptomEntity</value>
+        <value>com.selfdiagnosis.core.entity.SymptomQuestionAnswerEntity</value>
+        <value>com.selfdiagnosis.core.entity.SymptomQuestionEntity</value>
         <value>com.selfdiagnosis.core.entity.SymptomTypeEntity</value>
+        <value>com.selfdiagnosis.core.entity.SystemUserEntity</value>
+        <value>com.selfdiagnosis.core.entity.TestBaseResultEntity</value>
         <value>com.selfdiagnosis.core.entity.TestEntity</value>
         <value>com.selfdiagnosis.core.entity.TestFlagEntity</value>
         <value>com.selfdiagnosis.core.entity.TestTypeEntity</value>
         <value>com.selfdiagnosis.core.entity.TestUnitEntity</value>
         <value>com.selfdiagnosis.core.entity.TreatmentEntity</value>
-        <value>com.selfdiagnosis.core.entity.SystemUserEntity</value>
+        <value>com.selfdiagnosis.core.entity.RecommendationEntity</value>
         <value>com.selfdiagnosis.core.entity.UserTestEntity</value>
-        <value>com.selfdiagnosis.core.entity.SecurityRoleEntity</value>
       </list>
     </constructor-arg>
   </bean>	
