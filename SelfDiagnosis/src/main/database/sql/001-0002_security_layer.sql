@@ -66,3 +66,5 @@ ALTER TABLE [dbo].[SystemUser] DROP COLUMN address;
 ALTER TABLE dbo.[SystemUser] ADD enabled int NOT NULL DEFAULT 1;
 GO
 
+-- password 'test1234' encoded using sha
+UPDATE [dbo].[SystemUser] set password = '9bc34549d565d9505b287de0cd20ac77be1d3f2c' where [email] = 'test@sd.com';
