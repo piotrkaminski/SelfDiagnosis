@@ -62,4 +62,6 @@ public interface BaseDAO {
 
 	void setSessionFactory(SessionFactory sessionFactory);
 
+	Object merge(Object obj);
+
 }

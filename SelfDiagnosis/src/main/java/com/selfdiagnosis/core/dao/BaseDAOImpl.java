@@ -8,8 +8,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Abstract class for DAO classes.
@@ -65,7 +63,6 @@ public abstract class BaseDAOImpl implements BaseDAO {
 	 * @see com.selfdiagnosis.core.dao.BaseDAO#save(java.lang.Object)
 	 */
     @Override
-	@Transactional(propagation=Propagation.REQUIRED)
     public Integer save(Object obj) {
         return (Integer) getCurrentSession().save(obj);
     }    
@@ -96,6 +93,11 @@ public abstract class BaseDAOImpl implements BaseDAO {
         getCurrentSession().createSQLQuery(procedure).executeUpdate();
     }
 
+    @Override
+    public Object merge(Object obj) {
+    	return getCurrentSession().merge(obj);
+    }
+    
     /* (non-Javadoc)
 	 * @see com.selfdiagnosis.core.dao.BaseDAO#getSessionFactory()
 	 */
@@ -111,5 +113,6 @@ public abstract class BaseDAOImpl implements BaseDAO {
 	public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
+    
     
 }

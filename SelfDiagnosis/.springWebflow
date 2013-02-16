@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webflow-project-description>
+	<version>1</version>
+	<pluginVersion><![CDATA[3.2.0.201211290605-M1]]></pluginVersion>
+	<configs>
+		<config>
+			<file>src/main/webapp/WEB-INF/jsp/admin/parent-flow.xml</file>
+			<name><![CDATA[parent-flow]]></name>
+		</config>
+		<config>
+			<file>src/main/webapp/WEB-INF/jsp/admin/disease.xml</file>
+			<name><![CDATA[disease]]></name>
+		</config>
+		<config>
+			<file>src/main/webapp/WEB-INF/jsp/admin/bodyPart.xml</file>
+			<name><![CDATA[bodyPart]]></name>
+		</config>
+		<config>
+			<file>src/main/webapp/WEB-INF/jsp/admin/symptomType.xml</file>
+			<name><![CDATA[symptomType]]></name>
+		</config>
+	</configs>
+</webflow-project-description>

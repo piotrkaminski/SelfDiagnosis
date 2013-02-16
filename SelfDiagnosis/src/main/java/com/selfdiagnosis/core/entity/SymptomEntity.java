@@ -1,5 +1,7 @@
 package com.selfdiagnosis.core.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,7 +12,12 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Symptom")
-public class SymptomEntity {
+public class SymptomEntity implements SelfDiagnosisEntity, Serializable {
+
+	/**
+	 * Serial
+	 */
+	private static final long serialVersionUID = 7426824635548340022L;
 
 	/**
 	 * Primary key

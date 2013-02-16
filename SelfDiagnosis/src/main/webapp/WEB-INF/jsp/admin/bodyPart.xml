@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+        http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
+    parent="parent-flow">
+
+	<view-state id="entityForm" model="entity" view="bodyPartForm.jsp">
+    	<!-- <on-render>
+    		<evaluate expression="adminService.getBodyPartList()" result="flowScope.bodyParts"></evaluate>
+    	</on-render>-->
+        <transition on="saveAndNew" to="entityForm">
+	        <evaluate expression="bodyPartBean" result="entity"/>
+        </transition>
+   	</view-state>
+
+
+</flow>

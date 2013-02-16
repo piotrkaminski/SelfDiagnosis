@@ -1,5 +1,6 @@
 package com.selfdiagnosis.core.entity;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import javax.persistence.Column;
@@ -13,7 +14,12 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Disease")
-public class DiseaseEntity {
+public class DiseaseEntity implements SelfDiagnosisEntity, Serializable {
+	/**
+	 * Serial
+	 */
+	private static final long serialVersionUID = -6865332512873021190L;
+
 	/**
 	 * Primary key
 	 */
@@ -38,7 +44,7 @@ public class DiseaseEntity {
 	 * Frequency of disease
 	 */
 	@Column(name = "frequency", nullable = false)
-	private Short frequncy;
+	private Short frequency;
 	
 
 	/**
@@ -88,12 +94,12 @@ public class DiseaseEntity {
 		this.description = description;
 	}
 
-	public Short getFrequncy() {
-		return frequncy;
+	public Short getFrequency() {
+		return frequency;
 	}
 
-	public void setFrequncy(Short frequncy) {
-		this.frequncy = frequncy;
+	public void setFrequency(Short frequncy) {
+		this.frequency = frequncy;
 	}
 
 	public Collection<DoctorSpecialtyEntity> getDoctorSpecialtyCollection() {
@@ -114,5 +120,8 @@ public class DiseaseEntity {
 		this.treatmentCollection = treatmentCollection;
 	}
  
-
+	@SuppressWarnings("unused")
+	public void addNewSymptom(SymptomEntity symptom) {
+		int test = 0;
+	}
 }

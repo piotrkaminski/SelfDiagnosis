@@ -1,5 +1,7 @@
 package com.selfdiagnosis.core.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,12 +10,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotBlank;
-
 @Entity
 @Table(name = "BodyPart")
-public class BodyPartEntity {
+public class BodyPartEntity implements SelfDiagnosisEntity, Serializable {
+	/**
+	 * Serial
+	 */
+	private static final long serialVersionUID = -3935000687100000630L;
+
 	/**
 	 * Primary key
 	 */
@@ -26,8 +30,6 @@ public class BodyPartEntity {
 	 * Name of the test type
 	 */
 	@Column(name = "name", unique = false, nullable = false)
-	@Length(max=10)
-	@NotBlank
 	private String name;
 
 	/**
@@ -59,5 +61,10 @@ public class BodyPartEntity {
 
 	public void setParentBodyPart(BodyPartEntity parentBodyPart) {
 		this.parentBodyPart = parentBodyPart;
+	}
+	
+	@Override
+	public String toString() {
+		return getId()== null ? null : getId().toString();
 	}
 }
