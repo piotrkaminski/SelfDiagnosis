@@ -9,19 +9,19 @@ package com.selfdiagnosis;
  */
 public class SelfDiagnosisException extends RuntimeException {
 
-	private static final long serialVersionUID = 1L;
-	
-	public SelfDiagnosisException(String string) {
-		super(string);
-	}
+    private static final long serialVersionUID = 1L;
+    
+    public SelfDiagnosisException(String string) {
+        super(string);
+    }
 
 
-	public SelfDiagnosisException(String message, Throwable cause) {
-		super(message, cause);
-	}
+    public SelfDiagnosisException(String message, Throwable cause) {
+        super(message, cause);
+    }
 
-	public SelfDiagnosisException(Throwable cause) {
-		super(cause);
-	}
+    public SelfDiagnosisException(Throwable cause) {
+        super(cause);
+    }
 
 }

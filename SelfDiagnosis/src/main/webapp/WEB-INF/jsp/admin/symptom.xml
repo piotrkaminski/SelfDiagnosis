@@ -5,88 +5,49 @@
                           http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
       parent="parent-flow">
 
-    <!-- <secured attributes="ROLE_USER" /> -->
+    <on-start>
+            <evaluate expression="adminService.getBodyPartList()" result="flowScope.bodyParts"></evaluate>
+            <evaluate expression="adminService.getSymptomTypeList()" result="flowScope.symptomTypes"></evaluate>
+            <evaluate expression="adminService.getTestList()" result="flowScope.tests"></evaluate>
+    </on-start>
 
-	<view-state id="entityForm" model="entity" view="symptomForm.jsp">
-    	<on-render>
-    		<evaluate expression="adminService.getBodyPartList()" result="flowScope.bodyParts"></evaluate>
-    		<evaluate expression="adminService.getSymptomTypeList()" result="flowScope.symptomTypes"></evaluate>
-    	</on-render>
+    <view-state id="entityForm" model="entity" view="symptomForm.jsp">
         <transition on="saveAndNew" to="entityForm">
-	        <evaluate expression="symptomBean" result="entity"/>
+            <evaluate expression="symptomBean" result="entity"/>
         </transition>
         <transition on="addNewBodyPart" to="addNewBodyPart"></transition>
         <transition on="addNewSymptomType" to="addNewSymptomType"></transition>
+        <transition on="addNewTest" to="addNewTest"></transition>
     </view-state>
 
     <subflow-state id="addNewBodyPart" subflow="bodyPart">
-    	<input name="entity" value="bodyPartBean"/>
-    	<transition on="saveAndBack" to="entityForm">
-    		<evaluate expression="entity.setBodyPart(currentEvent.attributes.entity)"></evaluate>
-    	</transition>
-    	<transition on="back" to="entityForm">
-    	</transition>
+        <input name="entity" value="bodyPartBean"/>
+        <transition on="saveAndBack" to="entityForm">
+            <evaluate expression="adminService.getBodyPartList()" result="flowScope.bodyParts"></evaluate>
+            <evaluate expression="entity.setBodyPart(currentEvent.attributes.entity)"></evaluate>
+        </transition>
+        <transition on="back" to="entityForm">
+        </transition>
     </subflow-state>
 
     <subflow-state id="addNewSymptomType" subflow="symptomType">
-    	<input name="entity" value="symptomTypeBean"/>
-    	<transition on="saveAndBack" to="entityForm">
-    		<evaluate expression="entity.setSymptomType(currentEvent.attributes.entity)"></evaluate>
-    	</transition>
-    	<transition on="back" to="entityForm">
-    	</transition>
+        <input name="entity" value="symptomTypeBean"/>
+        <transition on="saveAndBack" to="entityForm">
+            <evaluate expression="adminService.getSymptomTypeList()" result="flowScope.symptomTypes"></evaluate>
+            <evaluate expression="entity.setSymptomType(currentEvent.attributes.entity)"></evaluate>
+        </transition>
+        <transition on="back" to="entityForm">
+        </transition>
     </subflow-state>
 
-
-<!-- <input name="id" />
-
-    <decision-state id="createOrEdit">
-        <if test="id == null" then="create" else="edit" />
-    </decision-state>
-
-    <action-state id="create">
-        <evaluate expression="symptomBean" result="flowScope.symptom" />
-        <transition to="symptomForm" />
-    </action-state>
-
-    <action-state id="edit">
-        <evaluate expression="symptomService.findById(id)"
-            result="flowScope.symptom" />
-        <transition to="symptomForm" />
-    </action-state>
-
-    <view-state id="symptomForm" model="symptom" view="symptomForm.jsp">
-    	<on-render>
-    		<evaluate expression="adminService.getBodyPartList()" result="flowScope.bodyParts"></evaluate>
-    	</on-render>
-        <transition on="save" to="save">
-            <evaluate expression="adminService.saveSymptom(symptom)" />
+    <subflow-state id="addNewTest" subflow="test">
+        <input name="entity" value="testBean"/>
+        <transition on="saveAndBack" to="entityForm">
+            <evaluate expression="adminService.getTestList()" result="flowScope.tests"></evaluate>
+            <evaluate expression="entity.setTest(currentEvent.attributes.entity)"></evaluate>
         </transition>
-        <transition on="cancel" to="cancel" bind="false">
+        <transition on="back" to="entityForm">
         </transition>
-        <transition on="addBodyPart" to="bodyPartForm" bind="false">
-        	<evaluate expression="bodyPartBean" result="flowScope.bodyPart"/>
-        </transition>
-    </view-state>
-
-    <view-state id="bodyPartForm" model="bodyPart" view="bodyPartForm.jsp">
-        <transition on="save">
-            <evaluate expression="adminService.saveBodyPart(bodyPart)" />
-        </transition>
-        <transition on="back" to="symptomForm" bind="false">
-        	<set name="symptom.bodyPart" value="bodyPart"></set>
-        </transition>
-        <transition on="saveAndBack" to="symptomForm">
-            <evaluate expression="adminService.saveBodyPart(bodyPart)"/> -->
-            <!-- <set name="symptom.bodyPart" value="bodyPart.id"></set>  -->
-            <!-- <evaluate expression="adminService.setSymptomBodyPart(flowScope.symptom, bodyPart)" result="flowScope.symptom"> 
-            </evaluate>-->
-<!--        </transition>
-    </view-state>
-
-
-    <end-state id="save"/>
-
-    <end-state id="cancel"/>  -->    
+    </subflow-state>
 
 </flow>

@@ -2,11 +2,11 @@ sp_rename 'User', 'SystemUser';
 GO
 
 CREATE TABLE [dbo].[SecurityRole](
-	[id] [numeric](19, 0) IDENTITY(1,1) NOT NULL,
-	[roleName] [nvarchar](50) NULL,
+    [id] [numeric](19, 0) IDENTITY(1,1) NOT NULL,
+    [roleName] [nvarchar](50) NULL,
  CONSTRAINT [PK_SecurityRole] PRIMARY KEY CLUSTERED 
 (
-	[id] ASC
+    [id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
@@ -14,11 +14,11 @@ GO
 
 
 CREATE TABLE [dbo].[SystemUserSecurityRole](
-	[systemUser_id] [numeric](19, 0) NOT NULL,
-	[securityRole_id] [numeric](19, 0) NOT NULL,
+    [systemUser_id] [numeric](19, 0) NOT NULL,
+    [securityRole_id] [numeric](19, 0) NOT NULL,
  CONSTRAINT [PK_SystemUserSecurityRole] PRIMARY KEY CLUSTERED 
 (
-	[systemUser_id], [securityRole_id] ASC
+    [systemUser_id], [securityRole_id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
@@ -55,7 +55,7 @@ SELECT @user_id = id FROM [dbo].[SystemUser] WHERE [email] = 'test@sd.com';
 SELECT @securityRole_id = id from [dbo].[SecurityRole] WHERE [roleName] = 'ROLE_USER';
 
 INSERT INTO [dbo].[SystemUserSecurityRole](systemUser_id, securityRole_id) 
-	VALUES (@user_id, @securityRole_id);
+    VALUES (@user_id, @securityRole_id);
 
 END
 GO

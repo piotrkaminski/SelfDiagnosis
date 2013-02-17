@@ -6,6 +6,6 @@ import com.selfdiagnosis.core.entity.SymptomTypeEntity;
 
 public interface SymptomTypeDAO {
 
-	List<SymptomTypeEntity> findAll();
+    List<SymptomTypeEntity> findAll();
 
 }

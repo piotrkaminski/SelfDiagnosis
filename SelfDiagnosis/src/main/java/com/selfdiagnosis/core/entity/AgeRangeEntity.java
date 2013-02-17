@@ -1,57 +1,78 @@
 package com.selfdiagnosis.core.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.Range;
+
+import com.selfdiagnosis.SelfDiagnosisConstants;
+
+
+/**
+ * Entity with Age range. Used for base test results.
+ * @author mmieszkowski
+ *
+ */
 @Entity
-@Table(name="AgeRange")
-public class AgeRangeEntity {
+@Table(name = "AgeRange")
+public class AgeRangeEntity extends SelfDiagnosisEntity implements Serializable {
 
-	/**
-	 * Primary key
-	 */
-	@Id
-	@GeneratedValue
-	@Column(name = "id", unique = true, nullable = false)
-	private Long id;
-	
-	/**
-	 * Name of the test
-	 */
-	@Column(name = "yearsFrom", unique = false, nullable = true)
-	private Integer yearsFrom;
-	
-	/**
-	 * Description of the test
-	 */
-	@Column(name = "yearsTo", unique = false, nullable = true)
-	private Integer yearsTo;
+    /**
+     * Serial.
+     */
+    private static final long serialVersionUID = -5592671453853458069L;
 
-	public Long getId() {
-		return id;
-	}
+    /**
+     * Primary key.
+     */
+    @Id
+    @GeneratedValue
+    @Column(name = "id", unique = true, nullable = false)
+    private Long id;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    /**
+     * Name of the test.
+     */
+    @Range(min = SelfDiagnosisConstants.AGE_RANGE_AGE_MIN, 
+            max = SelfDiagnosisConstants.AGE_RANGE_AGE_MAX)
+    @Column(name = "yearsFrom", unique = false, nullable = true)
+    private Integer yearsFrom;
 
-	public Integer getYearsFrom() {
-		return yearsFrom;
-	}
+    /**
+     * Description of the test.
+     */
+    @Range(min = SelfDiagnosisConstants.AGE_RANGE_AGE_MIN, 
+            max = SelfDiagnosisConstants.AGE_RANGE_AGE_MAX)
+    @Column(name = "yearsTo", unique = false, nullable = true)
+    private Integer yearsTo;
 
-	public void setYearsFrom(Integer yearsFrom) {
-		this.yearsFrom = yearsFrom;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public Integer getYearsTo() {
-		return yearsTo;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setYearsTo(Integer yearsTo) {
-		this.yearsTo = yearsTo;
-	}
+    public Integer getYearsFrom() {
+        return yearsFrom;
+    }
+
+    public void setYearsFrom(Integer yearsFrom) {
+        this.yearsFrom = yearsFrom;
+    }
+
+    public Integer getYearsTo() {
+        return yearsTo;
+    }
+
+    public void setYearsTo(Integer yearsTo) {
+        this.yearsTo = yearsTo;
+    }
 
 }

@@ -15,13 +15,13 @@ import com.selfdiagnosis.core.entity.SystemUserEntity;
  */
 @Repository
 public class SystemUserDAOImpl extends BaseDAOImpl implements SystemUserDAO {
-	
-	
-	@Override
-	@Transactional(propagation = Propagation.REQUIRED)
-	public SystemUserEntity findByEmail(String email) {
-		Query query = getCurrentSession().createQuery("from SystemUserEntity where email = :emailParam");
-		query.setString("emailParam", email);
-		return (SystemUserEntity)query.uniqueResult();
-	}
+    
+    
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED)
+    public SystemUserEntity findByEmail(String email) {
+        Query query = getCurrentSession().createQuery("from SystemUserEntity where email = :emailParam");
+        query.setString("emailParam", email);
+        return (SystemUserEntity)query.uniqueResult();
+    }
 }

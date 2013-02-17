@@ -3,11 +3,11 @@
 <%@ page session="false" %>
 <html>
 <head>
-    <title>Edit Symptom type</title>
+    <title>Edit Test type</title>
 </head>
 <body>
 <h1>
-    Enter new Symptom Type!  
+    Enter new Test Type!  
 </h1>
 <form:form commandName="entity">
     <table>

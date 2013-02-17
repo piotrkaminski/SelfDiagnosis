@@ -1,5 +1,7 @@
 package com.selfdiagnosis.core.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,64 +9,90 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+
+import com.selfdiagnosis.SelfDiagnosisConstants;
+
+/**
+ * Entity that stores anwers to symptom questions.
+ * 
+ * @author mmieszkowski
+ * 
+ */
 @Entity
 @Table(name = "SymptomQuestionAnswer")
-public class SymptomQuestionAnswerEntity {
+public class SymptomQuestionAnswerEntity extends SelfDiagnosisEntity implements Serializable {
 
-	@Id
-	@GeneratedValue
-	@Column(name = "id", unique = true, nullable = false)
-	private Long id;
-	
-	/**
-	 * Question, this answer relates to
-	 */
-	@ManyToOne
-	@JoinColumn(name = "symptomQuestion_id", unique = false, nullable = false)
-	private SymptomQuestionEntity symptomQuestion;
-	
-	/**
-	 * Answers's number within given symptom question.
-	 */
-	@Column(name = "answerNumber", unique = false, nullable = false)
-	private Short answerNumber;
-	
-	/**
-	 * Answer's text
-	 */
-	@Column(name = "answer", unique = false, nullable = false)
-	private String answer;
+    /**
+     * Serial.
+     */
+    private static final long serialVersionUID = -5243042936481966453L;
 
-	public Long getId() {
-		return id;
-	}
+    /**
+     * Primary key.
+     */
+    @Id
+    @GeneratedValue
+    @Column(name = "id", unique = true, nullable = false)
+    private Long id;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    /**
+     * Question, this answer relates to.
+     */
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "symptomQuestion_id", unique = false, nullable = false)
+    private SymptomQuestionEntity symptomQuestion;
 
-	public SymptomQuestionEntity getSymptomQuestion() {
-		return symptomQuestion;
-	}
+    /**
+     * Answers's number within given symptom question.
+     */
+    @NotNull
+    @Min(0)
+    @Column(name = "answerNumber", unique = false, nullable = false)
+    private Short answerNumber;
 
-	public void setSymptomQuestion(SymptomQuestionEntity symptomQuestion) {
-		this.symptomQuestion = symptomQuestion;
-	}
+    /**
+     * Answer's text.
+     */
+    @NotBlank
+    @Length(max = SelfDiagnosisConstants.SYMPTOM_QUESTION_ANSWER_LENGTH_MAX)
+    @Column(name = "answer", unique = false, nullable = false)
+    private String answer;
 
-	public Short getAnswerNumber() {
-		return answerNumber;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setAnswerNumber(Short answerNumber) {
-		this.answerNumber = answerNumber;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getAnswer() {
-		return answer;
-	}
+    public SymptomQuestionEntity getSymptomQuestion() {
+        return symptomQuestion;
+    }
 
-	public void setAnswer(String answer) {
-		this.answer = answer;
-	}
+    public void setSymptomQuestion(SymptomQuestionEntity symptomQuestion) {
+        this.symptomQuestion = symptomQuestion;
+    }
+
+    public Short getAnswerNumber() {
+        return answerNumber;
+    }
+
+    public void setAnswerNumber(Short answerNumber) {
+        this.answerNumber = answerNumber;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
 }

@@ -1,5 +1,7 @@
 package com.selfdiagnosis.core.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,82 +9,108 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Range;
+
+import com.selfdiagnosis.SelfDiagnosisConstants;
+
+/**
+ * Entity to hold relation between disease and a symptom.
+ * 
+ * @author mmieszkowski
+ * 
+ */
 @Entity
 @Table(name = "DiseaseSymptom")
-public class DiseaseSymptomEntity {
-	
-	/**
-	 * Primary key
-	 */
-	@Id
-	@GeneratedValue
-	@Column(name = "id", unique = true, nullable = false)
-	private Long id;
+public class DiseaseSymptomEntity extends SelfDiagnosisEntity implements Serializable {
 
-	/**
-	 * Related disease
-	 */
-	@ManyToOne
-	@JoinColumn(name = "disease_id", nullable = false)
-	private DiseaseEntity disease;
-	
-	/**
-	 * Related symptom
-	 */
-	@ManyToOne
-	@JoinColumn(name = "symptom_id", nullable = false)
-	private SymptomEntity symptom;
+    /**
+     * Serial.
+     */
+    private static final long serialVersionUID = 8091460590278611579L;
 
-	/**
-	 * Rank of symptom in the disease. Higher the rank, higher the disease in the diseases result list
-	 */
-	@Column(name = "rank", nullable = false)
-	private Short rank;
-	
-	/**
-	 * Frequency of symptom in the disease. 0-100 where 100 means that 100% of sick patients, has to have this symptom.
-	 */
-	@Column(name = "frequency", nullable = false)
-	private Short frequncy;
+    /**
+     * Primary key.
+     */
+    @Id
+    @GeneratedValue
+    @Column(name = "id", unique = true, nullable = false)
+    private Long id;
 
-	public Long getId() {
-		return id;
-	}
+    /**
+     * Related disease.
+     */
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "disease_id", nullable = false)
+    private DiseaseEntity disease;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    /**
+     * Related symptom.
+     */
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "symptom_id", nullable = false)
+    private SymptomEntity symptom;
 
-	public DiseaseEntity getDisease() {
-		return disease;
-	}
+    /**
+     * Rank of symptom in the disease. Higher the rank, higher the disease in
+     * the diseases result list.
+     */
+    @NotNull
+    @Range(min = SelfDiagnosisConstants.DISEASE_SYMPTOM_RANK_MIN, 
+            max = SelfDiagnosisConstants.DISEASE_SYMPTOM_RANK_MAX)
+    @Column(name = "rank", nullable = false)
+    private Short rank;
 
-	public void setDisease(DiseaseEntity disease) {
-		this.disease = disease;
-	}
+    /**
+     * Frequency of symptom in the disease. 0-100 where 100 means that 100% of
+     * sick patients, has to have this symptom.
+     */
+    @NotNull
+    @Range(min = SelfDiagnosisConstants.ENTITY_FREQUENCY_MIN, 
+            max = SelfDiagnosisConstants.ENTITY_FREQUENCY_MAX)
+    @Column(name = "frequency", nullable = false)
+    private Short frequncy;
 
-	public SymptomEntity getSymptom() {
-		return symptom;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setSymptom(SymptomEntity symptom) {
-		this.symptom = symptom;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public Short getRank() {
-		return rank;
-	}
+    public DiseaseEntity getDisease() {
+        return disease;
+    }
 
-	public void setRank(Short rank) {
-		this.rank = rank;
-	}
+    public void setDisease(DiseaseEntity disease) {
+        this.disease = disease;
+    }
 
-	public Short getFrequncy() {
-		return frequncy;
-	}
+    public SymptomEntity getSymptom() {
+        return symptom;
+    }
 
-	public void setFrequncy(Short frequncy) {
-		this.frequncy = frequncy;
-	}
+    public void setSymptom(SymptomEntity symptom) {
+        this.symptom = symptom;
+    }
+
+    public Short getRank() {
+        return rank;
+    }
+
+    public void setRank(Short rank) {
+        this.rank = rank;
+    }
+
+    public Short getFrequncy() {
+        return frequncy;
+    }
+
+    public void setFrequncy(Short frequncy) {
+        this.frequncy = frequncy;
+    }
 }

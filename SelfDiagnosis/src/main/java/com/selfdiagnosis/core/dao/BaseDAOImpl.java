@@ -20,31 +20,31 @@ public abstract class BaseDAOImpl implements BaseDAO {
     /**
      *  SessionFactory
      */
-	@Autowired
+    @Autowired
     private SessionFactory sessionFactory;
     
     /* (non-Javadoc)
-	 * @see com.selfdiagnosis.core.dao.BaseDAO#getCurrentSession()
-	 */
+     * @see com.selfdiagnosis.core.dao.BaseDAO#getCurrentSession()
+     */
     @Override
-	public Session getCurrentSession() {
+    public Session getCurrentSession() {
         return sessionFactory.getCurrentSession();
     }
     
     /* (non-Javadoc)
-	 * @see com.selfdiagnosis.core.dao.BaseDAO#getObject(java.lang.Class, java.io.Serializable)
-	 */
+     * @see com.selfdiagnosis.core.dao.BaseDAO#getObject(java.lang.Class, java.io.Serializable)
+     */
     @Override
-	@SuppressWarnings("rawtypes")
+    @SuppressWarnings("rawtypes")
     public Object getObject(Class clazz, Serializable id) {
         return getCurrentSession().get(clazz, id);
     }
     
     /* (non-Javadoc)
-	 * @see com.selfdiagnosis.core.dao.BaseDAO#getObjectList(java.lang.Class)
-	 */
+     * @see com.selfdiagnosis.core.dao.BaseDAO#getObjectList(java.lang.Class)
+     */
     @Override
-	@SuppressWarnings("rawtypes")
+    @SuppressWarnings("rawtypes")
     public List getObjectList(Class clazz) {
         Criteria criteria = getCurrentSession().createCriteria(clazz);
         return criteria.list();
@@ -52,65 +52,57 @@ public abstract class BaseDAOImpl implements BaseDAO {
     
     
     /* (non-Javadoc)
-	 * @see com.selfdiagnosis.core.dao.BaseDAO#saveOrUpdate(java.lang.Object)
-	 */
+     * @see com.selfdiagnosis.core.dao.BaseDAO#saveOrUpdate(java.lang.Object)
+     */
     @Override
-	public void saveOrUpdate(Object obj) {
+    public void saveOrUpdate(Object obj) {
         getCurrentSession().saveOrUpdate(obj);
     }
     
     /* (non-Javadoc)
-	 * @see com.selfdiagnosis.core.dao.BaseDAO#save(java.lang.Object)
-	 */
+     * @see com.selfdiagnosis.core.dao.BaseDAO#delete(java.lang.Object)
+     */
     @Override
-    public Integer save(Object obj) {
-        return (Integer) getCurrentSession().save(obj);
-    }    
-    
-    /* (non-Javadoc)
-	 * @see com.selfdiagnosis.core.dao.BaseDAO#delete(java.lang.Object)
-	 */
-    @Override
-	public void delete(Object obj) {
+    public void delete(Object obj) {
         getCurrentSession().delete(obj);
     }
     
 
     /* (non-Javadoc)
-	 * @see com.selfdiagnosis.core.dao.BaseDAO#evictSession(java.lang.Object)
-	 */
+     * @see com.selfdiagnosis.core.dao.BaseDAO#evictSession(java.lang.Object)
+     */
     @Override
-	public void evictSession(Object obj) {
+    public void evictSession(Object obj) {
         getCurrentSession().evict(obj);
     }
    
     
     /* (non-Javadoc)
-	 * @see com.selfdiagnosis.core.dao.BaseDAO#executeStoredProcedure(java.lang.String)
-	 */
+     * @see com.selfdiagnosis.core.dao.BaseDAO#executeStoredProcedure(java.lang.String)
+     */
     @Override
-	public void executeStoredProcedure(String procedure) {
+    public void executeStoredProcedure(String procedure) {
         getCurrentSession().createSQLQuery(procedure).executeUpdate();
     }
 
     @Override
     public Object merge(Object obj) {
-    	return getCurrentSession().merge(obj);
+        return getCurrentSession().merge(obj);
     }
     
     /* (non-Javadoc)
-	 * @see com.selfdiagnosis.core.dao.BaseDAO#getSessionFactory()
-	 */
+     * @see com.selfdiagnosis.core.dao.BaseDAO#getSessionFactory()
+     */
     @Override
-	public SessionFactory getSessionFactory() {
+    public SessionFactory getSessionFactory() {
         return sessionFactory;
     }
 
     /* (non-Javadoc)
-	 * @see com.selfdiagnosis.core.dao.BaseDAO#setSessionFactory(org.hibernate.SessionFactory)
-	 */
+     * @see com.selfdiagnosis.core.dao.BaseDAO#setSessionFactory(org.hibernate.SessionFactory)
+     */
     @Override
-	public void setSessionFactory(SessionFactory sessionFactory) {
+    public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
     

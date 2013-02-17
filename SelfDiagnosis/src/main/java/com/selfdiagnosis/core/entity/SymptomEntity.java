@@ -9,105 +9,117 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+
+import com.selfdiagnosis.SelfDiagnosisConstants;
+
+/**
+ * Symptom entity.
+ * 
+ * @author mmieszkowski
+ * 
+ */
 @Entity
 @Table(name = "Symptom")
-public class SymptomEntity implements SelfDiagnosisEntity, Serializable {
+public class SymptomEntity extends SelfDiagnosisEntity implements Serializable {
 
-	/**
-	 * Serial
-	 */
-	private static final long serialVersionUID = 7426824635548340022L;
+    /**
+     * Serial.
+     */
+    private static final long serialVersionUID = 7426824635548340022L;
 
-	/**
-	 * Primary key
-	 */
-	@Id
-	@GeneratedValue
-	@Column(name = "id", unique = true, nullable = false)
-	private Long id;
-	
-	/**
-	 * Name of the disease
-	 */
-	@Column(name = "name", unique = false, nullable = false)
-	private String name;
-	
-	/**
-	 * Description of the disease
-	 */
-	@Column(name = "description", unique = false, nullable = true)
-	private String description;
+    /**
+     * Primary key.
+     */
+    @Id
+    @GeneratedValue
+    @Column(name = "id", unique = true, nullable = false)
+    private Long id;
 
-	/**
-	 * Type of the symptom
-	 */
-	@ManyToOne
-	@JoinColumn(name = "symptomType_id", nullable = false)
-	private SymptomTypeEntity symptomType;
-	
-	/**
-	 * body part the symptom is related with
-	 */
-	@ManyToOne
-	@JoinColumn(name = "bodyPart_id", nullable = true)
-	private BodyPartEntity bodyPart;
-	
-	/**
-	 * test related with symptom, not null for 'test' symptom types
-	 */
-	@ManyToOne
-	@JoinColumn(name = "test_id", nullable = true)
-	private TestEntity test;
+    /**
+     * Name of the symptom..
+     */
+    @NotBlank
+    @Length(max = SelfDiagnosisConstants.SYMPTOM_NAME_LENGTH_MAX)
+    @Column(name = "name", unique = false, nullable = false)
+    private String name;
 
-	public Long getId() {
-		return id;
-	}
+    /**
+     * Description of the symptom..
+     */
+    @Column(name = "description", unique = false, nullable = true)
+    private String description;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    /**
+     * Type of the symptom.
+     */
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "symptomType_id", nullable = false)
+    private SymptomTypeEntity symptomType;
 
-	public String getName() {
-		return name;
-	}
+    /**
+     * body part the symptom is related with.
+     */
+    @ManyToOne
+    @JoinColumn(name = "bodyPart_id", nullable = true)
+    private BodyPartEntity bodyPart;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    /**
+     * Test related with symptom, not null for 'test' symptom types.
+     */
+    @ManyToOne
+    @JoinColumn(name = "test_id", nullable = true)
+    private TestEntity test;
 
-	public String getDescription() {
-		return description;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public SymptomTypeEntity getSymptomType() {
-		return symptomType;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setSymptomType(SymptomTypeEntity symptomType) {
-		this.symptomType = symptomType;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public BodyPartEntity getBodyPart() {
-		return bodyPart;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public void setBodyPart(BodyPartEntity bodyPart) {
-		this.bodyPart = bodyPart;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public TestEntity getTest() {
-		return test;
-	}
+    public SymptomTypeEntity getSymptomType() {
+        return symptomType;
+    }
 
-	public void setTest(TestEntity test) {
-		this.test = test;
-	}
-	
-	
-	
+    public void setSymptomType(SymptomTypeEntity symptomType) {
+        this.symptomType = symptomType;
+    }
+
+    public BodyPartEntity getBodyPart() {
+        return bodyPart;
+    }
+
+    public void setBodyPart(BodyPartEntity bodyPart) {
+        this.bodyPart = bodyPart;
+    }
+
+    public TestEntity getTest() {
+        return test;
+    }
+
+    public void setTest(TestEntity test) {
+        this.test = test;
+    }
 }

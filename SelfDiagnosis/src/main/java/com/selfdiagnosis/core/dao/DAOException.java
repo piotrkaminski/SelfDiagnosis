@@ -10,18 +10,18 @@ import com.selfdiagnosis.SelfDiagnosisException;
  */
 public class DAOException extends SelfDiagnosisException {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	public DAOException(String message, Throwable cause) {
-		super(message, cause);
-	}
+    public DAOException(String message, Throwable cause) {
+        super(message, cause);
+    }
 
-	public DAOException(String string) {
-		super(string);
-	}
+    public DAOException(String string) {
+        super(string);
+    }
 
-	public DAOException(Throwable cause) {
-		super(cause);
-	}
+    public DAOException(Throwable cause) {
+        super(cause);
+    }
 
 }

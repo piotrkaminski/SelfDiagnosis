@@ -5,6 +5,6 @@ import java.util.List;
 import com.selfdiagnosis.core.entity.BodyPartEntity;
 
 public interface BodyPartDAO extends BaseDAO {
-	
-	List<BodyPartEntity> findAll();
+    
+    List<BodyPartEntity> findAll();
 }

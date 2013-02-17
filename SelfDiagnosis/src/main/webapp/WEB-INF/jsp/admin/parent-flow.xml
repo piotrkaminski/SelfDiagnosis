@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <flow xmlns="http://www.springframework.org/schema/webflow"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/webflow
         http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
     abstract="true">
 
@@ -20,7 +20,7 @@
         <transition on="back" to="back" bind="false"/>
         <transition on="saveAndNew" to="entityForm">
             <evaluate expression="adminService.saveEntity(entity)" result="entity"/>
-	        <!-- In child flow, create new entity bean -->
+            <!-- In child flow, create new entity bean -->
         </transition>
         <transition on="saveAndBack" to="saveAndBack">
             <evaluate expression="adminService.saveEntity(entity)" result="entity"/>
@@ -28,9 +28,9 @@
     </view-state>
 
     <end-state id="saveAndBack">
-    	<output name="entity" value="entity"/>
+        <output name="entity" value="entity"/>
     </end-state>
-	
+    
     <end-state id="back"/>
 
 </flow>

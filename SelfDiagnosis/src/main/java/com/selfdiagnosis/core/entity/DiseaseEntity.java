@@ -11,117 +11,136 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.Range;
+
+import com.selfdiagnosis.SelfDiagnosisConstants;
+
+/**
+ * Disease entity.
+ * 
+ * @author mmieszkowski
+ * 
+ */
 @Entity
 @Table(name = "Disease")
-public class DiseaseEntity implements SelfDiagnosisEntity, Serializable {
-	/**
-	 * Serial
-	 */
-	private static final long serialVersionUID = -6865332512873021190L;
+public class DiseaseEntity extends SelfDiagnosisEntity implements Serializable {
 
-	/**
-	 * Primary key
-	 */
-	@Id
-	@GeneratedValue
-	@Column(name = "id", unique = true, nullable = false)
-	private Long id;
-	
-	/**
-	 * Name of the disease
-	 */
-	@Column(name = "name", unique = false, nullable = false)
-	private String name;
-	
-	/**
-	 * Description of the disease
-	 */
-	@Column(name = "description", unique = false, nullable = true)
-	private String description;
+    /**
+     * Serial.
+     */
+    private static final long serialVersionUID = -6865332512873021190L;
 
-	/**
-	 * Frequency of disease
-	 */
-	@Column(name = "frequency", nullable = false)
-	private Short frequency;
-	
+    /**
+     * Primary key..
+     */
+    @Id
+    @GeneratedValue
+    @Column(name = "id", unique = true, nullable = false)
+    private Long id;
 
-	/**
-	 * Specialties of doctors you should see having a disease
-	 */
-	@ManyToMany
-	@JoinTable(
-			name = "DiseaseDoctorSpecialty",
-			joinColumns = @JoinColumn(name = "disease_id"),
-			inverseJoinColumns = @JoinColumn(name = "doctorSpecialty_id"))
-	private Collection<DoctorSpecialtyEntity> doctorSpecialtyCollection;
-	
+    /**
+     * Name of the disease.
+     */
+    @NotBlank
+    @Length(max = SelfDiagnosisConstants.DISEASE_NAME_LENGTH_MAX)
+    @Column(name = "name", unique = false, nullable = false)
+    private String name;
 
-	/**
-	 * Treatments that should be applied when having a disease
-	 */
-	@ManyToMany
-	@JoinTable(
-			name = "DiseaseTreatment",
-			joinColumns = @JoinColumn(name = "disease_id"),
-			inverseJoinColumns = @JoinColumn(name = "treatment_id"))
-	private Collection<TreatmentEntity> treatmentCollection;
+    /**
+     * Description of the disease.
+     */
+    @Column(name = "description", unique = false, nullable = true)
+    private String description;
+    
+    /**
+     * Frequency of disease.
+     */
+    @NotNull
+    @Range(min = SelfDiagnosisConstants.ENTITY_FREQUENCY_MIN, 
+            max = SelfDiagnosisConstants.ENTITY_FREQUENCY_MAX)
+    @Column(name = "frequency", nullable = false)
+    private Short frequency;
 
-	
-	
-	public Long getId() {
-		return id;
-	}
+    /**
+     * Specialties of doctors you should see having a disease.
+     */
+    @ManyToMany
+    @JoinTable(name = "DiseaseDoctorSpecialty", joinColumns = @JoinColumn(name = "disease_id"),
+            inverseJoinColumns = @JoinColumn(name = "doctorSpecialty_id"))
+    private Collection<DoctorSpecialtyEntity> doctorSpecialtyCollection;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    /**
+     * Treatments that should be applied when having a disease.
+     */
+    @ManyToMany
+    @JoinTable(name = "DiseaseTreatment", joinColumns = @JoinColumn(name = "disease_id"),
+            inverseJoinColumns = @JoinColumn(name = "treatment_id"))
+    private Collection<TreatmentEntity> treatmentCollection;
 
-	public String getName() {
-		return name;
-	}
+    /**
+     * Temporary field necessary for adding symptoms.
+     */
+    @Transient
+    private SymptomEntity symptom;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public Short getFrequency() {
-		return frequency;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setFrequency(Short frequncy) {
-		this.frequency = frequncy;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public Collection<DoctorSpecialtyEntity> getDoctorSpecialtyCollection() {
-		return doctorSpecialtyCollection;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public void setDoctorSpecialtyCollection(
-			Collection<DoctorSpecialtyEntity> doctorSpecialtyCollection) {
-		this.doctorSpecialtyCollection = doctorSpecialtyCollection;
-	}
+    public Short getFrequency() {
+        return frequency;
+    }
 
-	public Collection<TreatmentEntity> getTreatmentCollection() {
-		return treatmentCollection;
-	}
+    public void setFrequency(Short frequncy) {
+        this.frequency = frequncy;
+    }
 
-	public void setTreatmentCollection(
-			Collection<TreatmentEntity> treatmentCollection) {
-		this.treatmentCollection = treatmentCollection;
-	}
- 
-	@SuppressWarnings("unused")
-	public void addNewSymptom(SymptomEntity symptom) {
-		int test = 0;
-	}
+    public Collection<DoctorSpecialtyEntity> getDoctorSpecialtyCollection() {
+        return doctorSpecialtyCollection;
+    }
+
+    public void setDoctorSpecialtyCollection(Collection<DoctorSpecialtyEntity> doctorSpecialtyCollection) {
+        this.doctorSpecialtyCollection = doctorSpecialtyCollection;
+    }
+
+    public Collection<TreatmentEntity> getTreatmentCollection() {
+        return treatmentCollection;
+    }
+
+    public void setTreatmentCollection(Collection<TreatmentEntity> treatmentCollection) {
+        this.treatmentCollection = treatmentCollection;
+    }
+
+    public SymptomEntity getSymptom() {
+        return symptom;
+    }
+
+    public void setSymptom(SymptomEntity symptom) {
+        this.symptom = symptom;
+    }
 }

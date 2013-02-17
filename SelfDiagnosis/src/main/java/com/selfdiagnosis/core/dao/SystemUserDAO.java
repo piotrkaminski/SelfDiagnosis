@@ -9,11 +9,11 @@ import com.selfdiagnosis.core.entity.SystemUserEntity;
  *
  */
 public interface SystemUserDAO {
-	
-	/**
-	 * Find user using his email address
-	 * @param email Email address as filter
-	 * @return SystemUser with given email address
-	 */
-	SystemUserEntity findByEmail(String email);
+    
+    /**
+     * Find user using his email address
+     * @param email Email address as filter
+     * @return SystemUser with given email address
+     */
+    SystemUserEntity findByEmail(String email);
 }

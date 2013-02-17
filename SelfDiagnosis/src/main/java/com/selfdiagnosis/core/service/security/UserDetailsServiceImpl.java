@@ -28,38 +28,38 @@ import com.selfdiagnosis.core.entity.SystemUserEntity;
 @Service("userDetailsService")
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-	@Autowired
-	private SystemUserDAO dao;
+    @Autowired
+    private SystemUserDAO dao;
 
-	/**
-	 * Loads user from database using email as a username. Result is used
-	 * to create {@link User} object used by SpringSecurity framework
-	 * to perform authentication and authorization.
-	 */
-	@Transactional(readOnly = true)
-	public UserDetails loadUserByUsername(String username)
-			throws UsernameNotFoundException, DataAccessException {
-		SystemUserEntity userEntity = dao.findByEmail(username);
-		if (userEntity == null)
-			throw new UsernameNotFoundException("user not found");
-		return buildUserFromUserEntity(userEntity);
-	}
+    /**
+     * Loads user from database using email as a username. Result is used
+     * to create {@link User} object used by SpringSecurity framework
+     * to perform authentication and authorization.
+     */
+    @Transactional(readOnly = true)
+    public UserDetails loadUserByUsername(String username)
+            throws UsernameNotFoundException, DataAccessException {
+        SystemUserEntity userEntity = dao.findByEmail(username);
+        if (userEntity == null)
+            throw new UsernameNotFoundException("user not found");
+        return buildUserFromUserEntity(userEntity);
+    }
 
-	protected User buildUserFromUserEntity(SystemUserEntity userEntity) {
-		String username = userEntity.getEmail();
-		String password = userEntity.getPassword();
-		boolean enabled = userEntity.getEnabled();
-		boolean accountNonExpired = userEntity.getEnabled();
-		boolean credentialsNonExpired = userEntity.getEnabled();
-		boolean accountNonLocked = userEntity.getEnabled();
-		
-		Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-		for (SecurityRoleEntity role : userEntity.getSecurityRoles()) {
-			authorities.add(new SimpleGrantedAuthority(role.getRoleName()));
-		}
-		User user = new User(username, password, enabled, accountNonExpired,
-				credentialsNonExpired, accountNonLocked, authorities);
-		return user;
-	}
+    protected User buildUserFromUserEntity(SystemUserEntity userEntity) {
+        String username = userEntity.getEmail();
+        String password = userEntity.getPassword();
+        boolean enabled = userEntity.getEnabled();
+        boolean accountNonExpired = userEntity.getEnabled();
+        boolean credentialsNonExpired = userEntity.getEnabled();
+        boolean accountNonLocked = userEntity.getEnabled();
+        
+        Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+        for (SecurityRoleEntity role : userEntity.getSecurityRoles()) {
+            authorities.add(new SimpleGrantedAuthority(role.getRoleName()));
+        }
+        User user = new User(username, password, enabled, accountNonExpired,
+                credentialsNonExpired, accountNonLocked, authorities);
+        return user;
+    }
 
 }

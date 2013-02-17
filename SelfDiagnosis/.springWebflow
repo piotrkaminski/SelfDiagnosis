@@ -19,5 +19,13 @@
 			<file>src/main/webapp/WEB-INF/jsp/admin/symptomType.xml</file>
 			<name><![CDATA[symptomType]]></name>
 		</config>
+		<config>
+			<file>src/main/webapp/WEB-INF/jsp/admin/test.xml</file>
+			<name><![CDATA[test]]></name>
+		</config>
+		<config>
+			<file>src/main/webapp/WEB-INF/jsp/admin/testType.xml</file>
+			<name><![CDATA[testType]]></name>
+		</config>
 	</configs>
 </webflow-project-description>

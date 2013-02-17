@@ -1,7 +1,17 @@
 package com.selfdiagnosis.core.entity;
 
+/**
+ * Parent class for hibernate entities. It is needed for conversion
+ * simplifications.
+ * 
+ * @author mmieszkowski
+ * 
+ */
+public abstract class SelfDiagnosisEntity {
 
-public interface SelfDiagnosisEntity {
+    public abstract Long getId();
 
-	String toString();
+    public String toString() {
+        return getId() == null ? null : getId().toString();
+    }
 }

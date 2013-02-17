@@ -8,7 +8,7 @@ import com.selfdiagnosis.core.entity.SymptomEntity;
 
 public interface SymptomDAO extends BaseDAO {
 
-	@Transactional
-	List<SymptomEntity> findAll();
+    @Transactional
+    List<SymptomEntity> findAll();
 
 }

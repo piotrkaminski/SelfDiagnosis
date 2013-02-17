@@ -1,5 +1,6 @@
 package com.selfdiagnosis.core.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -8,114 +9,127 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
+/**
+ * Entity to store user and test relation.
+ * 
+ * @author mmieszkowski
+ * 
+ */
 @Entity
 @Table(name = "UserTest")
-public class UserTestEntity {
+public class UserTestEntity extends SelfDiagnosisEntity implements Serializable {
 
-	/**
-	 * Primary key
-	 */
-	@Id
-	@Column(name = "id", unique = true, nullable = false)
-	private Long id;
+    /**
+     * Serial.
+     */
+    private static final long serialVersionUID = -525214009201704315L;
 
-	/**
-	 * Related user
-	 */
-	@ManyToOne
-	@JoinColumn(name = "user_id", nullable = false)
-	private SystemUserEntity user;
-	
-	/**
-	 * Related test
-	 */
-	@ManyToOne
-	@JoinColumn(name = "test_id", nullable = false)
-	private TestEntity test;
-	
-	/**
-	 * Test result
-	 */
-	@Column(name = "testValue", nullable = true)
-	private Double testValue;
-	
-	/**
-	 * Unit in which test result is stored
-	 */
-	@ManyToOne
-	@JoinColumn(name = "testUnit_id", nullable = true)
-	private TestUnitEntity testUnit;
-	
-	/**
-	 * Test flag. I.e. below normal, correct etc.
-	 */
-	@ManyToOne
-	@JoinColumn(name = "testFlag_id", nullable = true)
-	private TestFlagEntity testFlag;
-	
-	/**
-	 * Date when test was performed
-	 */
-	@Column(name = "testDate", nullable = true)
-	private Date testDate;
+    /**
+     * Primary key.
+     */
+    @Id
+    @Column(name = "id", unique = true, nullable = false)
+    private Long id;
 
-	public Long getId() {
-		return id;
-	}
+    /**
+     * Related user.
+     */
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private SystemUserEntity user;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    /**
+     * Related test.
+     */
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "test_id", nullable = false)
+    private TestEntity test;
 
-	public SystemUserEntity getUser() {
-		return user;
-	}
+    /**
+     * Test result.
+     */
+    @Column(name = "testValue", nullable = true)
+    private Double testValue;
 
-	public void setUser(SystemUserEntity user) {
-		this.user = user;
-	}
+    /**
+     * Unit in which test result is stored.
+     */
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "testUnit_id", nullable = true)
+    private TestUnitEntity testUnit;
 
-	public TestEntity getTest() {
-		return test;
-	}
+    /**
+     * Test flag. I.e. below normal, correct etc.
+     */
+    @ManyToOne
+    @JoinColumn(name = "testFlag_id", nullable = true)
+    private TestFlagEntity testFlag;
 
-	public void setTest(TestEntity test) {
-		this.test = test;
-	}
+    /**
+     * Date when test was performed.
+     */
+    @Column(name = "testDate", nullable = true)
+    private Date testDate;
 
-	public Double getTestValue() {
-		return testValue;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setTestValue(Double testValue) {
-		this.testValue = testValue;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public TestUnitEntity getTestUnit() {
-		return testUnit;
-	}
+    public SystemUserEntity getUser() {
+        return user;
+    }
 
-	public void setTestUnit(TestUnitEntity testUnit) {
-		this.testUnit = testUnit;
-	}
+    public void setUser(SystemUserEntity user) {
+        this.user = user;
+    }
 
-	public TestFlagEntity getTestFlag() {
-		return testFlag;
-	}
+    public TestEntity getTest() {
+        return test;
+    }
 
-	public void setTestFlag(TestFlagEntity testFlag) {
-		this.testFlag = testFlag;
-	}
+    public void setTest(TestEntity test) {
+        this.test = test;
+    }
 
-	public Date getTestDate() {
-		return testDate;
-	}
+    public Double getTestValue() {
+        return testValue;
+    }
 
-	public void setTestDate(Date testDate) {
-		this.testDate = testDate;
-	}
-	
-	
-	
+    public void setTestValue(Double testValue) {
+        this.testValue = testValue;
+    }
+
+    public TestUnitEntity getTestUnit() {
+        return testUnit;
+    }
+
+    public void setTestUnit(TestUnitEntity testUnit) {
+        this.testUnit = testUnit;
+    }
+
+    public TestFlagEntity getTestFlag() {
+        return testFlag;
+    }
+
+    public void setTestFlag(TestFlagEntity testFlag) {
+        this.testFlag = testFlag;
+    }
+
+    public Date getTestDate() {
+        return testDate;
+    }
+
+    public void setTestDate(Date testDate) {
+        this.testDate = testDate;
+    }
+
 }

@@ -1,28 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <flow xmlns="http://www.springframework.org/schema/webflow"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/webflow
         http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
     parent="parent-flow">
 
+    <on-start>
+        <evaluate expression="adminService.getSymptomList()" result="flowScope.symptoms"></evaluate>
+    </on-start>
+    
     <action-state id="create">
         <evaluate expression="diseaseBean" result="flowScope.entity" />
         <transition to="entityForm" />
     </action-state>
 
-	<view-state id="entityForm" model="entity" view="diseaseForm.jsp">
+    <view-state id="entityForm" model="entity" view="diseaseForm.jsp">
+        <on-render>
+            <evaluate expression="adminService.getDiseaseSymptomListForDisease(entity.id)" result="flowScope.diseaseSymptoms"/>    
+        </on-render>
         <transition on="saveAndNew" to="entityForm">
-	        <evaluate expression="diseaseBean" result="entity"/>
+            <evaluate expression="diseaseBean" result="entity"/>
         </transition>
-        <transition on="addNewSymptom" to="addNewSymptom"></transition>
+        <transition on="addNewDiseaseSymptom" to="entityForm">
+            <evaluate expression="adminSerivce.saveEntity(entity)"/>
+            <evaluate expression="adminService.addNewDiseaseSymptom(entity)"/>
+        </transition>
+        <transition on="addNewSymptom" to="addNewSymptom"/>
+        <transition on="deleteDiseaseSymptom" to="deleteDiseaseSymptom"/>
     </view-state>
     
+    <action-state id="deleteDiseaseSymptom">
+        <on-entry>
+            <set name="flowScope.diseaseSymptom" value="requestParameters.diseaseSymptom"/>
+        </on-entry>
+        <evaluate expression="adminService.deleteDiseaseSymptom(flowScope.diseaseSymptom)"/>
+        <transition to="entityForm"/>
+    </action-state>
+    
     <subflow-state id="addNewSymptom" subflow="symptom">
-    	<input name="entity" value="symptomBean"/>
-    	<transition on="saveAndBack" to="entityForm">
-    		<evaluate expression="entity.addNewSymptom(currentEvent.attributes.entity)"></evaluate>
-    	</transition>
-    	<transition on="back" to="entityForm">
-    	</transition>
+        <input name="entity" value="symptomBean"/>
+        <transition on="saveAndBack" to="entityForm">
+            <evaluate expression="entity.setSymptom(currentEvent.attributes.entity)"></evaluate>
+        </transition>
+        <transition on="back" to="entityForm">
+        </transition>
     </subflow-state>
+    
+    
 </flow>

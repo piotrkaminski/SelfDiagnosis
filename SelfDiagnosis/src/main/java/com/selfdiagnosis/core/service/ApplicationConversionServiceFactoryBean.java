@@ -8,22 +8,33 @@ import org.springframework.stereotype.Component;
 import com.selfdiagnosis.web.EntityToStringConverter;
 import com.selfdiagnosis.web.StringToEntityConverterFactory;
 
-@Component(value="applicationConversionService")
+/**
+ * Custom conversion service.
+ * 
+ * @author mmieszkowski
+ * 
+ */
+@Component(value = "applicationConversionService")
 public class ApplicationConversionServiceFactoryBean extends FormattingConversionServiceFactoryBean {
 
-	@Autowired
-	private AdminService adminService;
-	
+    /**
+     * Injected {@link AdminService}.
+     */
+    @Autowired
+    private AdminService adminService;
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.springframework.format.support.FormattingConversionServiceFactoryBean
+     * #installFormatters(org.springframework.format.FormatterRegistry)
+     */
     @Override
     protected void installFormatters(FormatterRegistry registry) {
-//        registry.addConverter(new BodyPartConverter(adminService));
-//        registry.addConverter(new StringBodyPartConverter());
-//        registry.addConverter(new SymptomTypeConverter(adminService));
-//        registry.addConverter(new StringSymptomTypeConverter());
-        
         registry.addConverter(new EntityToStringConverter());
         registry.addConverterFactory(new StringToEntityConverterFactory(adminService));
-        
+
     }
-	
+
 }
