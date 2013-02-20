@@ -11,8 +11,23 @@ import javax.persistence.Table;
 import org.hibernate.validator.constraints.Range;
 
 import com.selfdiagnosis.SelfDiagnosisConstants;
-
-
+/**
+ * Entity with Age range. Used for base test results.
+ * @author mmieszkowski
+ *
+ */
+/**
+     * Serial.
+     */
+/**
+     * Primary key.
+     */
+/**
+     * Name of the test.
+     */
+/**
+     * Description of the test.
+     */
 /**
  * Entity with Age range. Used for base test results.
  * @author mmieszkowski
