@@ -27,5 +27,9 @@
 			<file>src/main/webapp/WEB-INF/jsp/admin/testType.xml</file>
 			<name><![CDATA[testType]]></name>
 		</config>
+		<config>
+			<file>src/main/webapp/WEB-INF/jsp/admin/symptom.xml</file>
+			<name><![CDATA[symptom]]></name>
+		</config>
 	</configs>
 </webflow-project-description>

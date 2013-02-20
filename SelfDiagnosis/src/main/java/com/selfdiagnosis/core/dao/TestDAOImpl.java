@@ -20,7 +20,7 @@ public class TestDAOImpl extends BaseDAOImpl implements TestDAO {
      */
     @Override
     @SuppressWarnings("unchecked")
-    public List<TestEntity> findAll() {
+    public final List<TestEntity> findAll() {
         Query query = getCurrentSession().createQuery("from TestEntity order by id asc");
         return query.list();
     }

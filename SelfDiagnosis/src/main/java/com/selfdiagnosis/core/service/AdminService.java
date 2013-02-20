@@ -27,8 +27,10 @@ public interface AdminService {
     /**
      * Saves any hibernate entity.
      * 
-     * @param selfDiagnosisEntity entity to save
-     * @param <T> any hibernate entity
+     * @param selfDiagnosisEntity
+     *            entity to save
+     * @param <T>
+     *            any hibernate entity
      * @return merged entity
      */
     <T extends SelfDiagnosisEntity> T saveEntity(T selfDiagnosisEntity);
@@ -41,9 +43,12 @@ public interface AdminService {
 
     /**
      * 
-     * @param clazz class of entity to get
-     * @param id of entity to get
-     * @param <T> any hibernate entity
+     * @param clazz
+     *            class of entity to get
+     * @param id
+     *            of entity to get
+     * @param <T>
+     *            any hibernate entity
      * @return entity
      */
     <T extends SelfDiagnosisEntity> T getEntityByTypeAndId(Class<T> clazz, Long id);
@@ -52,17 +57,41 @@ public interface AdminService {
      * Adds new disease symptom relation. Based on transient symptom stored in
      * disease entity
      * 
-     * @param disease related disease
+     * @param disease
+     *            related disease
      */
     void addNewDiseaseSymptom(DiseaseEntity disease);
 
+    /**
+     * Deletes given {@link DiseaseSymptomEntity}.
+     * 
+     * @param diseaseSymptomEntity
+     *            entity to be deleted.
+     */
     void deleteDiseaseSymptom(DiseaseSymptomEntity diseaseSymptomEntity);
 
+    /**
+     * 
+     * @return List of all disease symptoms.
+     */
     List<DiseaseSymptomEntity> getDiseaseSymptomList();
 
+    /**
+     * 
+     * @return List of all symptoms.
+     */
     List<SymptomEntity> getSymptomList();
 
+    /**
+     * 
+     * @return List of all tests.
+     */
     List<TestEntity> getTestList();
 
+    /**
+     * 
+     * @param id disease id
+     * @return List of all symptoms related with given disease
+     */
     List<DiseaseSymptomEntity> getDiseaseSymptomListForDisease(Long id);
 }

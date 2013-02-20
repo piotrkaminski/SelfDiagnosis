@@ -28,40 +28,36 @@ import com.selfdiagnosis.core.entity.TestEntity;
 @Service("adminService")
 public class AdminServiceImpl implements AdminService {
 
-    @Autowired
-    private SymptomDAO baseDAO;
-
+    /** DAO injected by Spring. */
     @Autowired
     private BodyPartDAO bodyPartDAO;
 
-    @Autowired
-    private SymptomTypeDAO symptomTypeDAO;
-    
-    @Autowired
-    private SymptomDAO symptomDAO;
-
+    /** DAO injected by Spring. */
     @Autowired
     private DiseaseSymptomDAO diseaseSymptomDAO;
 
+    /** DAO injected by Spring. */
+    @Autowired
+    private SymptomDAO baseDAO;
+
+    /** DAO injected by Spring. */
+    @Autowired
+    private SymptomTypeDAO symptomTypeDAO;
+    
+    /** DAO injected by Spring. */
+    @Autowired
+    private SymptomDAO symptomDAO;
+
+    /** DAO injected by Spring. */
     @Autowired
     private TestDAO testDAO;
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.selfdiagnosis.core.service.AdminService#getBodyPartList()
-     */
     @Override
     @Transactional
     public List<BodyPartEntity> getBodyPartList() {
         return bodyPartDAO.findAll();
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.selfdiagnosis.core.service.AdminService#getSymptomTypeList()
-     */
     @Override
     @Transactional
     public List<SymptomTypeEntity> getSymptomTypeList() {
@@ -76,7 +72,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     @Transactional
-    public List<DiseaseSymptomEntity> getDiseaseSymptomListForDisease(Long id) {
+    public List<DiseaseSymptomEntity> getDiseaseSymptomListForDisease(final Long id) {
         return diseaseSymptomDAO.findAllByDiseaseId(id);
     }
 
@@ -92,44 +88,23 @@ public class AdminServiceImpl implements AdminService {
         return testDAO.findAll();
     }
     
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * com.selfdiagnosis.core.service.AdminService#getEntityByTypeAndId(Class<T>
-     * clazz, Long id)
-     */
     @SuppressWarnings("unchecked")
     @Override
     @Transactional
-    public final <T extends SelfDiagnosisEntity> T getEntityByTypeAndId(Class<T> clazz, Long id) {
+    public final <T extends SelfDiagnosisEntity> T getEntityByTypeAndId(final Class<T> clazz, final Long id) {
         return (T) baseDAO.getObject(clazz, id);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * com.selfdiagnosis.core.service.AdminService#saveEntity(SelfDiagnosisEntity
-     * selfDiagnosisEntity)
-     */
     @SuppressWarnings("unchecked")
     @Override
     @Transactional
-    public final <T extends SelfDiagnosisEntity> T saveEntity(T selfDiagnosisEntity) {
+    public final <T extends SelfDiagnosisEntity> T saveEntity(final T selfDiagnosisEntity) {
         return (T) baseDAO.merge(selfDiagnosisEntity);
     }
 
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * com.selfdiagnosis.core.service.AdminService#addNewDiseaseSymptom(DiseaseEntity disease)
-     */
     @Override
     @Transactional
-    public void addNewDiseaseSymptom(DiseaseEntity disease) {
+    public void addNewDiseaseSymptom(final DiseaseEntity disease) {
         DiseaseSymptomEntity diseaseSymptom = new DiseaseSymptomEntity();
         diseaseSymptom.setDisease(disease);
         diseaseSymptom.setSymptom(disease.getSymptom());
@@ -140,7 +115,7 @@ public class AdminServiceImpl implements AdminService {
     
     @Override
     @Transactional
-    public void deleteDiseaseSymptom(DiseaseSymptomEntity diseaseSymptomEntity) {
+    public void deleteDiseaseSymptom(final DiseaseSymptomEntity diseaseSymptomEntity) {
         baseDAO.delete(diseaseSymptomEntity);
     }
 

@@ -23,15 +23,8 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
     @Autowired
     private AdminService adminService;
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * org.springframework.format.support.FormattingConversionServiceFactoryBean
-     * #installFormatters(org.springframework.format.FormatterRegistry)
-     */
     @Override
-    protected void installFormatters(FormatterRegistry registry) {
+    protected void installFormatters(final FormatterRegistry registry) {
         registry.addConverter(new EntityToStringConverter());
         registry.addConverterFactory(new StringToEntityConverterFactory(adminService));
 

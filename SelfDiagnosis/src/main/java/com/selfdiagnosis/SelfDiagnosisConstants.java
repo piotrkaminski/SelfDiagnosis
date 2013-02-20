@@ -10,9 +10,9 @@ public class SelfDiagnosisConstants {
 
     /* ENTITITES constants */
     /* Common constants */
-    public static final int ENTITY_FREQUENCY_MIN = 0;
+    public static final short ENTITY_FREQUENCY_MIN = 0;
 
-    public static final int ENTITY_FREQUENCY_MAX = 100;
+    public static final short ENTITY_FREQUENCY_MAX = 100;
     
     /* AgeRangeEntity constants */
     /**
