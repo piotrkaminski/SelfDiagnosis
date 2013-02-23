@@ -6,12 +6,25 @@ package com.selfdiagnosis;
  * @author mmieszkowski
  * 
  */
-public class SelfDiagnosisConstants {
+public final class SelfDiagnosisConstants {
+    
+    /**
+     * Private constructor to avoid instantiation.
+     */
+    private SelfDiagnosisConstants() {
+        
+    }
 
     /* ENTITITES constants */
     /* Common constants */
+    /**
+     * Minimum frequency for all entities.
+     */
     public static final short ENTITY_FREQUENCY_MIN = 0;
 
+    /**
+     * Maximum frequency for all entities.
+     */
     public static final short ENTITY_FREQUENCY_MAX = 100;
     
     /* AgeRangeEntity constants */
@@ -54,12 +67,12 @@ public class SelfDiagnosisConstants {
     /**
      * Minimum rank value for disease symptom relation.
      */
-    public static final int DISEASE_SYMPTOM_RANK_MIN = 0;
+    public static final short DISEASE_SYMPTOM_RANK_MIN = 0;
 
     /**
      * Maximum rank value for disease symptom relation.
      */
-    public static final int DISEASE_SYMPTOM_RANK_MAX = 10;
+    public static final short DISEASE_SYMPTOM_RANK_MAX = 10;
     
     
     /* DoctorSpecialtyEntity constants */

@@ -108,7 +108,7 @@ public class AdminServiceImpl implements AdminService {
         DiseaseSymptomEntity diseaseSymptom = new DiseaseSymptomEntity();
         diseaseSymptom.setDisease(disease);
         diseaseSymptom.setSymptom(disease.getSymptom());
-        diseaseSymptom.setFrequncy(new Short("50"));
+        diseaseSymptom.setFrequency(new Short("50"));
         diseaseSymptom.setRank(new Short("50"));
         saveEntity(diseaseSymptom);
     }

@@ -110,7 +110,7 @@ public class DiseaseSymptomEntity extends SelfDiagnosisEntity implements Seriali
         return frequncy;
     }
 
-    public void setFrequncy(Short frequncy) {
+    public void setFrequency(Short frequncy) {
         this.frequncy = frequncy;
     }
 }

@@ -18,7 +18,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import com.selfdiagnosis.SelfDiagnosisConstants;
 
 /**
- * Entity that stores anwers to symptom questions.
+ * Entity that stores answers to symptom questions.
  * 
  * @author mmieszkowski
  * 

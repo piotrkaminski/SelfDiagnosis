@@ -14,7 +14,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import com.selfdiagnosis.SelfDiagnosisConstants;
 
 /**
- * Test flag entity.
+ * Test flag entity. List of possible test results. I.e. below normal, above normal.
  * 
  * @author mmieszkowski
  * 

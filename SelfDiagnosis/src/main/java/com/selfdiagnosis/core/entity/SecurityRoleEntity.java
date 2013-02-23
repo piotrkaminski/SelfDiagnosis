@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -31,6 +32,7 @@ public class SecurityRoleEntity extends SelfDiagnosisEntity implements Serializa
      * Primary key for entity.
      */
     @Id
+    @GeneratedValue
     @Column(name = "id", nullable = false, unique = true)
     private Long id;
 
