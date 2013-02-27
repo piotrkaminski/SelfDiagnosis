@@ -25,12 +25,9 @@ import org.springframework.webflow.test.execution.AbstractXmlFlowExecutionTests;
 	    "file:src/main/webapp/WEB-INF/spring/web-root-context.xml"
 	})
 @RunWith(SpringJUnit4ClassRunner.class)
-public class SpringWebContextTest extends AbstractXmlFlowExecutionTests {
+public abstract class SpringWebContextTest extends AbstractXmlFlowExecutionTests {
 
     @Override
-    protected FlowDefinitionResource getResource(FlowDefinitionResourceFactory arg0) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+    protected abstract FlowDefinitionResource getResource(FlowDefinitionResourceFactory arg0);
 
 }

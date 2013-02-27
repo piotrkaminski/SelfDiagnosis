@@ -6,8 +6,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.selfdiagnosis.core.entity.SelfDiagnosisEntity;
-
 /**
  * Base class for test which requires Spring context. It is necessary for:
  * <ul>

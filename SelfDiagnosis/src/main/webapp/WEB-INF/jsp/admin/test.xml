@@ -9,6 +9,13 @@
             <evaluate expression="adminService.getTestTypeList()" result="flowScope.testTypes"></evaluate>
     </on-start>
 
+    <decision-state id="createOrEdit"/>
+
+    <action-state id="create">
+        <evaluate expression="testBean" result="flowScope.entity" />
+        <transition to="entityForm" />
+    </action-state>
+
     <view-state id="entityForm" model="entity" view="testForm.jsp">
         <transition on="saveAndNew" to="entityForm">
             <evaluate expression="testBean" result="entity"/>

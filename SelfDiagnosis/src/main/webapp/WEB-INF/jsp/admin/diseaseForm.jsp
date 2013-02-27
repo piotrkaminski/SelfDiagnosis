@@ -25,27 +25,46 @@
             <td><form:input path="frequency"/></td>
             <td><form:errors path="frequency"/></td>
         </tr>
+        <tr>
+
     <c:forEach var="diseaseSymptom" items="${diseaseSymptoms}" varStatus="counter">
         <tr>
-            <td>${counter}</td>
+            <td>${counter.index}</td>
 	        <td>${diseaseSymptom.symptom.name}</td>
+	        <td>${diseaseSymptom.rank}</td>
+            <td>${diseaseSymptom.frequency}</td>
+            
             <td><a href="${flowExecutionUrl}&_eventId=deleteDiseaseSymptom&diseaseSymptom=${diseaseSymptom}">Delete</a></td>
         </tr>
     </c:forEach>
         
+        </tr>
         <tr>
-            <td></td>
+            <td/>
             <td> Symptom: </td>
+            <td> Rank: </td>
+            <td> Frequency: </td>
         </tr>
         <tr>
             <td> New Disease Symptom: </td>
             <td>
-                <form:select path="symptom" items="${symptoms}" itemLabel="name" itemValue="id"/>
+                <form:select path="diseaseSymptom.symptom" items="${symptoms}" itemLabel="name" itemValue="id"/>
+            </td>
+            <td>
+                <form:input path="diseaseSymptom.rank"/>
+            </td>
+            <td>
+                <form:input path="diseaseSymptom.frequency"/>
             </td>
             <td>
                 <input type="submit" name="_eventId_addNewDiseaseSymptom" value="Add New Disease Symptom"/>
             </td>
         </tr>
+        <tr>
+            <td/>
+            <td><form:errors path="diseaseSymptom.symptom"/></td>
+            <td><form:errors path="diseaseSymptom.rank"/></td>
+            <td><form:errors path="diseaseSymptom.frequency"/></td>
         <tr>
             <td/>
             <td><input type="submit" name="_eventId_addNewSymptom" value="Add New Symptom"/></td>

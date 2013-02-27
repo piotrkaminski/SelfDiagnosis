@@ -123,7 +123,7 @@ public class DiseaseSymptomEntityTest extends EntityTest {
         DiseaseSymptomEntity diseaseSymptom = (DiseaseSymptomEntity) entity;
         diseaseSymptom.setDisease(new DiseaseEntityTest().saveEntity(diseaseSymptom.getDisease(), adminService));
         diseaseSymptom.setSymptom(new SymptomEntityTest().saveEntity(diseaseSymptom.getSymptom(), adminService));
-        return diseaseSymptom;
+        return adminService.saveEntity(diseaseSymptom);
     }
 
 }

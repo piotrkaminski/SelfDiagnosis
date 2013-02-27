@@ -11,6 +11,14 @@
             <evaluate expression="adminService.getTestList()" result="flowScope.tests"></evaluate>
     </on-start>
 
+<!-- After adding start state to parent flow, this shouldn't be necesary 
+    <decision-state id="createOrEdit"/> -->
+
+    <action-state id="create">
+        <evaluate expression="symptomBean" result="flowScope.entity" />
+        <transition to="entityForm" />
+    </action-state>
+
     <view-state id="entityForm" model="entity" view="symptomForm.jsp">
         <transition on="saveAndNew" to="entityForm">
             <evaluate expression="symptomBean" result="entity"/>

@@ -3,15 +3,19 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/webflow
         http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
-    abstract="true">
+    abstract="true"
+    start-state="createOrEdit">
 
     <!-- <secured attributes="ROLE_USER" /> -->
 
     <input name="entity" />
+    
 
-<!-- <action-state id="createOrEdit"> 
-        <transition to="entityForm" />
-    </action-state>-->    
+    <decision-state id="createOrEdit">
+        <if test="entity == null" then="create" else="entityForm"/>
+    </decision-state>
+    
+    <!-- Child flow has to define 'create' action states  -->
 
     <view-state id="entityForm" model="entity">
         <transition on="save" to="entityForm">

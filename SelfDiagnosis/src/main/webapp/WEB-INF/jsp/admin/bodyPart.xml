@@ -5,6 +5,13 @@
         http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
     parent="parent-flow">
 
+    <decision-state id="createOrEdit"/>
+
+    <action-state id="create">
+        <evaluate expression="bodyPartBean" result="flowScope.entity" />
+        <transition to="entityForm" />
+    </action-state>
+
     <view-state id="entityForm" model="entity" view="bodyPartForm.jsp">
         <!-- <on-render>
             <evaluate expression="adminService.getBodyPartList()" result="flowScope.bodyParts"></evaluate>

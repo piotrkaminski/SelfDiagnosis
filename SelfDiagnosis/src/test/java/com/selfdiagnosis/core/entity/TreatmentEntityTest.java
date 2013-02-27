@@ -21,7 +21,6 @@ import com.selfdiagnosis.test.SelfDiagnosisTestUtils;
  */
 public class TreatmentEntityTest extends EntityTest {
 
-
     /**
      * Checks treatment with blank name.
      */
@@ -51,19 +50,22 @@ public class TreatmentEntityTest extends EntityTest {
      * Creates valid test flag entity. Can be used in this test or tests of
      * related entities.
      * 
-     * @return valid {@link TreatmentEntity} 
+     * @return valid {@link TreatmentEntity}
      */
     @Override
     public TreatmentEntity createValidEntity() {
         TreatmentEntity treatment = new TreatmentEntity();
-        treatment.setName("Rehabilitation");
+        treatment.setTreatmentType(new TreatmentTypeEntityTest().createValidEntity());
+        treatment.setName("Criotherapy");
         return treatment;
     }
 
     @Override
     public TreatmentEntity saveEntity(SelfDiagnosisEntity entity, AdminService adminService) {
-        return (TreatmentEntity) adminService.saveEntity(entity);
+        TreatmentEntity treatment = (TreatmentEntity) entity;
+        treatment
+                .setTreatmentType(new TreatmentTypeEntityTest().saveEntity(treatment.getTreatmentType(), adminService));
+        return adminService.saveEntity(treatment);
     }
 
-    
 }
