@@ -45,21 +45,39 @@ public class ContraindicationEntityTest extends EntityTest {
         assertEquals("length must be between 0 and 50", constraintViolations.iterator().next().getMessage());
     }
 
+    @Override
+    protected ContraindicationEntity createValidEntity() {
+        return createValidContraindicationEntity();
+    }
+
     /**
      * Creates valid contraindication entity. Can be used in this test or tests
      * of related entities.
      * 
      * @return valid {@link ContraindicationEntity}
      */
-    @Override
-    public ContraindicationEntity createValidEntity() {
+    public static ContraindicationEntity createValidContraindicationEntity() {
         ContraindicationEntity contraindication = new ContraindicationEntity();
         contraindication.setName("Disease");
         return contraindication;
     }
 
     @Override
-    public ContraindicationEntity saveEntity(SelfDiagnosisEntity entity, AdminService adminService) {
+    protected ContraindicationEntity saveEntity(SelfDiagnosisEntity entity, AdminService adminService) {
+        return saveContraindicationEntity(entity, adminService);
+    }
+
+    /**
+     * Saves contraindication.
+     * 
+     * @param entity
+     *            to save
+     * @param adminService
+     *            injected service
+     * @return saved entity
+     */
+    public static ContraindicationEntity saveContraindicationEntity(SelfDiagnosisEntity entity,
+            AdminService adminService) {
         return (ContraindicationEntity) adminService.saveEntity(entity);
     }
 

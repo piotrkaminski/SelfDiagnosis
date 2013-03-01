@@ -9,6 +9,7 @@ import com.selfdiagnosis.core.entity.SelfDiagnosisEntity;
 import com.selfdiagnosis.core.entity.SymptomEntity;
 import com.selfdiagnosis.core.entity.SymptomTypeEntity;
 import com.selfdiagnosis.core.entity.TestEntity;
+import com.selfdiagnosis.core.entity.TestTypeEntity;
 
 /**
  * Service that stores methods used in system administration module.
@@ -90,8 +91,15 @@ public interface AdminService {
 
     /**
      * 
+     * @return list of all test types
+     */
+    List<TestTypeEntity> getTestTypeList();
+
+    /**
+     * 
      * @param id disease id
      * @return List of all symptoms related with given disease
      */
     List<DiseaseSymptomEntity> getDiseaseSymptomListForDisease(Long id);
+
 }

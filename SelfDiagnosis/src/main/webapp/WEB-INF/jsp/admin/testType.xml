@@ -12,7 +12,7 @@
         <transition to="entityForm" />
     </action-state>
 
-    <view-state id="entityForm" model="entity" view="symptomTypeForm.jsp">
+    <view-state id="entityForm" model="entity" view="testTypeForm.jsp">
         <transition on="saveAndNew" to="entityForm">
             <evaluate expression="testTypeBean" result="entity"/>
         </transition>

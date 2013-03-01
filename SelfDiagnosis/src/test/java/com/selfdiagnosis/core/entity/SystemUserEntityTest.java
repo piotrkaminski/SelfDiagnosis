@@ -110,22 +110,39 @@ public class SystemUserEntityTest extends EntityTest {
         assertEquals("must be in the past", constraintViolations.iterator().next().getMessage());
     }
 
+    @Override
+    protected SystemUserEntity createValidEntity() {
+        return createValidSystemUserEntity();
+    }
+
     /**
      * Creates valid system user entity. Can be used in this test or tests of
      * related entities.
      * 
      * @return valid {@link SystemUserEntity}
      */
-    @Override
-    public SystemUserEntity createValidEntity() {
+    public static SystemUserEntity createValidSystemUserEntity() {
         SystemUserEntity systemUser = new SystemUserEntity();
         systemUser.setPassword("Password");
         systemUser.setEnabled(true);
         return systemUser;
     }
-
+   
     @Override
-    public SystemUserEntity saveEntity(SelfDiagnosisEntity entity, AdminService adminService) {
+    protected SystemUserEntity saveEntity(SelfDiagnosisEntity entity, AdminService adminService) {
+        return saveSystemUserEntity(entity, adminService);
+    }
+
+    /**
+     * Saves system user.
+     * 
+     * @param entity
+     *            to save
+     * @param adminService
+     *            injected service
+     * @return saved entity
+     */
+    public static SystemUserEntity saveSystemUserEntity(SelfDiagnosisEntity entity, AdminService adminService) {
         return (SystemUserEntity) adminService.saveEntity(entity);
     }
 

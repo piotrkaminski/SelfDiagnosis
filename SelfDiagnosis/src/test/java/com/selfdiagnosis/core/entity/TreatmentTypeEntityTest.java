@@ -47,23 +47,39 @@ public class TreatmentTypeEntityTest extends EntityTest {
         assertEquals("length must be between 0 and 100", constraintViolations.iterator().next().getMessage());
     }
 
+    @Override
+    protected TreatmentTypeEntity createValidEntity() {
+        return createValidTreatmentTypeEntity();
+    }
+
     /**
      * Creates valid test flag entity. Can be used in this test or tests of
      * related entities.
      * 
      * @return valid {@link TreatmentTypeEntity} 
      */
-    @Override
-    public TreatmentTypeEntity createValidEntity() {
+    public static TreatmentTypeEntity createValidTreatmentTypeEntity() {
         TreatmentTypeEntity treatmentType = new TreatmentTypeEntity();
         treatmentType.setName("Rehabilitation");
         return treatmentType;
     }
-
+    
     @Override
-    public TreatmentTypeEntity saveEntity(SelfDiagnosisEntity entity, AdminService adminService) {
+    protected TreatmentTypeEntity saveEntity(SelfDiagnosisEntity entity, AdminService adminService) {
+        return saveTreatmentTypeEntity(entity, adminService);
+    }
+
+    /**
+     * Saves treatment type.
+     * 
+     * @param entity
+     *            to save
+     * @param adminService
+     *            injected service
+     * @return saved entity
+     */
+    public static TreatmentTypeEntity saveTreatmentTypeEntity(SelfDiagnosisEntity entity, AdminService adminService) {
         return (TreatmentTypeEntity) adminService.saveEntity(entity);
     }
 
-    
 }

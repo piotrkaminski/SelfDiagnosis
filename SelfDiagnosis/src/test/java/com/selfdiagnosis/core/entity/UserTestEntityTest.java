@@ -56,27 +56,44 @@ public class UserTestEntityTest extends EntityTest {
         assertEquals("may not be null", constraintViolations.iterator().next().getMessage());
     }
 
+    @Override
+    protected UserTestEntity createValidEntity() {
+        return createValidUserTestEntity();
+    }
+    
     /**
      * Creates valid user test entity. Can be used in this test or tests of
      * related entities.
      * 
      * @return valid {@link UserTestEntity}
      */
-    @Override
-    public UserTestEntity createValidEntity() {
+    public static UserTestEntity createValidUserTestEntity() {
         UserTestEntity userTest = new UserTestEntity();
-        userTest.setTest(new TestEntityTest().createValidEntity());
-        userTest.setUser(new SystemUserEntityTest().createValidEntity());
-        userTest.setTestUnit(new TestUnitEntityTest().createValidEntity());
+        userTest.setTest(TestEntityTest.createValidTestEntity());
+        userTest.setUser(SystemUserEntityTest.createValidSystemUserEntity());
+        userTest.setTestUnit(TestUnitEntityTest.createValidTestUnitEntity());
         return userTest;
     }
 
     @Override
-    public UserTestEntity saveEntity(SelfDiagnosisEntity entity, AdminService adminService) {
+    protected UserTestEntity saveEntity(SelfDiagnosisEntity entity, AdminService adminService) {
+        return saveUserTestEntity(entity, adminService);
+    }
+
+    /**
+     * Saves user test entity.
+     * 
+     * @param entity
+     *            to save
+     * @param adminService
+     *            injected service
+     * @return saved entity
+     */
+    public static UserTestEntity saveUserTestEntity(SelfDiagnosisEntity entity, AdminService adminService) {
         UserTestEntity userTest = (UserTestEntity) entity;
-        userTest.setTest((new TestEntityTest()).saveEntity(userTest.getTest(), adminService));
-        userTest.setUser(new SystemUserEntityTest().saveEntity(userTest.getUser(), adminService));
-        userTest.setTestUnit(new TestUnitEntityTest().saveEntity(userTest.getTestUnit(), adminService));
+        userTest.setTest(TestEntityTest.saveTestEntity(userTest.getTest(), adminService));
+        userTest.setUser(SystemUserEntityTest.saveSystemUserEntity(userTest.getUser(), adminService));
+        userTest.setTestUnit(TestUnitEntityTest.saveTestUnitEntity(userTest.getTestUnit(), adminService));
         return adminService.saveEntity(userTest);
     }
 

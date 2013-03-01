@@ -46,22 +46,39 @@ public class RecommendationEntityTest extends EntityTest {
         assertEquals("length must be between 0 and 1000", constraintViolations.iterator().next().getMessage());
     }
 
+    @Override
+    protected RecommendationEntity createValidEntity() {
+        return createValidRecommendationEntity();
+    }
+
     /**
      * Creates valid recommendation entity. Can be used in this test or tests of
      * related entities.
      * 
      * @return valid {@link RecommendationEntity} 
      */
-    @Override
-    public RecommendationEntity createValidEntity() {
+    public static RecommendationEntity createValidRecommendationEntity() {
         RecommendationEntity recommendation = new RecommendationEntity();
         recommendation.setRecommendation("Do not eat before the test.");
         return recommendation;
     }
-
+    
     @Override
-    public RecommendationEntity saveEntity(SelfDiagnosisEntity entity, AdminService adminService) {
-        return (RecommendationEntity) adminService.saveEntity(entity);
+    protected RecommendationEntity saveEntity(SelfDiagnosisEntity entity, AdminService adminService) {
+        return saveRecommendationEntity(entity, adminService);
     }
 
+    /**
+     * Saves recommendation.
+     * 
+     * @param entity
+     *            to save
+     * @param adminService
+     *            injected service
+     * @return saved entity
+     */
+    public static RecommendationEntity saveRecommendationEntity(SelfDiagnosisEntity entity, AdminService adminService) {
+        return (RecommendationEntity) adminService.saveEntity(entity);
+    }
+    
 }

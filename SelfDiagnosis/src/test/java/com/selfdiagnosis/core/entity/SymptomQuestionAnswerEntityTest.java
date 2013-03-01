@@ -75,25 +75,43 @@ public class SymptomQuestionAnswerEntityTest extends EntityTest {
         assertEquals("length must be between 0 and 200", constraintViolations.iterator().next().getMessage());
     }
 
+    @Override
+    protected SymptomQuestionAnswerEntity createValidEntity() {
+        return createValidSymptomQuestionAnswerEntity();
+    }
+
     /**
      * Creates valid symptom question answer entity. Can be used in this test or
      * tests of related entities.
      * 
      * @return valid {@link SymptomQuestionAnswerEntity}
      */
-    @Override
-    public SymptomQuestionAnswerEntity createValidEntity() {
+    public static SymptomQuestionAnswerEntity createValidSymptomQuestionAnswerEntity() {
         SymptomQuestionAnswerEntity symptomQuestionAnswer = new SymptomQuestionAnswerEntity();
         symptomQuestionAnswer.setAnswerNumber(new Short("0"));
         symptomQuestionAnswer.setAnswer("Yes");
-        symptomQuestionAnswer.setSymptomQuestion(new SymptomQuestionEntityTest().createValidEntity());
+        symptomQuestionAnswer.setSymptomQuestion(SymptomQuestionEntityTest.createValidSymptomQuestionEntity());
         return symptomQuestionAnswer;
     }
 
     @Override
-    public SymptomQuestionAnswerEntity saveEntity(SelfDiagnosisEntity entity, AdminService adminService) {
+    protected SymptomQuestionAnswerEntity saveEntity(SelfDiagnosisEntity entity, AdminService adminService) {
+        return saveSymptomQuestionAnswerEntity(entity, adminService);
+    }
+
+    /**
+     * Saves symptom question answer.
+     * 
+     * @param entity
+     *            to save
+     * @param adminService
+     *            injected service
+     * @return saved entity
+     */
+    public static SymptomQuestionAnswerEntity saveSymptomQuestionAnswerEntity(SelfDiagnosisEntity entity,
+            AdminService adminService) {
         SymptomQuestionAnswerEntity symptomQuestionAnswer = (SymptomQuestionAnswerEntity) entity;
-        symptomQuestionAnswer.setSymptomQuestion(new SymptomQuestionEntityTest().saveEntity(
+        symptomQuestionAnswer.setSymptomQuestion(SymptomQuestionEntityTest.saveSymptomQuestionEntity(
                 symptomQuestionAnswer.getSymptomQuestion(), adminService));
         return adminService.saveEntity(symptomQuestionAnswer);
     }

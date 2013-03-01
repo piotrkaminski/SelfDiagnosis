@@ -59,21 +59,39 @@ public class TestUnitEntityTest extends EntityTest {
         assertEquals("length must be between 0 and 10", constraintViolations.iterator().next().getMessage());
     }
     
+    @Override
+    protected TestUnitEntity createValidEntity() {
+        return createValidTestUnitEntity();
+    }
+
     /**
      * Creates valid testUnit entity. Can be used in this testUnit or testUnits of
      * related entities.
      * 
      * @return valid {@link TestUnitEntity}
      */
-    @Override
-    public TestUnitEntity createValidEntity() {
+    public static TestUnitEntity createValidTestUnitEntity() {
         TestUnitEntity testUnit = new TestUnitEntity();
         testUnit.setName("ml");
         return testUnit;
     }
-
+    
     @Override
-    public TestUnitEntity saveEntity(SelfDiagnosisEntity entity, AdminService adminService) {
-       return (TestUnitEntity) adminService.saveEntity(entity);
+    protected TestUnitEntity saveEntity(SelfDiagnosisEntity entity, AdminService adminService) {
+        return saveTestUnitEntity(entity, adminService);
     }
+
+    /**
+     * Saves test unit.
+     * 
+     * @param entity
+     *            to save
+     * @param adminService
+     *            injected service
+     * @return saved entity
+     */
+    public static TestUnitEntity saveTestUnitEntity(SelfDiagnosisEntity entity, AdminService adminService) {
+        return (TestUnitEntity) adminService.saveEntity(entity);
+    }
+
 }

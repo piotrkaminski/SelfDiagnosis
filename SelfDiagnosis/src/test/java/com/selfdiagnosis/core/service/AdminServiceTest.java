@@ -44,8 +44,7 @@ public class AdminServiceTest extends SpringContextTest {
         Assert.assertNotNull(bodyPartList);
         Assert.assertEquals(0, bodyPartList.size());
 
-        BodyPartEntityTest entityTest = new BodyPartEntityTest();
-        entityTest.saveEntity(entityTest.createValidEntity(), adminService);
+        BodyPartEntityTest.saveBodyPartEntity(BodyPartEntityTest.createValidBodyPartEntity(), adminService);
 
         bodyPartList = adminService.getBodyPartList();
         Assert.assertEquals(1, bodyPartList.size());
@@ -61,8 +60,7 @@ public class AdminServiceTest extends SpringContextTest {
         Assert.assertNotNull(symptomTypeList);
         Assert.assertEquals(0, symptomTypeList.size());
 
-        SymptomTypeEntityTest entityTest = new SymptomTypeEntityTest();
-        entityTest.saveEntity(entityTest.createValidEntity(), adminService);
+        SymptomTypeEntityTest.saveSymptomTypeEntity(SymptomTypeEntityTest.createValidSymptomTypeEntity(), adminService);
 
         symptomTypeList = adminService.getSymptomTypeList();
         Assert.assertEquals(1, symptomTypeList.size());
@@ -75,44 +73,43 @@ public class AdminServiceTest extends SpringContextTest {
     @Test
     @Transactional
     public void getDiseaseSymptomListTest() {
-        //Test getDiseaseSymptomList with no data.
+        // Test getDiseaseSymptomList with no data.
         List<DiseaseSymptomEntity> diseaseSymptomList = adminService.getDiseaseSymptomList();
         Assert.assertNotNull(diseaseSymptomList);
         Assert.assertEquals(0, diseaseSymptomList.size());
 
-        //Test getDiseaseSymptomList with one new row.
-        DiseaseSymptomEntityTest entityTest = new DiseaseSymptomEntityTest();
-        entityTest.saveEntity(entityTest.createValidEntity(), adminService);
+        // Test getDiseaseSymptomList with one new row.
+        DiseaseSymptomEntityTest.saveDiseaseSymptomEntity(DiseaseSymptomEntityTest.createValidDiseaseSymptomEntity(),
+                adminService);
         diseaseSymptomList = adminService.getDiseaseSymptomList();
         Assert.assertEquals(1, diseaseSymptomList.size());
 
-        //Test getDiseaseSymptomListForDisease with correct id.
+        // Test getDiseaseSymptomListForDisease with correct id.
         DiseaseEntity disease = diseaseSymptomList.get(0).getDisease();
         diseaseSymptomList = adminService.getDiseaseSymptomListForDisease(disease.getId());
         Assert.assertEquals(1, diseaseSymptomList.size());
 
-        //Prepare new disease symptom to add using addNewDiseaseSymptom method
-        DiseaseSymptomEntity diseaseSymptom = entityTest.createValidEntity();
+        // Prepare new disease symptom to add using addNewDiseaseSymptom method
+        DiseaseSymptomEntity diseaseSymptom = DiseaseSymptomEntityTest.createValidDiseaseSymptomEntity();
         diseaseSymptom.setDisease(disease);
-        SymptomEntityTest symptomEntityTest = new SymptomEntityTest();
-        SymptomEntity symptom = symptomEntityTest.createValidEntity();
-        diseaseSymptom.setSymptom(symptomEntityTest.saveEntity(symptom, adminService));
+        SymptomEntity symptom = SymptomEntityTest.createValidSymptomEntity();
+        diseaseSymptom.setSymptom(SymptomEntityTest.saveSymptomEntity(symptom, adminService));
         disease.setDiseaseSymptom(diseaseSymptom);
 
-        //Test addNewDiseaseSymptom method.
+        // Test addNewDiseaseSymptom method.
         adminService.addNewDiseaseSymptom(disease);
         diseaseSymptomList = adminService.getDiseaseSymptomList();
         Assert.assertEquals(2, diseaseSymptomList.size());
-        
-        //Test deleteDiseaseSymptom method.
+
+        // Test deleteDiseaseSymptom method.
         adminService.deleteDiseaseSymptom(diseaseSymptomList.get(0));
         diseaseSymptomList = adminService.getDiseaseSymptomListForDisease(disease.getId());
         Assert.assertEquals(1, diseaseSymptomList.size());
-        
-        //Test getDiseaseSymptomListForDisease with null id.
+
+        // Test getDiseaseSymptomListForDisease with null id.
         diseaseSymptomList = adminService.getDiseaseSymptomListForDisease(null);
         Assert.assertEquals(0, diseaseSymptomList.size());
-        
+
     }
 
     /**
@@ -125,8 +122,7 @@ public class AdminServiceTest extends SpringContextTest {
         Assert.assertNotNull(symptomList);
         Assert.assertEquals(0, symptomList.size());
 
-        SymptomEntityTest entityTest = new SymptomEntityTest();
-        entityTest.saveEntity(entityTest.createValidEntity(), adminService);
+        SymptomEntityTest.saveSymptomEntity(SymptomEntityTest.createValidSymptomEntity(), adminService);
 
         symptomList = adminService.getSymptomList();
         Assert.assertEquals(1, symptomList.size());
@@ -142,8 +138,7 @@ public class AdminServiceTest extends SpringContextTest {
         Assert.assertNotNull(testList);
         Assert.assertEquals(0, testList.size());
 
-        TestEntityTest entityTest = new TestEntityTest();
-        entityTest.saveEntity(entityTest.createValidEntity(), adminService);
+        TestEntityTest.saveTestEntity(TestEntityTest.createValidTestEntity(), adminService);
 
         testList = adminService.getTestList();
         Assert.assertEquals(1, testList.size());

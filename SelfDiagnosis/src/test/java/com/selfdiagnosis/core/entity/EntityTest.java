@@ -69,7 +69,7 @@ public abstract class EntityTest extends SpringContextTest {
      * @return entity with saved related rows
      * 
      */
-    public abstract SelfDiagnosisEntity saveEntity(SelfDiagnosisEntity entity, AdminService adminService);
+    protected abstract SelfDiagnosisEntity saveEntity(SelfDiagnosisEntity entity, AdminService adminService);
 
     /**
      * Creates valid entity of any type. Can be used in this test or tests of
@@ -77,7 +77,7 @@ public abstract class EntityTest extends SpringContextTest {
      * 
      * @return valid {@link SelfDiagnosisEntity}
      */
-    public abstract SelfDiagnosisEntity createValidEntity();
+    protected abstract SelfDiagnosisEntity createValidEntity();
 
     public AdminService getAdminService() {
         return adminService;

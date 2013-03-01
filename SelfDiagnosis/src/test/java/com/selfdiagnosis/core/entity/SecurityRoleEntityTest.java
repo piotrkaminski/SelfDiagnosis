@@ -43,21 +43,38 @@ public class SecurityRoleEntityTest extends EntityTest {
         assertEquals("length must be between 0 and 50", constraintViolations.iterator().next().getMessage());
     }
 
+    @Override
+    protected SecurityRoleEntity createValidEntity() {
+        return createValidSecurityRoleEntity();
+    }
+
     /**
      * Creates valid security role entity. Can be used in this test or tests of
      * related entities.
      * 
      * @return valid {@link SecurityRoleEntity}
      */
-    @Override
-    public SecurityRoleEntity createValidEntity() {
+    public static SecurityRoleEntity createValidSecurityRoleEntity() {
         SecurityRoleEntity securityRole = new SecurityRoleEntity();
         securityRole.setRoleName("User");
         return securityRole;
     }
 
     @Override
-    public SecurityRoleEntity saveEntity(SelfDiagnosisEntity entity, AdminService adminService) {
+    protected SecurityRoleEntity saveEntity(SelfDiagnosisEntity entity, AdminService adminService) {
+        return saveSecurityRoleEntity(entity, adminService);
+    }
+
+    /**
+     * Saves security role entity.
+     * 
+     * @param entity
+     *            to save
+     * @param adminService
+     *            injected service
+     * @return saved entity
+     */
+    public static SecurityRoleEntity saveSecurityRoleEntity(SelfDiagnosisEntity entity, AdminService adminService) {
         return (SecurityRoleEntity) adminService.saveEntity(entity);
     }
 

@@ -11,8 +11,7 @@ import org.junit.Test;
 import com.selfdiagnosis.core.service.AdminService;
 
 /**
- * Test class to test {@link DrugEntity}. Including validators and save
- * entity.
+ * Test class to test {@link DrugEntity}. Including validators and save entity.
  * 
  * @author mmieszkowski
  * 
@@ -43,21 +42,38 @@ public class DrugEntityTest extends EntityTest {
         assertEquals("length must be between 0 and 50", constraintViolations.iterator().next().getMessage());
     }
 
-    /**
-     * Creates valid drug entity. Can be used in this test or tests of
-     * related entities.
-     * 
-     * @return valid {@link DrugEntity} 
-     */
     @Override
-    public DrugEntity createValidEntity() {
+    protected DrugEntity createValidEntity() {
+        return createValidDrugEntity();
+    }
+
+    /**
+     * Creates valid drug entity. Can be used in this test or tests of related
+     * entities.
+     * 
+     * @return valid {@link DrugEntity}
+     */
+    public static DrugEntity createValidDrugEntity() {
         DrugEntity drug = new DrugEntity();
         drug.setName("Aspirin");
         return drug;
     }
 
     @Override
-    public DrugEntity saveEntity(SelfDiagnosisEntity entity, AdminService adminService) {
+    protected DrugEntity saveEntity(SelfDiagnosisEntity entity, AdminService adminService) {
+        return saveDrugEntity(entity, adminService);
+    }
+
+    /**
+     * Saves drug.
+     * 
+     * @param entity
+     *            to save
+     * @param adminService
+     *            injected service
+     * @return saved entity
+     */
+    public static DrugEntity saveDrugEntity(SelfDiagnosisEntity entity, AdminService adminService) {
         return (DrugEntity) adminService.saveEntity(entity);
     }
 

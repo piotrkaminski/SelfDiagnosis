@@ -102,27 +102,44 @@ public class DiseaseSymptomEntityTest extends EntityTest {
         assertEquals("must be between 0 and 10", constraintViolations.iterator().next().getMessage());
     }
 
+    @Override
+    protected DiseaseSymptomEntity createValidEntity() {
+        return createValidDiseaseSymptomEntity();
+    }
+    
     /**
      * Creates valid disease symptom entity. Can be used in this test or tests of
      * related entities.
      * 
      * @return valid {@link DiseaseSymptomEntity}
      */
-    @Override
-    public DiseaseSymptomEntity createValidEntity() {
+    public static DiseaseSymptomEntity createValidDiseaseSymptomEntity() {
         DiseaseSymptomEntity diseaseSymptom = new DiseaseSymptomEntity();
         diseaseSymptom.setFrequency(SelfDiagnosisConstants.ENTITY_FREQUENCY_MAX);
         diseaseSymptom.setRank(SelfDiagnosisConstants.DISEASE_SYMPTOM_RANK_MAX);
-        diseaseSymptom.setDisease(new DiseaseEntityTest().createValidEntity());
-        diseaseSymptom.setSymptom(new SymptomEntityTest().createValidEntity());
+        diseaseSymptom.setDisease(DiseaseEntityTest.createValidDiseaseEntity());
+        diseaseSymptom.setSymptom(SymptomEntityTest.createValidSymptomEntity());
         return diseaseSymptom;
     }
-
+    
     @Override
-    public DiseaseSymptomEntity saveEntity(SelfDiagnosisEntity entity, AdminService adminService) {
+    protected DiseaseSymptomEntity saveEntity(SelfDiagnosisEntity entity, AdminService adminService) {
+        return saveDiseaseSymptomEntity(entity, adminService);
+    }
+
+    /**
+     * Saves disease symptom.
+     * 
+     * @param entity
+     *            to save
+     * @param adminService
+     *            injected service
+     * @return saved entity
+     */
+    public static DiseaseSymptomEntity saveDiseaseSymptomEntity(SelfDiagnosisEntity entity, AdminService adminService) {
         DiseaseSymptomEntity diseaseSymptom = (DiseaseSymptomEntity) entity;
-        diseaseSymptom.setDisease(new DiseaseEntityTest().saveEntity(diseaseSymptom.getDisease(), adminService));
-        diseaseSymptom.setSymptom(new SymptomEntityTest().saveEntity(diseaseSymptom.getSymptom(), adminService));
+        diseaseSymptom.setDisease(DiseaseEntityTest.saveDiseaseEntity(diseaseSymptom.getDisease(), adminService));
+        diseaseSymptom.setSymptom(SymptomEntityTest.saveSymptomEntity(diseaseSymptom.getSymptom(), adminService));
         return adminService.saveEntity(diseaseSymptom);
     }
 

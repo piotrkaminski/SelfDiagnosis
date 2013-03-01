@@ -13,14 +13,14 @@ import com.selfdiagnosis.core.service.AdminService;
 import com.selfdiagnosis.test.SelfDiagnosisTestUtils;
 
 /**
- * Test class to test {@link DiseaseSymptomEntity}.
- * Including validators and save entity.
+ * Test class to test {@link DiseaseSymptomEntity}. Including validators and
+ * save entity.
  * 
  * @author mmieszkowski
- *
+ * 
  */
 public class SymptomQuestionEntityTest extends EntityTest {
-       
+
     /**
      * Checks symptom question with no symptom.
      */
@@ -70,25 +70,43 @@ public class SymptomQuestionEntityTest extends EntityTest {
         assertEquals("length must be between 0 and 200", constraintViolations.iterator().next().getMessage());
     }
 
+    @Override
+    protected SymptomQuestionEntity createValidEntity() {
+        return createValidSymptomQuestionEntity();
+    }
+
     /**
-     * Creates valid symptom question entity. Can be used in this test or tests of
-     * related entities.
+     * Creates valid symptom question entity. Can be used in this test or tests
+     * of related entities.
      * 
      * @return valid {@link SymptomQuestionEntity}
      */
-    @Override
-    public SymptomQuestionEntity createValidEntity() {
+    public static SymptomQuestionEntity createValidSymptomQuestionEntity() {
         SymptomQuestionEntity symptomQuestion = new SymptomQuestionEntity();
         symptomQuestion.setQuestionNumber(new Short("0"));
         symptomQuestion.setQuestion("Do you have a pain?");
-        symptomQuestion.setSymptom(new SymptomEntityTest().createValidEntity());
+        symptomQuestion.setSymptom(SymptomEntityTest.createValidSymptomEntity());
         return symptomQuestion;
     }
 
     @Override
-    public SymptomQuestionEntity saveEntity(SelfDiagnosisEntity entity, AdminService adminService) {
+    protected SymptomQuestionEntity saveEntity(SelfDiagnosisEntity entity, AdminService adminService) {
+        return saveSymptomQuestionEntity(entity, adminService);
+    }
+
+    /**
+     * Saves symptom question.
+     * 
+     * @param entity
+     *            to save
+     * @param adminService
+     *            injected service
+     * @return saved entity
+     */
+    public static SymptomQuestionEntity saveSymptomQuestionEntity(
+            SelfDiagnosisEntity entity, AdminService adminService) {
         SymptomQuestionEntity symptomQuestion = (SymptomQuestionEntity) entity;
-        symptomQuestion.setSymptom(new SymptomEntityTest().saveEntity(symptomQuestion.getSymptom(), adminService));
+        symptomQuestion.setSymptom(SymptomEntityTest.saveSymptomEntity(symptomQuestion.getSymptom(), adminService));
         return adminService.saveEntity(symptomQuestion);
     }
 

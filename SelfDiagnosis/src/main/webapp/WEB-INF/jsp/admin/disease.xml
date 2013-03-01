@@ -30,11 +30,6 @@
         <transition on="deleteDiseaseSymptom" to="deleteDiseaseSymptom"/>
     </view-state>
     
-    <action-state id="refreshDiseaseSymptoms">
-        <evaluate expression="adminService.getDiseaseSymptomListForDisease(entity.id)" result="flowScope.diseaseSymptoms"/>   
-        <transition to="entityForm"/> 
-    </action-state>
-    
     <action-state id="deleteDiseaseSymptom">
         <on-entry>
             <set name="flowScope.diseaseSymptom" value="requestParameters.diseaseSymptom"/>
@@ -44,13 +39,17 @@
     </action-state>
     
     <subflow-state id="addNewSymptom" subflow="symptom">
-        <!-- <input name="entity" value="symptomBean"/> -->
         <transition on="saveAndBack" to="entityForm">
             <evaluate expression="entity.diseaseSymptom.setSymptom(currentEvent.attributes.entity)"></evaluate>
+            <evaluate expression="adminService.getSymptomList()" result="flowScope.symptoms"></evaluate>
         </transition>
         <transition on="back" to="entityForm">
         </transition>
     </subflow-state>
     
+    <action-state id="refreshDiseaseSymptoms">
+        <evaluate expression="adminService.getDiseaseSymptomListForDisease(entity.id)" result="flowScope.diseaseSymptoms"/>   
+        <transition to="entityForm"/> 
+    </action-state>
     
 </flow>

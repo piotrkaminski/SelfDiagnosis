@@ -29,7 +29,6 @@
     </view-state>
 
     <subflow-state id="addNewBodyPart" subflow="bodyPart">
-        <input name="entity" value="bodyPartBean"/>
         <transition on="saveAndBack" to="entityForm">
             <evaluate expression="adminService.getBodyPartList()" result="flowScope.bodyParts"></evaluate>
             <evaluate expression="entity.setBodyPart(currentEvent.attributes.entity)"></evaluate>
@@ -39,7 +38,6 @@
     </subflow-state>
 
     <subflow-state id="addNewSymptomType" subflow="symptomType">
-        <input name="entity" value="symptomTypeBean"/>
         <transition on="saveAndBack" to="entityForm">
             <evaluate expression="adminService.getSymptomTypeList()" result="flowScope.symptomTypes"></evaluate>
             <evaluate expression="entity.setSymptomType(currentEvent.attributes.entity)"></evaluate>
@@ -49,7 +47,6 @@
     </subflow-state>
 
     <subflow-state id="addNewTest" subflow="test">
-        <input name="entity" value="testBean"/>
         <transition on="saveAndBack" to="entityForm">
             <evaluate expression="adminService.getTestList()" result="flowScope.tests"></evaluate>
             <evaluate expression="entity.setTest(currentEvent.attributes.entity)"></evaluate>

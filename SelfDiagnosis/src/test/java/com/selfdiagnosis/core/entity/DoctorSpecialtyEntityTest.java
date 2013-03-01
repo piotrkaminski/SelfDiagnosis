@@ -11,8 +11,8 @@ import org.junit.Test;
 import com.selfdiagnosis.core.service.AdminService;
 
 /**
- * Test class to test {@link DoctorSpecialtyEntity}. Including validators and save
- * entity.
+ * Test class to test {@link DoctorSpecialtyEntity}. Including validators and
+ * save entity.
  * 
  * @author mmieszkowski
  * 
@@ -37,28 +37,46 @@ public class DoctorSpecialtyEntityTest extends EntityTest {
     @Test
     public void nameIsTooLong() {
         DoctorSpecialtyEntity doctorSpecialty = createValidEntity();
-        doctorSpecialty.setName("Very long doctor specialty name that is longer than fifty characters. " 
+        doctorSpecialty.setName("Very long doctor specialty name that is longer than fifty characters. "
                 + "Very long doctor specialty name that is longer than fifty characters");
         Set<ConstraintViolation<DoctorSpecialtyEntity>> constraintViolations = getValidator().validate(doctorSpecialty);
         assertEquals(1, constraintViolations.size());
         assertEquals("length must be between 0 and 100", constraintViolations.iterator().next().getMessage());
     }
 
+    @Override
+    protected DoctorSpecialtyEntity createValidEntity() {
+        return createValidDoctorSpecialtyEntity();
+    }
+
     /**
-     * Creates valid doctor specialty entity. Can be used in this test or tests of
-     * related entities.
+     * Creates valid doctor specialty entity. Can be used in this test or tests
+     * of related entities.
      * 
      * @return valid {@link DoctorSpecialtyEntity}
      */
-    @Override
-    public DoctorSpecialtyEntity createValidEntity() {
+    public static DoctorSpecialtyEntity createValidDoctorSpecialtyEntity() {
         DoctorSpecialtyEntity doctorSpecialty = new DoctorSpecialtyEntity();
         doctorSpecialty.setName("Internist");
         return doctorSpecialty;
     }
 
     @Override
-    public DoctorSpecialtyEntity saveEntity(SelfDiagnosisEntity entity, AdminService adminService) {
+    protected DoctorSpecialtyEntity saveEntity(SelfDiagnosisEntity entity, AdminService adminService) {
+        return saveDoctorSpecialtyEntity(entity, adminService);
+    }
+
+    /**
+     * Saves doctor specialty.
+     * 
+     * @param entity
+     *            to save
+     * @param adminService
+     *            injected service
+     * @return saved entity
+     */
+    public static DoctorSpecialtyEntity saveDoctorSpecialtyEntity(
+            SelfDiagnosisEntity entity, AdminService adminService) {
         return (DoctorSpecialtyEntity) adminService.saveEntity(entity);
     }
 

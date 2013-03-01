@@ -13,9 +13,9 @@
     </action-state>
 
     <view-state id="entityForm" model="entity" view="bodyPartForm.jsp">
-        <!-- <on-render>
+        <on-render>
             <evaluate expression="adminService.getBodyPartList()" result="flowScope.bodyParts"></evaluate>
-        </on-render>-->
+        </on-render>
         <transition on="saveAndNew" to="entityForm">
             <evaluate expression="bodyPartBean" result="entity"/>
         </transition>

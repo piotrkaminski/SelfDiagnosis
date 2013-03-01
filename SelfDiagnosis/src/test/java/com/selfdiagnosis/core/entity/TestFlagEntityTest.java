@@ -46,21 +46,38 @@ public class TestFlagEntityTest extends EntityTest {
         assertEquals("length must be between 0 and 20", constraintViolations.iterator().next().getMessage());
     }
 
+    @Override
+    protected TestFlagEntity createValidEntity() {
+        return createValidTestFlagEntity();
+    }
+    
     /**
      * Creates valid test flag entity. Can be used in this test or tests of
      * related entities.
      * 
      * @return valid {@link TestFlagEntity} 
      */
-    @Override
-    public TestFlagEntity createValidEntity() {
+    public static TestFlagEntity createValidTestFlagEntity() {
         TestFlagEntity testFlag = new TestFlagEntity();
         testFlag.setName("Too high");
         return testFlag;
     }
 
     @Override
-    public SelfDiagnosisEntity saveEntity(SelfDiagnosisEntity entity, AdminService adminService) {
+    protected TestFlagEntity saveEntity(SelfDiagnosisEntity entity, AdminService adminService) {
+        return saveTestFlagEntity(entity, adminService);
+    }
+
+    /**
+     * Saves test flag.
+     * 
+     * @param entity
+     *            to save
+     * @param adminService
+     *            injected service
+     * @return saved entity
+     */
+    public static TestFlagEntity saveTestFlagEntity(SelfDiagnosisEntity entity, AdminService adminService) {
         return (TestFlagEntity) adminService.saveEntity(entity);
     }
 

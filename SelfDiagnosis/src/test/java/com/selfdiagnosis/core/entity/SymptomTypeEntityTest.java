@@ -43,23 +43,39 @@ public class SymptomTypeEntityTest extends EntityTest {
         assertEquals("length must be between 0 and 50", constraintViolations.iterator().next().getMessage());
     }
 
+    @Override
+    protected SymptomTypeEntity createValidEntity() {
+        return createValidSymptomTypeEntity();
+    }
+
     /**
      * Creates valid symptom type entity. Can be used in this test or tests of
      * related entities.
      * 
      * @return valid {@link SymptomTypeEntity}
      */
-    @Override
-    public SymptomTypeEntity createValidEntity() {
+    public static SymptomTypeEntity createValidSymptomTypeEntity() {
         SymptomTypeEntity symptomType = new SymptomTypeEntity();
         symptomType.setName("Leg");
         return symptomType;
     }
-    
+
     @Override
-    public SymptomTypeEntity saveEntity(SelfDiagnosisEntity entity, AdminService adminService) {
-        return (SymptomTypeEntity) adminService.saveEntity(entity);
+    protected SymptomTypeEntity saveEntity(SelfDiagnosisEntity entity, AdminService adminService) {
+        return saveSymptomTypeEntity(entity, adminService);
     }
 
+    /**
+     * Saves symptom type.
+     * 
+     * @param entity
+     *            to save
+     * @param adminService
+     *            injected service
+     * @return saved entity
+     */
+    public static SymptomTypeEntity saveSymptomTypeEntity(SelfDiagnosisEntity entity, AdminService adminService) {
+        return (SymptomTypeEntity) adminService.saveEntity(entity);
+    }
 
 }

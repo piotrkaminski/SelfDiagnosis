@@ -44,24 +44,43 @@ public class TestBaseResultEntityTest extends EntityTest {
         assertEquals("may not be null", constraintViolations.iterator().next().getMessage());
     }
 
+    @Override
+    protected TestBaseResultEntity createValidEntity() {
+        return createValidTestBaseResultEntity();
+    }
+    
     /**
      * Creates valid testBaseResult entity. Can be used in this testBaseResult or testBaseResults of
      * related entities.
      * 
      * @return valid {@link TestBaseResultEntity}
      */
-    public TestBaseResultEntity createValidEntity() {
+    public static TestBaseResultEntity createValidTestBaseResultEntity() {
         TestBaseResultEntity testBaseResult = new TestBaseResultEntity();
-        testBaseResult.setTestUnit(new TestUnitEntityTest().createValidEntity());
-        testBaseResult.setTest(new TestEntityTest().createValidEntity());
+        testBaseResult.setTestUnit(TestUnitEntityTest.createValidTestUnitEntity());
+        testBaseResult.setTest(TestEntityTest.createValidTestEntity());
         return testBaseResult;
     }
 
     @Override
-    public SelfDiagnosisEntity saveEntity(SelfDiagnosisEntity entity, AdminService adminService) {
+    protected TestBaseResultEntity saveEntity(SelfDiagnosisEntity entity, AdminService adminService) {
+        return saveTestBaseResultEntity(entity, adminService);
+    }
+
+    /**
+     * Saves test base result.
+     * 
+     * @param entity
+     *            to save
+     * @param adminService
+     *            injected service
+     * @return saved entity
+     */
+    public static TestBaseResultEntity saveTestBaseResultEntity(SelfDiagnosisEntity entity, AdminService adminService) {
         TestBaseResultEntity testBaseResult = (TestBaseResultEntity) entity;
-        testBaseResult.setTest(new TestEntityTest().saveEntity(testBaseResult.getTest(), adminService));
-        testBaseResult.setTestUnit(new TestUnitEntityTest().saveEntity(testBaseResult.getTestUnit(), adminService));
+        testBaseResult.setTest(TestEntityTest.saveTestEntity(testBaseResult.getTest(), adminService));
+        testBaseResult.setTestUnit(TestUnitEntityTest.saveTestUnitEntity(testBaseResult.getTestUnit(), adminService));
         return adminService.saveEntity(testBaseResult);
     }
+
 }

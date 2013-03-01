@@ -45,21 +45,38 @@ public class TestTypeEntityTest extends EntityTest {
         assertEquals("length must be between 0 and 100", constraintViolations.iterator().next().getMessage());
     }
 
+    @Override
+    protected TestTypeEntity createValidEntity() {
+        return createValidTestTypeEntity();
+    }
+
     /**
      * Creates valid test type entity. Can be used in this test or tests of
      * related entities.
      * 
      * @return valid {@link TestTypeEntity}
      */
-    @Override
-    public TestTypeEntity createValidEntity() {
+    public static TestTypeEntity createValidTestTypeEntity() {
         TestTypeEntity testType = new TestTypeEntity();
         testType.setName("Blood");
         return testType;
     }
-
+    
     @Override
-    public TestTypeEntity saveEntity(SelfDiagnosisEntity entity, AdminService adminService) {
+    protected TestTypeEntity saveEntity(SelfDiagnosisEntity entity, AdminService adminService) {
+        return saveTestTypeEntity(entity, adminService);
+    }
+
+    /**
+     * Saves test type.
+     * 
+     * @param entity
+     *            to save
+     * @param adminService
+     *            injected service
+     * @return saved entity
+     */
+    public static TestTypeEntity saveTestTypeEntity(SelfDiagnosisEntity entity, AdminService adminService) {
         return (TestTypeEntity) adminService.saveEntity(entity);
     }
 

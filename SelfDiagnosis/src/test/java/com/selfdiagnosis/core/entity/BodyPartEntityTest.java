@@ -43,22 +43,36 @@ public class BodyPartEntityTest extends EntityTest {
         assertEquals("length must be between 0 and 50", constraintViolations.iterator().next().getMessage());
     }
 
+    @Override
+    protected BodyPartEntity createValidEntity() {
+        return createValidBodyPartEntity();
+    }
+    
     /**
      * Creates valid body part entity. Can be used in this test or tests of
      * related entities.
      * 
      * @return valid {@link BodyPartEntity}
      */
-    @Override
-    public BodyPartEntity createValidEntity() {
+    public static BodyPartEntity createValidBodyPartEntity() {
         BodyPartEntity bodyPart = new BodyPartEntity();
         bodyPart.setName("Leg");
         return bodyPart;
     }
 
     @Override
-    public BodyPartEntity saveEntity(SelfDiagnosisEntity entity, AdminService adminService) {
+    protected BodyPartEntity saveEntity(SelfDiagnosisEntity entity, AdminService adminService) {
+        return saveBodyPartEntity(entity, adminService);
+    }
+    
+    /**
+     * Saves body part.
+     * @param entity to save
+     * @param adminService injected service
+     * @return saved body part
+     */
+    public static BodyPartEntity saveBodyPartEntity(SelfDiagnosisEntity entity, AdminService adminService) {
         return (BodyPartEntity) adminService.saveEntity(entity);
     }
-
+    
 }

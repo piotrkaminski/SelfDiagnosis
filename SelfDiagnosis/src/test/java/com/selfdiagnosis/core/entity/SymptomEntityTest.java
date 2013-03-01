@@ -71,26 +71,43 @@ public class SymptomEntityTest extends EntityTest {
         assertEquals("may not be null", constraintViolations.iterator().next().getMessage());
     }
 
+    @Override
+    protected SymptomEntity createValidEntity() {
+        return createValidSymptomEntity();
+    }
+
     /**
      * Creates valid symptom entity. Can be used in this test or tests of
      * related entities.
      * 
      * @return valid {@link SymptomEntity}
      */
-    @Override
-    public SymptomEntity createValidEntity() {
+    public static SymptomEntity createValidSymptomEntity() {
         SymptomEntity symptom = new SymptomEntity();
         symptom.setName("Pain");
-        symptom.setBodyPart(new BodyPartEntityTest().createValidEntity());
-        symptom.setSymptomType(new SymptomTypeEntityTest().createValidEntity());
+        symptom.setBodyPart(BodyPartEntityTest.createValidBodyPartEntity());
+        symptom.setSymptomType(SymptomTypeEntityTest.createValidSymptomTypeEntity());
         return symptom;
     }
 
     @Override
-    public SymptomEntity saveEntity(SelfDiagnosisEntity entity, AdminService adminService) {
+    protected SymptomEntity saveEntity(SelfDiagnosisEntity entity, AdminService adminService) {
+        return saveSymptomEntity(entity, adminService);
+    }
+
+    /**
+     * Saves symptom.
+     * 
+     * @param entity
+     *            to save
+     * @param adminService
+     *            injected service
+     * @return saved entity
+     */
+    public static SymptomEntity saveSymptomEntity(SelfDiagnosisEntity entity, AdminService adminService) {
         SymptomEntity symptom = (SymptomEntity) entity;
-        symptom.setBodyPart(new BodyPartEntityTest().saveEntity(symptom.getBodyPart(), adminService));
-        symptom.setSymptomType(new SymptomTypeEntityTest().saveEntity(symptom.getSymptomType(), adminService));
+        symptom.setBodyPart(BodyPartEntityTest.saveBodyPartEntity(symptom.getBodyPart(), adminService));
+        symptom.setSymptomType(SymptomTypeEntityTest.saveSymptomTypeEntity(symptom.getSymptomType(), adminService));
         return adminService.saveEntity(symptom);
     }
 

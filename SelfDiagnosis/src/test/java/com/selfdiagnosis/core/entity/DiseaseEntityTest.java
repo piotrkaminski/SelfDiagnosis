@@ -12,11 +12,11 @@ import com.selfdiagnosis.SelfDiagnosisConstants;
 import com.selfdiagnosis.core.service.AdminService;
 
 /**
- * Test class to test {@link DiseaseEntity}.
- * Including validators and save entity.
+ * Test class to test {@link DiseaseEntity}. Including validators and save
+ * entity.
  * 
  * @author mmieszkowski
- *
+ * 
  */
 public class DiseaseEntityTest extends EntityTest {
 
@@ -31,20 +31,20 @@ public class DiseaseEntityTest extends EntityTest {
         assertEquals(1, constraintViolations.size());
         assertEquals("may not be empty", constraintViolations.iterator().next().getMessage());
     }
-    
+
     /**
      * Checks disease with too long name.
      */
     @Test
     public void nameIsTooLong() {
         DiseaseEntity disease = createValidEntity();
-        disease.setName("Very long disease name that is longer than one hundred characters. " 
+        disease.setName("Very long disease name that is longer than one hundred characters. "
                 + "Very long disease name that is longer than one hundred characters.");
         Set<ConstraintViolation<DiseaseEntity>> constraintViolations = getValidator().validate(disease);
         assertEquals(1, constraintViolations.size());
         assertEquals("length must be between 0 and 100", constraintViolations.iterator().next().getMessage());
     }
-    
+
     /**
      * Checks disease with no frequency.
      */
@@ -67,21 +67,25 @@ public class DiseaseEntityTest extends EntityTest {
         Set<ConstraintViolation<DiseaseEntity>> constraintViolations = getValidator().validate(disease);
         assertEquals(1, constraintViolations.size());
         assertEquals("must be between 0 and 100", constraintViolations.iterator().next().getMessage());
-        
+
         disease.setFrequency(new Short("101"));
         constraintViolations = getValidator().validate(disease);
         assertEquals(1, constraintViolations.size());
         assertEquals("must be between 0 and 100", constraintViolations.iterator().next().getMessage());
     }
-    
+
+    @Override
+    protected DiseaseEntity createValidEntity() {
+        return createValidDiseaseEntity();
+    }
+
     /**
      * Creates valid disease entity. Can be used in this test or tests of
      * related entities.
      * 
      * @return valid {@link DiseaseEntity}
      */
-    @Override
-    public DiseaseEntity createValidEntity() {
+    public static DiseaseEntity createValidDiseaseEntity() {
         DiseaseEntity disease = new DiseaseEntity();
         disease.setName("Flu");
         disease.setFrequency(SelfDiagnosisConstants.ENTITY_FREQUENCY_MAX);
@@ -89,7 +93,20 @@ public class DiseaseEntityTest extends EntityTest {
     }
 
     @Override
-    public DiseaseEntity saveEntity(SelfDiagnosisEntity entity, AdminService adminService) {
+    protected DiseaseEntity saveEntity(SelfDiagnosisEntity entity, AdminService adminService) {
+        return saveDiseaseEntity(entity, adminService);
+    }
+
+    /**
+     * Saves disease.
+     * 
+     * @param entity
+     *            to save
+     * @param adminService
+     *            injected service
+     * @return saved entity
+     */
+    public static DiseaseEntity saveDiseaseEntity(SelfDiagnosisEntity entity, AdminService adminService) {
         return (DiseaseEntity) adminService.saveEntity(entity);
     }
 

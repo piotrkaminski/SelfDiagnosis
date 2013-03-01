@@ -5,16 +5,11 @@ import java.util.List;
 
 import org.easymock.EasyMock;
 import org.junit.Test;
-import org.springframework.binding.mapping.Mapper;
-import org.springframework.binding.mapping.MappingResults;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.webflow.config.FlowDefinitionResource;
 import org.springframework.webflow.config.FlowDefinitionResourceFactory;
-import org.springframework.webflow.core.collection.LocalAttributeMap;
-import org.springframework.webflow.core.collection.MutableAttributeMap;
-import org.springframework.webflow.engine.EndState;
-import org.springframework.webflow.engine.Flow;
 import org.springframework.webflow.test.MockExternalContext;
+import org.springframework.webflow.test.MockParameterMap;
 
 import com.selfdiagnosis.core.entity.DiseaseEntity;
 import com.selfdiagnosis.core.entity.DiseaseEntityTest;
@@ -35,23 +30,50 @@ public class DiseaseFlowExecutionTest extends ParentFlowExecutionTest {
         return resourceFactory.createFileResource("src/main/webapp/WEB-INF/jsp/admin/disease.xml");
     }
 
-    /**
-     * Tests disease flow start with new disease entity.
-     */
-    @Test
-    public void testStartDiseaseFlowCreate() {
-
+    @Override
+    public void testFlowOnStartCreate() {
         List<SymptomEntity> symptomList = new ArrayList<SymptomEntity>();
         List<DiseaseSymptomEntity> diseaseSymptomList = new ArrayList<DiseaseSymptomEntity>();
         EasyMock.expect(getAdminServiceMock().getSymptomList()).andReturn(symptomList);
         EasyMock.expect(getAdminServiceMock().getDiseaseSymptomListForDisease(null)).andReturn(diseaseSymptomList);
+    }
+
+    @Override
+    public DiseaseEntity testFlowOnStartEdit() {
+        DiseaseEntity disease = createEntity();
+        disease.setId(1L);
+
+        List<SymptomEntity> symptomList = new ArrayList<SymptomEntity>();
+        List<DiseaseSymptomEntity> diseaseSymptomList = new ArrayList<DiseaseSymptomEntity>();
+        EasyMock.expect(getAdminServiceMock().getSymptomList()).andReturn(symptomList);
+        EasyMock.expect(getAdminServiceMock().getDiseaseSymptomListForDisease(1L)).andReturn(diseaseSymptomList);
+        return disease;
+    }
+
+    /**
+     * Tests disease flow. addNewDiseaseSymptom event.
+     */
+    @Test
+    @Transactional
+    public void testDiseaseFlowAddNewDiseaseSymptom() {
+        DiseaseEntity disease = createEntity();
+
+        List<DiseaseSymptomEntity> diseaseSymptomList = new ArrayList<DiseaseSymptomEntity>();
+
+        EasyMock.expect(getAdminServiceMock().saveEntity(disease)).andReturn(disease);
+        disease.setId(1L);
+        getAdminServiceMock().addNewDiseaseSymptom(disease);
+        EasyMock.expectLastCall().once();
+        EasyMock.expect(getAdminServiceMock().getDiseaseSymptomListForDisease(1L)).andReturn(diseaseSymptomList);
 
         EasyMock.replay(getAdminServiceMock());
 
-        MutableAttributeMap input = new LocalAttributeMap();
-        input.put("entity", null);
+        setCurrentState("entityForm");
+        getFlowScope().put("entity", disease);
+
         MockExternalContext context = new MockExternalContext();
-        startFlow(input, context);
+        context.setEventId("addNewDiseaseSymptom");
+        resumeFlow(context);
 
         assertCurrentStateEquals("entityForm");
         assertResponseWrittenEquals("diseaseForm.jsp", context);
@@ -60,26 +82,32 @@ public class DiseaseFlowExecutionTest extends ParentFlowExecutionTest {
     }
 
     /**
-     * Tests disease flow start with existing disease.
+     * Tests disease flow. addNewDiseaseSymptom event.
      */
     @Test
     @Transactional
-    public void testStartDiseaseFlowEdit() {
+    public void testDiseaseFlowDeleteDiseaseSymptom() {
         DiseaseEntity disease = createEntity();
         disease.setId(1L);
-
-        List<SymptomEntity> symptomList = new ArrayList<SymptomEntity>();
         List<DiseaseSymptomEntity> diseaseSymptomList = new ArrayList<DiseaseSymptomEntity>();
+        DiseaseSymptomEntity diseaseSymptom = new DiseaseSymptomEntity();
+        diseaseSymptom.setId(2L);
 
-        EasyMock.expect(getAdminServiceMock().getSymptomList()).andReturn(symptomList);
+        getAdminServiceMock().deleteDiseaseSymptom(diseaseSymptom);
+        EasyMock.expectLastCall().once();
         EasyMock.expect(getAdminServiceMock().getDiseaseSymptomListForDisease(1L)).andReturn(diseaseSymptomList);
 
         EasyMock.replay(getAdminServiceMock());
 
-        MutableAttributeMap input = new LocalAttributeMap();
-        input.put("entity", disease);
+        setCurrentState("entityForm");
+        getFlowScope().put("entity", disease);
+        getFlowScope().put("diseaseSymptom", new DiseaseSymptomEntity());
+        MockParameterMap requestParameterMap = new MockParameterMap();
+        requestParameterMap.put("diseaseSymptom", "2");
         MockExternalContext context = new MockExternalContext();
-        startFlow(input, context);
+        context.setRequestParameterMap(requestParameterMap);
+        context.setEventId("deleteDiseaseSymptom");
+        resumeFlow(context);
 
         assertCurrentStateEquals("entityForm");
         assertResponseWrittenEquals("diseaseForm.jsp", context);
@@ -92,10 +120,11 @@ public class DiseaseFlowExecutionTest extends ParentFlowExecutionTest {
      */
     @Test
     @Transactional
-    public void testDiseaseFlowAddNewSymptomNoOutput() {
-        DiseaseEntity disease = testDiseaseFlowAddNewSymptom(createMockSymptomSubflowNoOutput());
+    public void testDiseaseFlowAddNewSymptomBack() {
+        DiseaseEntity disease = (DiseaseEntity) testFlowAddNewEntity(createMockSubflowBackOutput("symptom"),
+                "addNewSymptom");
         assertNull(disease.getDiseaseSymptom().getSymptom());
-        
+
     }
 
     /**
@@ -103,88 +132,36 @@ public class DiseaseFlowExecutionTest extends ParentFlowExecutionTest {
      */
     @Test
     @Transactional
-    public void testDiseaseFlowAddNewSymptomWithOutput() {
-        DiseaseEntity disease = testDiseaseFlowAddNewSymptom(createMockSymptomSubflowWithOutput());
+    public void testDiseaseFlowAddNewSymptomSaveAndBack() {
+        DiseaseEntity disease = (DiseaseEntity) testFlowAddNewEntity(
+                createMockSubflowSaveAndBackOutput("symptom", createSymptom()), "addNewSymptom");
         assertEquals(1L, disease.getDiseaseSymptom().getSymptom().getId().longValue());
     }
 
-    /**
-     * Universal method for symptom subflow test.
-     * 
-     * @param symptomSubflow
-     *            subflow to test
-     * @return disease entity processed by the flow
-     */
-    public DiseaseEntity testDiseaseFlowAddNewSymptom(Flow symptomSubflow) {
-        DiseaseEntity disease = createEntity();
-
-        EasyMock.replay(getAdminServiceMock());
-
-        setCurrentState("entityForm");
-        getFlowScope().put("entity", disease);
-
-        getFlowDefinitionRegistry().registerFlowDefinition(symptomSubflow);
-        MockExternalContext context = new MockExternalContext();
-        context.setEventId("addNewSymptom");
-        resumeFlow(context);
-
-        assertFlowExecutionActive();
-        assertCurrentStateEquals("entityForm");
-        assertResponseWrittenEquals(getFormName(), context);
-        EasyMock.verify(getAdminServiceMock());
-        return disease;
-    }
-
-    /**
-     * 
-     * @return subflow mock
-     */
-    public Flow createMockSymptomSubflowNoOutput() {
-        Flow mockSymptomFlow = new Flow("symptom");
-        new EndState(mockSymptomFlow, "back");
-
-        return mockSymptomFlow;
-    }
-
-    /**
-     * 
-     * @return subflow mock
-     */
-    public Flow createMockSymptomSubflowWithOutput() {
-        Flow mockSymptomFlow = new Flow("symptom");
-        EndState endState = new EndState(mockSymptomFlow, "saveAndBack");
-        endState.setOutputMapper(new Mapper() {
-            
-            @Override
-            public MappingResults map(Object source, Object target) {
-                ((LocalAttributeMap) target).put("entity", createSymptom());
-
-                return null;
-            }
-        });
-
-        return mockSymptomFlow;
-    }
-    
     /**
      * Creates symptom in order to test symptom subflow.
      * 
      * @return symptom entity with id
      */
     public SymptomEntity createSymptom() {
-        SymptomEntity symptom = new SymptomEntityTest().createValidEntity();
+        SymptomEntity symptom = SymptomEntityTest.createValidSymptomEntity();
         symptom.setId(1L);
         return symptom;
     }
 
     @Override
     public DiseaseEntity createEntity() {
-        return new DiseaseEntityTest().createValidEntity();
+        return DiseaseEntityTest.createValidDiseaseEntity();
     }
 
     @Override
     public String getFormName() {
         return "diseaseForm.jsp";
+    }
+
+    @Override
+    public void entityFormOnRender() {
+        // do nothing
     }
 
 }

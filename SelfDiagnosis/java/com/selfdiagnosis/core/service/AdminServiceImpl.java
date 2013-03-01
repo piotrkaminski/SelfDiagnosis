@@ -12,6 +12,7 @@ import com.selfdiagnosis.core.dao.DiseaseSymptomDAO;
 import com.selfdiagnosis.core.dao.SymptomDAO;
 import com.selfdiagnosis.core.dao.SymptomTypeDAO;
 import com.selfdiagnosis.core.dao.TestDAO;
+import com.selfdiagnosis.core.dao.TestTypeDAO;
 import com.selfdiagnosis.core.entity.BodyPartEntity;
 import com.selfdiagnosis.core.entity.DiseaseEntity;
 import com.selfdiagnosis.core.entity.DiseaseSymptomEntity;
@@ -19,6 +20,7 @@ import com.selfdiagnosis.core.entity.SelfDiagnosisEntity;
 import com.selfdiagnosis.core.entity.SymptomEntity;
 import com.selfdiagnosis.core.entity.SymptomTypeEntity;
 import com.selfdiagnosis.core.entity.TestEntity;
+import com.selfdiagnosis.core.entity.TestTypeEntity;
 
 /**
  * Implementation for {@link AdminService}.
@@ -28,7 +30,7 @@ import com.selfdiagnosis.core.entity.TestEntity;
  */
 @Service("adminService")
 public class AdminServiceImpl implements AdminService {
-
+    //TODO check generated queries. Maybe we dont need eager fetching
     /** DAO injected by Spring. */
     @Autowired
     private BodyPartDAO bodyPartDAO;
@@ -52,6 +54,10 @@ public class AdminServiceImpl implements AdminService {
     /** DAO injected by Spring. */
     @Autowired
     private TestDAO testDAO;
+
+    /** DAO injected by Spring. */
+    @Autowired
+    private TestTypeDAO testTypeDAO;
 
     @Override
     @Transactional(readOnly = true)
@@ -92,6 +98,12 @@ public class AdminServiceImpl implements AdminService {
         return testDAO.findAll();
     }
     
+    @Override
+    @Transactional(readOnly = true)
+    public List<TestTypeEntity> getTestTypeList() {
+        return testTypeDAO.findAll();
+    }
+
     @SuppressWarnings("unchecked")
     @Override
     @Transactional(readOnly = true)

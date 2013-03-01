@@ -57,24 +57,42 @@ public class TestEntityTest extends EntityTest {
         assertEquals("may not be null", constraintViolations.iterator().next().getMessage());
     }
 
+    @Override
+    protected TestEntity createValidEntity() {
+        return createValidTestEntity();
+    }
+    
     /**
      * Creates valid test entity. Can be used in this test or tests of related
      * entities.
      * 
      * @return valid {@link TestEntity}
      */
-    @Override
-    public TestEntity createValidEntity() {
+    public static TestEntity createValidTestEntity() {
         TestEntity test = new TestEntity();
         test.setName("Sugar");
-        test.setTestType(new TestTypeEntityTest().createValidEntity());
+        test.setTestType(TestTypeEntityTest.createValidTestTypeEntity());
         return test;
     }
 
     @Override
-    public TestEntity saveEntity(SelfDiagnosisEntity entity, AdminService adminService) {
+    protected TestEntity saveEntity(SelfDiagnosisEntity entity, AdminService adminService) {
+        return saveTestEntity(entity, adminService);
+    }
+
+    /**
+     * Saves test entity.
+     * 
+     * @param entity
+     *            to save
+     * @param adminService
+     *            injected service
+     * @return saved entity
+     */
+    public static TestEntity saveTestEntity(SelfDiagnosisEntity entity, AdminService adminService) {
         TestEntity test = (TestEntity) entity;
-        test.setTestType(new TestTypeEntityTest().saveEntity(test.getTestType(), adminService));
+        test.setTestType(TestTypeEntityTest.saveTestTypeEntity(test.getTestType(), adminService));
         return adminService.saveEntity(test);
     }
+    
 }
