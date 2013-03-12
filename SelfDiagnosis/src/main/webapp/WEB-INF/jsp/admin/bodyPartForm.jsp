@@ -1,11 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page session="false" %>
-<html>
-<head>
-    <title>Edit Body part</title>
-</head>
-<body>
 <h1>
     Enter new Body Part!  
 </h1>
@@ -29,5 +24,3 @@
         </tr>
     </table>
 </form:form>
-</body>
-</html>

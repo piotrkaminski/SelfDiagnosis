@@ -29,7 +29,7 @@ public class DiseaseEntityTest extends EntityTest {
         disease.setName("");
         Set<ConstraintViolation<DiseaseEntity>> constraintViolations = getValidator().validate(disease);
         assertEquals(1, constraintViolations.size());
-        assertEquals("may not be empty", constraintViolations.iterator().next().getMessage());
+        assertEquals("{NotBlank.name}", constraintViolations.iterator().next().getMessage());
     }
 
     /**
@@ -54,7 +54,7 @@ public class DiseaseEntityTest extends EntityTest {
         disease.setFrequency(null);
         Set<ConstraintViolation<DiseaseEntity>> constraintViolations = getValidator().validate(disease);
         assertEquals(1, constraintViolations.size());
-        assertEquals("may not be null", constraintViolations.iterator().next().getMessage());
+        assertEquals("{NotBlank.frequency}", constraintViolations.iterator().next().getMessage());
     }
 
     /**

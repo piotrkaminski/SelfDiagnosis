@@ -7,4 +7,5 @@
 	<!-- Contexts Configuration -->
 	<import resource="appServlet/servlet-context.xml"/>
 	<import resource="core/webflow-context.xml"/>
+    <import resource="core/tiles-context.xml"/>
 </beans>

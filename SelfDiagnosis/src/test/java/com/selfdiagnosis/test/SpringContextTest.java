@@ -18,8 +18,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @Ignore
 @ContextConfiguration(locations = {
-        "classpath:spring/root-context-test.xml",
-        "file:src/main/webapp/WEB-INF/spring/web-root-context.xml"
+        "classpath:spring/root-context-test.xml"
 	})
 @RunWith(SpringJUnit4ClassRunner.class)
 public class SpringContextTest extends AbstractTransactionalJUnit4SpringContextTests {

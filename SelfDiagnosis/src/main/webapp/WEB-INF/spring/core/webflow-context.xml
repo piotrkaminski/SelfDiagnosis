@@ -13,7 +13,7 @@
           p:flowExecutor-ref="flowExecutor" />
 
     <!-- Executes flows: the entry point into the Spring Web Flow system -->
-    <webflow:flow-executor id="flowExecutor">
+    <webflow:flow-executor id="flowExecutor" flow-registry="flowRegistry">
         <webflow:flow-execution-listeners>
             <webflow:listener ref="securityFlowExecutionListener" />
         </webflow:flow-execution-listeners>
@@ -39,18 +39,15 @@
 
     <!-- Plugs in a custom creator for Web Flow views -->
     <webflow:flow-builder-services id="flowBuilderServices" conversion-service="defaultConversionService"
-        validator="validator"/>
+        validator="validator" />
         
-    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"></bean>
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <property name="validationMessageSource" ref="messageSource"/>
+    </bean>
     
     <bean id="defaultConversionService" class="org.springframework.binding.convert.service.DefaultConversionService">
         <constructor-arg ref="applicationConversionService"/>
     </bean>
-
-    <!-- Configures Web Flow to use Tiles to create views for rendering; Tiles allows for applying consistent layouts to your views 
-    <bean id="mvcViewFactoryCreator"
-          class="org.springframework.webflow.mvc.builder.MvcViewFactoryCreator"
-          p:viewResolvers-ref="viewResolver" />-->
 
     <!-- Installs a listener to apply Spring Security authorities -->
     <bean id="securityFlowExecutionListener"

@@ -19,4 +19,7 @@
 	<import resource="core-logic-context.xml"/>
 	<import resource="spring-security-context.xml"/>
 	<import resource="hibernate-context.xml"/>		
+    <import resource="file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml"/>
+    <import resource="file:src/main/webapp/WEB-INF/spring/core/webflow-context.xml"/>
+
 </beans>

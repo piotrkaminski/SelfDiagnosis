@@ -1,10 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<html>
-<head>
-    <title>Edit Symptom</title>
-</head>
-<body>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
+<tiles:insertDefinition name="mainTemplate" >
+<tiles:putAttribute name="body">
 <h1>
     Enter new Symptom!  
 </h1>
@@ -49,5 +47,5 @@
         </tr>
     </table>
 </form:form>
-</body>
-</html>
+</tiles:putAttribute>
+</tiles:insertDefinition>

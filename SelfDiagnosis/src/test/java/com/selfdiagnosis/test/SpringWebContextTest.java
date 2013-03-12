@@ -21,8 +21,7 @@ import org.springframework.webflow.test.execution.AbstractXmlFlowExecutionTests;
  */
 @Ignore
 @ContextConfiguration(locations = {
-	    "classpath:spring/root-context-test.xml",
-	    "file:src/main/webapp/WEB-INF/spring/web-root-context.xml"
+	    "classpath:spring/root-context-test.xml"
 	})
 @RunWith(SpringJUnit4ClassRunner.class)
 public abstract class SpringWebContextTest extends AbstractXmlFlowExecutionTests {

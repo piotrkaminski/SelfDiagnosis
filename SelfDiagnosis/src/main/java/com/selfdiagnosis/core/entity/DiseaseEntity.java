@@ -46,7 +46,7 @@ public class DiseaseEntity extends SelfDiagnosisEntity implements Serializable {
     /**
      * Name of the disease.
      */
-    @NotBlank
+    @NotBlank (message = "{NotBlank.name}")
     @Length(max = SelfDiagnosisConstants.DISEASE_NAME_LENGTH_MAX)
     @Column(name = "name", unique = false, nullable = false)
     private String name;
@@ -60,7 +60,7 @@ public class DiseaseEntity extends SelfDiagnosisEntity implements Serializable {
     /**
      * Frequency of disease.
      */
-    @NotNull
+    @NotNull (message = "{NotBlank.frequency}")
     @Range(min = SelfDiagnosisConstants.ENTITY_FREQUENCY_MIN, 
             max = SelfDiagnosisConstants.ENTITY_FREQUENCY_MAX)
     @Column(name = "frequency", nullable = false)
