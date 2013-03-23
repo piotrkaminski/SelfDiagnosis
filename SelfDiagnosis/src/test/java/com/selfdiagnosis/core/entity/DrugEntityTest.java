@@ -27,7 +27,7 @@ public class DrugEntityTest extends EntityTest {
         drug.setName("");
         Set<ConstraintViolation<DrugEntity>> constraintViolations = getValidator().validate(drug);
         assertEquals(1, constraintViolations.size());
-        assertEquals("may not be empty", constraintViolations.iterator().next().getMessage());
+        assertEquals("{NotBlank.name}", constraintViolations.iterator().next().getMessage());
     }
 
     /**

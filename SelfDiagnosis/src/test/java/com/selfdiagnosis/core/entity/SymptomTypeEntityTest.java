@@ -28,7 +28,7 @@ public class SymptomTypeEntityTest extends EntityTest {
         symptomType.setName("");
         Set<ConstraintViolation<SymptomTypeEntity>> constraintViolations = getValidator().validate(symptomType);
         assertEquals(1, constraintViolations.size());
-        assertEquals("may not be empty", constraintViolations.iterator().next().getMessage());
+        assertEquals("{NotBlank.name}", constraintViolations.iterator().next().getMessage());
     }
 
     /**
@@ -40,7 +40,7 @@ public class SymptomTypeEntityTest extends EntityTest {
         symptomType.setName("Very long body part name that is longer than fifty characters");
         Set<ConstraintViolation<SymptomTypeEntity>> constraintViolations = getValidator().validate(symptomType);
         assertEquals(1, constraintViolations.size());
-        assertEquals("length must be between 0 and 50", constraintViolations.iterator().next().getMessage());
+        assertEquals("{Length.name}", constraintViolations.iterator().next().getMessage());
     }
 
     @Override

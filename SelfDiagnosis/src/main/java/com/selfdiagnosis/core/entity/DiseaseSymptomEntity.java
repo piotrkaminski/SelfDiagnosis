@@ -41,7 +41,7 @@ public class DiseaseSymptomEntity extends SelfDiagnosisEntity implements Seriali
     /**
      * Related disease.
      */
-    @NotNull
+    @NotNull(message = "{NotBlank.disease}")
     @ManyToOne
     @JoinColumn(name = "disease_id", nullable = false)
     private DiseaseEntity disease;
@@ -49,7 +49,7 @@ public class DiseaseSymptomEntity extends SelfDiagnosisEntity implements Seriali
     /**
      * Related symptom.
      */
-    @NotNull
+    @NotNull(message = "{NotNull.symptom}")
     @ManyToOne
     @JoinColumn(name = "symptom_id", nullable = false)
     private SymptomEntity symptom;
@@ -58,9 +58,10 @@ public class DiseaseSymptomEntity extends SelfDiagnosisEntity implements Seriali
      * Rank of symptom in the disease. Higher the rank, higher the disease in
      * the diseases result list.
      */
-    @NotNull
+    @NotNull(message = "{NotBlank.rank}")
     @Range(min = SelfDiagnosisConstants.DISEASE_SYMPTOM_RANK_MIN, 
-            max = SelfDiagnosisConstants.DISEASE_SYMPTOM_RANK_MAX)
+            max = SelfDiagnosisConstants.DISEASE_SYMPTOM_RANK_MAX,
+            message = "{Range.rank}")
     @Column(name = "rank", nullable = false)
     private Short rank;
 
@@ -68,9 +69,10 @@ public class DiseaseSymptomEntity extends SelfDiagnosisEntity implements Seriali
      * Frequency of symptom in the disease. 0-100 where 100 means that 100% of
      * sick patients, has to have this symptom.
      */
-    @NotNull
+    @NotNull(message = "{NotBlank.frequency}")
     @Range(min = SelfDiagnosisConstants.ENTITY_FREQUENCY_MIN, 
-            max = SelfDiagnosisConstants.ENTITY_FREQUENCY_MAX)
+            max = SelfDiagnosisConstants.ENTITY_FREQUENCY_MAX,
+            message = "{Range.frequency}")
     @Column(name = "frequency", nullable = false)
     private Short frequency;
 

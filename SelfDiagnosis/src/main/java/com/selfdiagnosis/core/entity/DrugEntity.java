@@ -43,7 +43,7 @@ public class DrugEntity extends SelfDiagnosisEntity implements Serializable {
     /**
      * Name of the drug.
      */
-    @NotBlank
+    @NotBlank(message = "{NotBlank.name}")
     @Length(max = SelfDiagnosisConstants.DRUG_NAME_LENGTH_MAX)
     @Column(name = "name", unique = false, nullable = false)
     private String name;

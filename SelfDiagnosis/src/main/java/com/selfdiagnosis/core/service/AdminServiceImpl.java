@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.selfdiagnosis.core.dao.BodyPartDAO;
+import com.selfdiagnosis.core.dao.DiseaseDAO;
 import com.selfdiagnosis.core.dao.DiseaseSymptomDAO;
 import com.selfdiagnosis.core.dao.SymptomDAO;
 import com.selfdiagnosis.core.dao.SymptomTypeDAO;
@@ -41,6 +42,10 @@ public class AdminServiceImpl implements AdminService {
 
     /** DAO injected by Spring. */
     @Autowired
+    private DiseaseDAO diseaseDAO;
+
+    /** DAO injected by Spring. */
+    @Autowired
     private SymptomDAO baseDAO;
 
     /** DAO injected by Spring. */
@@ -70,6 +75,13 @@ public class AdminServiceImpl implements AdminService {
     public List<SymptomTypeEntity> getSymptomTypeList() {
         return symptomTypeDAO.findAll();
     }
+    
+    @Override
+    @Transactional(readOnly = true)
+    public List<DiseaseEntity> getDiseaseList() {
+        return diseaseDAO.findAll();
+    }
+
     
     @Override
     @Transactional(readOnly = true)
@@ -115,7 +127,7 @@ public class AdminServiceImpl implements AdminService {
     @Transactional
     public final <T extends SelfDiagnosisEntity> T saveEntity(final T selfDiagnosisEntity) {
         baseDAO.saveOrUpdate(selfDiagnosisEntity);
-        return selfDiagnosisEntity; //(T) baseDAO.merge(selfDiagnosisEntity);
+        return selfDiagnosisEntity;
     }
 
     @Override
@@ -129,7 +141,7 @@ public class AdminServiceImpl implements AdminService {
     
     @Override
     @Transactional
-    public void deleteDiseaseSymptom(final DiseaseSymptomEntity diseaseSymptomEntity) {
-        baseDAO.delete(diseaseSymptomEntity);
+    public void deleteEntity(final SelfDiagnosisEntity selfDiagnosisEntity) {
+        baseDAO.delete(selfDiagnosisEntity);
     }
 }

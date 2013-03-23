@@ -64,12 +64,18 @@ public interface AdminService {
     void addNewDiseaseSymptom(DiseaseEntity disease);
 
     /**
-     * Deletes given {@link DiseaseSymptomEntity}.
+     * Deletes given {@link SelfDiagnosisEntity}.
      * 
-     * @param diseaseSymptomEntity
+     * @param selfDiagnosisEntity
      *            entity to be deleted.
      */
-    void deleteDiseaseSymptom(DiseaseSymptomEntity diseaseSymptomEntity);
+    void deleteEntity(SelfDiagnosisEntity selfDiagnosisEntity);
+
+    /**
+     * 
+     * @return List of all diseases.
+     */
+    List<DiseaseEntity> getDiseaseList();
 
     /**
      * 
@@ -101,5 +107,6 @@ public interface AdminService {
      * @return List of all symptoms related with given disease
      */
     List<DiseaseSymptomEntity> getDiseaseSymptomListForDisease(Long id);
+
 
 }

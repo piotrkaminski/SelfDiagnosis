@@ -102,7 +102,7 @@ public class AdminServiceTest extends SpringContextTest {
         Assert.assertEquals(2, diseaseSymptomList.size());
 
         // Test deleteDiseaseSymptom method.
-        adminService.deleteDiseaseSymptom(diseaseSymptomList.get(0));
+        adminService.deleteEntity(diseaseSymptomList.get(0));
         diseaseSymptomList = adminService.getDiseaseSymptomListForDisease(disease.getId());
         Assert.assertEquals(1, diseaseSymptomList.size());
 

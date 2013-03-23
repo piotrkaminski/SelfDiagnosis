@@ -39,15 +39,15 @@ public class TestUnitEntity extends SelfDiagnosisEntity implements Serializable 
     /**
      * Name of the test unit.
      */
-    @NotBlank
-    @Length(max = SelfDiagnosisConstants.TEST_UNIT_NAME_LENGTH_MAX)
+    @NotBlank(message = "{NotBlank.name}")
+    @Length(max = SelfDiagnosisConstants.TEST_UNIT_NAME_LENGTH_MAX, message = "{Length.name}")
     @Column(name = "name", unique = false, nullable = false)
     private String name;
 
     /**
      * Description of the test unit.
      */
-    @Length(max = SelfDiagnosisConstants.TEST_UNIT_SHORT_NAME_LENGTH_MAX)
+    @Length(max = SelfDiagnosisConstants.TEST_UNIT_SHORT_NAME_LENGTH_MAX, message = "{Length.name}")
     @Column(name = "shortName", unique = false, nullable = true)
     private String shortName;
 

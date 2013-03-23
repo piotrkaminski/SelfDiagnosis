@@ -39,8 +39,8 @@ public class SecurityRoleEntity extends SelfDiagnosisEntity implements Serializa
     /**
      * Security role name.
      */
-    @NotBlank
-    @Length(max = SelfDiagnosisConstants.SECURITY_ROLE_NAME_LENGTH_MAX)
+    @NotBlank(message = "{NotBlank.name}")
+    @Length(max = SelfDiagnosisConstants.SECURITY_ROLE_NAME_LENGTH_MAX, message = "{Length.name}")
     @Column(name = "roleName", nullable = false, unique = true)
     private String roleName;
 

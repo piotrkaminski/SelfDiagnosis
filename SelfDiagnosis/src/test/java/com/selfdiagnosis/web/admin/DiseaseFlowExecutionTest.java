@@ -93,7 +93,7 @@ public class DiseaseFlowExecutionTest extends ParentFlowExecutionTest {
         DiseaseSymptomEntity diseaseSymptom = new DiseaseSymptomEntity();
         diseaseSymptom.setId(2L);
 
-        getAdminServiceMock().deleteDiseaseSymptom(diseaseSymptom);
+        getAdminServiceMock().deleteEntity(diseaseSymptom);
         EasyMock.expectLastCall().once();
         EasyMock.expect(getAdminServiceMock().getDiseaseSymptomListForDisease(1L)).andReturn(diseaseSymptomList);
 

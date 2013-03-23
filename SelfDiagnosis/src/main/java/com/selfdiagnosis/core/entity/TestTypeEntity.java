@@ -39,8 +39,8 @@ public class TestTypeEntity extends SelfDiagnosisEntity implements Serializable 
     /**
      * Name of the test type.
      */
-    @NotBlank
-    @Length(max = SelfDiagnosisConstants.TEST_TYPE_NAME_LENGTH_MAX)
+    @NotBlank(message = "{NotBlank.name}")
+    @Length(max = SelfDiagnosisConstants.TEST_TYPE_NAME_LENGTH_MAX, message = "{Length.name}")
     @Column(name = "name", unique = false, nullable = false)
     private String name;
     

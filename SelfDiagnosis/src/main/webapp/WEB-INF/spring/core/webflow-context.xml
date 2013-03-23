@@ -29,12 +29,19 @@
     <!-- The registry of executable flow definitions -->
     <webflow:flow-registry id="flowRegistry" flow-builder-services="flowBuilderServices">
         <webflow:flow-location path="/WEB-INF/jsp/admin/parent-flow.xml" />
+        <webflow:flow-location path="/WEB-INF/jsp/admin/parent-list-flow.xml" />
         <webflow:flow-location path="/WEB-INF/jsp/admin/bodyPart.xml" />
+        <webflow:flow-location path="/WEB-INF/jsp/admin/bodyPartList.xml" />
         <webflow:flow-location path="/WEB-INF/jsp/admin/disease.xml" />
+        <webflow:flow-location path="/WEB-INF/jsp/admin/diseaseList.xml" />
         <webflow:flow-location path="/WEB-INF/jsp/admin/symptom.xml" />
+        <webflow:flow-location path="/WEB-INF/jsp/admin/symptomList.xml" />
         <webflow:flow-location path="/WEB-INF/jsp/admin/symptomType.xml" />
+        <webflow:flow-location path="/WEB-INF/jsp/admin/symptomTypeList.xml" />
         <webflow:flow-location path="/WEB-INF/jsp/admin/test.xml" />
+        <webflow:flow-location path="/WEB-INF/jsp/admin/testList.xml" />
         <webflow:flow-location path="/WEB-INF/jsp/admin/testType.xml" />
+        <webflow:flow-location path="/WEB-INF/jsp/admin/testTypeList.xml" />
     </webflow:flow-registry>
 
     <!-- Plugs in a custom creator for Web Flow views -->

@@ -29,7 +29,7 @@ public class TestEntityTest extends EntityTest {
         test.setName("");
         Set<ConstraintViolation<TestEntity>> constraintViolations = getValidator().validate(test);
         assertEquals(1, constraintViolations.size());
-        assertEquals("may not be empty", constraintViolations.iterator().next().getMessage());
+        assertEquals("{NotBlank.name}", constraintViolations.iterator().next().getMessage());
     }
 
     /**
@@ -42,7 +42,7 @@ public class TestEntityTest extends EntityTest {
         test.setName(name);
         Set<ConstraintViolation<TestEntity>> constraintViolations = getValidator().validate(test);
         assertEquals(1, constraintViolations.size());
-        assertEquals("length must be between 0 and 100", constraintViolations.iterator().next().getMessage());
+        assertEquals("{Length.name}", constraintViolations.iterator().next().getMessage());
     }
 
     /**
@@ -54,7 +54,7 @@ public class TestEntityTest extends EntityTest {
         test.setTestType(null);
         Set<ConstraintViolation<TestEntity>> constraintViolations = getValidator().validate(test);
         assertEquals(1, constraintViolations.size());
-        assertEquals("may not be null", constraintViolations.iterator().next().getMessage());
+        assertEquals("{NotNull.testType}", constraintViolations.iterator().next().getMessage());
     }
 
     @Override

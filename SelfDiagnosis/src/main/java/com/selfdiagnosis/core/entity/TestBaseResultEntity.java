@@ -41,7 +41,7 @@ public class TestBaseResultEntity extends SelfDiagnosisEntity implements Seriali
     /**
      * Type of the test - i.e. blood, urine etc.
      */
-    @NotNull
+    @NotNull(message = "{NotNull.test}")
     @ManyToOne
     @JoinColumn(name = "test_id")
     private TestEntity test;
@@ -50,7 +50,8 @@ public class TestBaseResultEntity extends SelfDiagnosisEntity implements Seriali
      * Bottom of the age range.
      */
     @Range(min = SelfDiagnosisConstants.AGE_RANGE_AGE_MIN, 
-            max = SelfDiagnosisConstants.AGE_RANGE_AGE_MAX)
+            max = SelfDiagnosisConstants.AGE_RANGE_AGE_MAX,
+            message = "{Range.age}")
     @Column(name = "yearsFrom", unique = false, nullable = true)
     private Integer yearsFrom;
 
@@ -58,7 +59,8 @@ public class TestBaseResultEntity extends SelfDiagnosisEntity implements Seriali
      * Age range top.
      */
     @Range(min = SelfDiagnosisConstants.AGE_RANGE_AGE_MIN, 
-            max = SelfDiagnosisConstants.AGE_RANGE_AGE_MAX)
+            max = SelfDiagnosisConstants.AGE_RANGE_AGE_MAX,
+            message = "{Range.age}")
     @Column(name = "yearsTo", unique = false, nullable = true)
     private Integer yearsTo;
 
@@ -83,7 +85,7 @@ public class TestBaseResultEntity extends SelfDiagnosisEntity implements Seriali
     /**
      * Unit in which test result is being stored.
      */
-    @NotNull
+    @NotNull(message = "{NotNull.testUnit}")
     @ManyToOne
     @JoinColumn(name = "testUnit_id")
     private TestUnitEntity testUnit;

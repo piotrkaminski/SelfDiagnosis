@@ -39,8 +39,8 @@ public class ContraindicationEntity extends SelfDiagnosisEntity implements Seria
     /**
      * Name of the contraindication.
      */
-    @NotBlank
-    @Length(max = SelfDiagnosisConstants.CONTRAINDICATION_NAME_LENGTH_MAX)
+    @NotBlank(message = "NotBlank.name")
+    @Length(max = SelfDiagnosisConstants.CONTRAINDICATION_NAME_LENGTH_MAX, message = "{Length.name}")
     @Column(name = "name", unique = false, nullable = false)
     private String name;
 

@@ -29,7 +29,7 @@ public class SymptomEntityTest extends EntityTest {
         symptom.setName("");
         Set<ConstraintViolation<SymptomEntity>> constraintViolations = getValidator().validate(symptom);
         assertEquals(1, constraintViolations.size());
-        assertEquals("may not be empty", constraintViolations.iterator().next().getMessage());
+        assertEquals("{NotBlank.name}", constraintViolations.iterator().next().getMessage());
     }
     
     /**
@@ -42,7 +42,7 @@ public class SymptomEntityTest extends EntityTest {
                 + "Very long disease name that is longer than one hundred characters.");
         Set<ConstraintViolation<SymptomEntity>> constraintViolations = getValidator().validate(symptom);
         assertEquals(1, constraintViolations.size());
-        assertEquals("length must be between 0 and 100", constraintViolations.iterator().next().getMessage());
+        assertEquals("{Length.name}", constraintViolations.iterator().next().getMessage());
     }
     
     /**
@@ -68,7 +68,7 @@ public class SymptomEntityTest extends EntityTest {
         symptom.setSymptomType(null);
         Set<ConstraintViolation<SymptomEntity>> constraintViolations = getValidator().validate(symptom);
         assertEquals(1, constraintViolations.size());
-        assertEquals("may not be null", constraintViolations.iterator().next().getMessage());
+        assertEquals("{NotNull.symptomType}", constraintViolations.iterator().next().getMessage());
     }
 
     @Override

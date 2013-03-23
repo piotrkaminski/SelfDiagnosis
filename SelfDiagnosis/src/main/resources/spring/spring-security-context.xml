@@ -12,6 +12,7 @@
 		<security:intercept-url pattern="/login.jsp"
 			access="IS_AUTHENTICATED_ANONYMOUSLY" />
         <security:intercept-url access="IS_AUTHENTICATED_ANONYMOUSLY" pattern="/css/main.css"/>
+        <security:logout logout-success-url="/"/>
 	</security:http>
 
 	<bean id="userDetailsService"

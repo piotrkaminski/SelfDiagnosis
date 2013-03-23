@@ -42,7 +42,7 @@ public class DiseaseEntityTest extends EntityTest {
                 + "Very long disease name that is longer than one hundred characters.");
         Set<ConstraintViolation<DiseaseEntity>> constraintViolations = getValidator().validate(disease);
         assertEquals(1, constraintViolations.size());
-        assertEquals("length must be between 0 and 100", constraintViolations.iterator().next().getMessage());
+        assertEquals("{Length.name}", constraintViolations.iterator().next().getMessage());
     }
 
     /**
@@ -66,12 +66,12 @@ public class DiseaseEntityTest extends EntityTest {
         disease.setFrequency(new Short("-1"));
         Set<ConstraintViolation<DiseaseEntity>> constraintViolations = getValidator().validate(disease);
         assertEquals(1, constraintViolations.size());
-        assertEquals("must be between 0 and 100", constraintViolations.iterator().next().getMessage());
+        assertEquals("{Range.frequency}", constraintViolations.iterator().next().getMessage());
 
         disease.setFrequency(new Short("101"));
         constraintViolations = getValidator().validate(disease);
         assertEquals(1, constraintViolations.size());
-        assertEquals("must be between 0 and 100", constraintViolations.iterator().next().getMessage());
+        assertEquals("{Range.frequency}", constraintViolations.iterator().next().getMessage());
     }
 
     @Override

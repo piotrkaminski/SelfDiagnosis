@@ -6,7 +6,7 @@
     abstract="true"
     start-state="createOrEdit">
 
-    <!-- <secured attributes="ROLE_USER" /> -->
+    <secured attributes="ROLE_ADMINISTRATOR" />
 
     <input name="entity" />
     
@@ -20,6 +20,7 @@
     <view-state id="entityForm" model="entity">
         <transition on="save" to="entityForm">
             <evaluate expression="adminService.saveEntity(entity)" result="entity"/>
+            <set name="flashScope.statusMessageKey" value="'form.msg.success'" type="string"></set>
         </transition>
         <transition on="back" to="back" bind="false"/>
         <transition on="saveAndNew" to="entityForm">

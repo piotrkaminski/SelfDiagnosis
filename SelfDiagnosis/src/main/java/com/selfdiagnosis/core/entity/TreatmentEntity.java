@@ -42,8 +42,8 @@ public class TreatmentEntity extends SelfDiagnosisEntity implements Serializable
     /**
      * Name of the treatment.
      */
-    @NotBlank
-    @Length(max = SelfDiagnosisConstants.TREATMENT_NAME_LENGTH_MAX)
+    @NotBlank(message = "{NotBlank.name}")
+    @Length(max = SelfDiagnosisConstants.TREATMENT_NAME_LENGTH_MAX, message = "{Length.name}")
     @Column(name = "name", unique = false, nullable = false)
     private String name;
 
@@ -56,7 +56,7 @@ public class TreatmentEntity extends SelfDiagnosisEntity implements Serializable
     /**
      * Treatment type. I.e rehabilitation, drugs etc.
      */
-    @NotNull
+    @NotNull(message = "{NotNull.treatmentType}")
     @ManyToOne
     @JoinColumn(name = "treatmentType_id", unique = false, nullable = false)
     private TreatmentTypeEntity treatmentType;

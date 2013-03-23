@@ -28,7 +28,7 @@ public class DoctorSpecialtyEntityTest extends EntityTest {
         doctorSpecialty.setName("");
         Set<ConstraintViolation<DoctorSpecialtyEntity>> constraintViolations = getValidator().validate(doctorSpecialty);
         assertEquals(1, constraintViolations.size());
-        assertEquals("may not be empty", constraintViolations.iterator().next().getMessage());
+        assertEquals("{NotBlank.name}", constraintViolations.iterator().next().getMessage());
     }
 
     /**

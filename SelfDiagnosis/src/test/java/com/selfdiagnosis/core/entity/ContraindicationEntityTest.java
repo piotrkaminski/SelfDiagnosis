@@ -29,7 +29,7 @@ public class ContraindicationEntityTest extends EntityTest {
         Set<ConstraintViolation<ContraindicationEntity>> constraintViolations = getValidator().validate(
                 contraindication);
         assertEquals(1, constraintViolations.size());
-        assertEquals("may not be empty", constraintViolations.iterator().next().getMessage());
+        assertEquals("NotBlank.name", constraintViolations.iterator().next().getMessage());
     }
 
     /**
@@ -42,7 +42,7 @@ public class ContraindicationEntityTest extends EntityTest {
         Set<ConstraintViolation<ContraindicationEntity>> constraintViolations = getValidator().validate(
                 contraindication);
         assertEquals(1, constraintViolations.size());
-        assertEquals("length must be between 0 and 50", constraintViolations.iterator().next().getMessage());
+        assertEquals("{Length.name}", constraintViolations.iterator().next().getMessage());
     }
 
     @Override

@@ -19,7 +19,7 @@ public class DiseaseSymptomDAOImpl extends BaseDAOImpl implements DiseaseSymptom
     @Override
     @SuppressWarnings("unchecked")
     public List<DiseaseSymptomEntity> findAll() {
-        Query query = getCurrentSession().createQuery("from DiseaseSymptomEntity order by id desc");
+        Query query = getCurrentSession().createQuery("from DiseaseSymptomEntity");
         return query.list();
     }
 
@@ -30,7 +30,7 @@ public class DiseaseSymptomDAOImpl extends BaseDAOImpl implements DiseaseSymptom
             return null;
         }
         Query query = getCurrentSession().createQuery(
-                "from DiseaseSymptomEntity where disease.id = :id order by id desc").setLong("id", id);
+                "from DiseaseSymptomEntity where disease.id = :id").setLong("id", id);
         return query.list();
     }
 

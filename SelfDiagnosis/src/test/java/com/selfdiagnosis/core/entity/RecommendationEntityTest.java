@@ -30,7 +30,7 @@ public class RecommendationEntityTest extends EntityTest {
         recommendation.setRecommendation("");
         Set<ConstraintViolation<RecommendationEntity>> constraintViolations = getValidator().validate(recommendation);
         assertEquals(1, constraintViolations.size());
-        assertEquals("may not be empty", constraintViolations.iterator().next().getMessage());
+        assertEquals("{NotBlank.recommendation}", constraintViolations.iterator().next().getMessage());
     }
 
     /**
@@ -43,7 +43,7 @@ public class RecommendationEntityTest extends EntityTest {
         recommendation.setRecommendation(text);
         Set<ConstraintViolation<RecommendationEntity>> constraintViolations = getValidator().validate(recommendation);
         assertEquals(1, constraintViolations.size());
-        assertEquals("length must be between 0 and 1000", constraintViolations.iterator().next().getMessage());
+        assertEquals("{Length.recommendation}", constraintViolations.iterator().next().getMessage());
     }
 
     @Override

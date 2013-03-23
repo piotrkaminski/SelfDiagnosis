@@ -30,7 +30,7 @@ public class SymptomQuestionEntityTest extends EntityTest {
         symptomQuestion.setSymptom(null);
         Set<ConstraintViolation<SymptomQuestionEntity>> constraintViolations = getValidator().validate(symptomQuestion);
         assertEquals(1, constraintViolations.size());
-        assertEquals("may not be null", constraintViolations.iterator().next().getMessage());
+        assertEquals("{NotNull.symptom}", constraintViolations.iterator().next().getMessage());
     }
 
     /**
@@ -42,7 +42,7 @@ public class SymptomQuestionEntityTest extends EntityTest {
         symptomQuestion.setQuestionNumber(null);
         Set<ConstraintViolation<SymptomQuestionEntity>> constraintViolations = getValidator().validate(symptomQuestion);
         assertEquals(1, constraintViolations.size());
-        assertEquals("may not be null", constraintViolations.iterator().next().getMessage());
+        assertEquals("{NotNull.questionNumber}", constraintViolations.iterator().next().getMessage());
     }
 
     /**
@@ -54,7 +54,7 @@ public class SymptomQuestionEntityTest extends EntityTest {
         symptomQuestion.setQuestion("");
         Set<ConstraintViolation<SymptomQuestionEntity>> constraintViolations = getValidator().validate(symptomQuestion);
         assertEquals(1, constraintViolations.size());
-        assertEquals("may not be empty", constraintViolations.iterator().next().getMessage());
+        assertEquals("{NotBlank.question}", constraintViolations.iterator().next().getMessage());
     }
 
     /**
@@ -67,7 +67,7 @@ public class SymptomQuestionEntityTest extends EntityTest {
         symptomQuestion.setQuestion(question);
         Set<ConstraintViolation<SymptomQuestionEntity>> constraintViolations = getValidator().validate(symptomQuestion);
         assertEquals(1, constraintViolations.size());
-        assertEquals("length must be between 0 and 200", constraintViolations.iterator().next().getMessage());
+        assertEquals("{Length.question}", constraintViolations.iterator().next().getMessage());
     }
 
     @Override

@@ -26,15 +26,15 @@
             <evaluate expression="adminService.saveEntity(entity)"/>
             <evaluate expression="adminService.addNewDiseaseSymptom(entity)"/>
         </transition>
-        <transition on="addNewSymptom" to="addNewSymptom"/>
+        <transition on="addNewSymptom" to="addNewSymptom" bind="true" validate="false"/>
         <transition on="deleteDiseaseSymptom" to="deleteDiseaseSymptom"/>
     </view-state>
     
     <action-state id="deleteDiseaseSymptom">
         <on-entry>
-            <set name="flowScope.diseaseSymptom" value="requestParameters.diseaseSymptom"/>
+            <set name="flowScope.diseaseSymptom" value="requestParameters.diseaseSymptom" type="com.selfdiagnosis.core.entity.DiseaseSymptomEntity"/>
         </on-entry>
-        <evaluate expression="adminService.deleteDiseaseSymptom(flowScope.diseaseSymptom)"/>
+        <evaluate expression="adminService.deleteEntity(flowScope.diseaseSymptom)"/>
         <transition to="refreshDiseaseSymptoms"/>
     </action-state>
     

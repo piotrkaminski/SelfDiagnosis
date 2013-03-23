@@ -41,8 +41,8 @@ public class BodyPartEntity extends SelfDiagnosisEntity implements Serializable 
     /**
      * Name of the body part.
      */
-    @NotBlank
-    @Length(max = SelfDiagnosisConstants.BODY_PART_NAME_LENGTH_MAX)
+    @NotBlank(message = "{NotBlank.name}")
+    @Length(max = SelfDiagnosisConstants.BODY_PART_NAME_LENGTH_MAX, message = "{Length.name}")
     @Column(name = "name", unique = false, nullable = false)
     private String name;
 

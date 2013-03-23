@@ -14,6 +14,8 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
@@ -28,6 +30,7 @@ import com.selfdiagnosis.SelfDiagnosisConstants;
  */
 @Entity
 @Table(name = "Disease")
+@OnDelete(action = OnDeleteAction.CASCADE)
 public class DiseaseEntity extends SelfDiagnosisEntity implements Serializable {
 
     /**
@@ -47,7 +50,7 @@ public class DiseaseEntity extends SelfDiagnosisEntity implements Serializable {
      * Name of the disease.
      */
     @NotBlank (message = "{NotBlank.name}")
-    @Length(max = SelfDiagnosisConstants.DISEASE_NAME_LENGTH_MAX)
+    @Length(max = SelfDiagnosisConstants.DISEASE_NAME_LENGTH_MAX, message = "{Length.name}")
     @Column(name = "name", unique = false, nullable = false)
     private String name;
 
@@ -62,7 +65,8 @@ public class DiseaseEntity extends SelfDiagnosisEntity implements Serializable {
      */
     @NotNull (message = "{NotBlank.frequency}")
     @Range(min = SelfDiagnosisConstants.ENTITY_FREQUENCY_MIN, 
-            max = SelfDiagnosisConstants.ENTITY_FREQUENCY_MAX)
+            max = SelfDiagnosisConstants.ENTITY_FREQUENCY_MAX,
+            message = "{Range.frequency}")
     @Column(name = "frequency", nullable = false)
     private Short frequency;
 

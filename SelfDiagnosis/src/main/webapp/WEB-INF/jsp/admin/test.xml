@@ -20,7 +20,7 @@
         <transition on="saveAndNew" to="entityForm">
             <evaluate expression="testBean" result="entity"/>
         </transition>
-        <transition on="addNewTestType" to="addNewTestType"></transition>
+        <transition on="addNewTestType" to="addNewTestType" bind="true" validate="false"/>
     </view-state>
 
     <subflow-state id="addNewTestType" subflow="testType">

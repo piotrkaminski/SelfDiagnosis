@@ -11,9 +11,6 @@
             <evaluate expression="adminService.getTestList()" result="flowScope.tests"></evaluate>
     </on-start>
 
-<!-- After adding start state to parent flow, this shouldn't be necesary 
-    <decision-state id="createOrEdit"/> -->
-
     <action-state id="create">
         <evaluate expression="symptomBean" result="flowScope.entity" />
         <transition to="entityForm" />
@@ -23,9 +20,9 @@
         <transition on="saveAndNew" to="entityForm">
             <evaluate expression="symptomBean" result="entity"/>
         </transition>
-        <transition on="addNewBodyPart" to="addNewBodyPart"></transition>
-        <transition on="addNewSymptomType" to="addNewSymptomType"></transition>
-        <transition on="addNewTest" to="addNewTest"></transition>
+        <transition on="addNewBodyPart" to="addNewBodyPart" bind="true" validate="false"/>
+        <transition on="addNewSymptomType" to="addNewSymptomType" bind="true" validate="false"/>
+        <transition on="addNewTest" to="addNewTest" bind="true" validate="false"/>
     </view-state>
 
     <subflow-state id="addNewBodyPart" subflow="bodyPart">

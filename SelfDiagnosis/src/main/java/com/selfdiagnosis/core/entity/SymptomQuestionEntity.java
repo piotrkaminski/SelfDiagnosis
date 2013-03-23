@@ -43,7 +43,7 @@ public class SymptomQuestionEntity extends SelfDiagnosisEntity implements Serial
     /**
      * Symptom, this question relates to.
      */
-    @NotNull
+    @NotNull(message = "{NotNull.symptom}")
     @ManyToOne
     @JoinColumn(name = "symptom_id", unique = false, nullable = false)
     private SymptomEntity symptom;
@@ -52,16 +52,16 @@ public class SymptomQuestionEntity extends SelfDiagnosisEntity implements Serial
      * Question's number within given symptom. First question is always about
      * having a symptom.
      */
-    @NotNull
-    @Min(0)
+    @NotNull(message = "{NotNull.questionNumber}")
+    @Min(value = 0, message = "{Min.questionNumber}")
     @Column(name = "questionNumber", unique = false, nullable = false)
     private Short questionNumber;
 
     /**
      * Question's text.
      */
-    @NotBlank
-    @Length(max = SelfDiagnosisConstants.SYMPTOM_QUESTION_LENGTH_MAX)
+    @NotBlank(message = "{NotBlank.question}")
+    @Length(max = SelfDiagnosisConstants.SYMPTOM_QUESTION_LENGTH_MAX, message = "{Length.question}")
     @Column(name = "question", unique = false, nullable = false)
     private String question;
 

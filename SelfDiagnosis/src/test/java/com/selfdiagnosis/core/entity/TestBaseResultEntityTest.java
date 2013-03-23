@@ -28,7 +28,7 @@ public class TestBaseResultEntityTest extends EntityTest {
         testBaseResult.setTest(null);
         Set<ConstraintViolation<TestBaseResultEntity>> constraintViolations = getValidator().validate(testBaseResult);
         assertEquals(1, constraintViolations.size());
-        assertEquals("may not be null", constraintViolations.iterator().next().getMessage());
+        assertEquals("{NotNull.test}", constraintViolations.iterator().next().getMessage());
     }
 
     /**
@@ -40,8 +40,7 @@ public class TestBaseResultEntityTest extends EntityTest {
         testBaseResult.setTestUnit(null);
         Set<ConstraintViolation<TestBaseResultEntity>> constraintViolations = getValidator().validate(testBaseResult);
         assertEquals(1, constraintViolations.size());
-        //TODO: Move messages to constants.
-        assertEquals("may not be null", constraintViolations.iterator().next().getMessage());
+        assertEquals("{NotNull.testUnit}", constraintViolations.iterator().next().getMessage());
     }
 
     @Override

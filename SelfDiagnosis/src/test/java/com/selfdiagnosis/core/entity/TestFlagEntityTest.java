@@ -30,7 +30,7 @@ public class TestFlagEntityTest extends EntityTest {
         testFlag.setName("");
         Set<ConstraintViolation<TestFlagEntity>> constraintViolations = getValidator().validate(testFlag);
         assertEquals(1, constraintViolations.size());
-        assertEquals("may not be empty", constraintViolations.iterator().next().getMessage());
+        assertEquals("{NotBlank.name}", constraintViolations.iterator().next().getMessage());
     }
 
     /**
@@ -43,7 +43,7 @@ public class TestFlagEntityTest extends EntityTest {
         testFlag.setName(flag);
         Set<ConstraintViolation<TestFlagEntity>> constraintViolations = getValidator().validate(testFlag);
         assertEquals(1, constraintViolations.size());
-        assertEquals("length must be between 0 and 20", constraintViolations.iterator().next().getMessage());
+        assertEquals("{Length.name}", constraintViolations.iterator().next().getMessage());
     }
 
     @Override

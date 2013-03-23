@@ -39,8 +39,8 @@ public class RecommendationEntity extends SelfDiagnosisEntity implements Seriali
     /**
      * Text of recommendation.
      */
-    @NotBlank
-    @Length(max = SelfDiagnosisConstants.RECOMMENDATION_LENGTH_MAX)
+    @NotBlank(message = "{NotBlank.recommendation}")
+    @Length(max = SelfDiagnosisConstants.RECOMMENDATION_LENGTH_MAX, message = "{Length.recommendation}")
     @Column(name = "recommendation", unique = false, nullable = false)
     private String recommendation;
 

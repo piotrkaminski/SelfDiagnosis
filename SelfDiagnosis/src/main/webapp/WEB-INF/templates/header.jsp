@@ -4,5 +4,5 @@
 <div id="headerTitle"><fmt:message key="site.title"/></div>
 
 <div class="subHeader">
-    <div align="right"><a href="<c:url value="/logout"/>"><fmt:message key="button.logout"/></a></div>
+    <div align="right"><a href="<c:url value="j_spring_security_logout"/>"><fmt:message key="button.logout"/></a></div>
 </div>

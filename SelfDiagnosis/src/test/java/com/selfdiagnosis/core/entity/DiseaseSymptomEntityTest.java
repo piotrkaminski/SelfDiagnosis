@@ -29,7 +29,7 @@ public class DiseaseSymptomEntityTest extends EntityTest {
         diseaseSymptom.setDisease(null);
         Set<ConstraintViolation<DiseaseSymptomEntity>> constraintViolations = getValidator().validate(diseaseSymptom);
         assertEquals(1, constraintViolations.size());
-        assertEquals("may not be null", constraintViolations.iterator().next().getMessage());
+        assertEquals("{NotBlank.disease}", constraintViolations.iterator().next().getMessage());
     }
     
     /**
@@ -41,7 +41,7 @@ public class DiseaseSymptomEntityTest extends EntityTest {
         diseaseSymptom.setSymptom(null);
         Set<ConstraintViolation<DiseaseSymptomEntity>> constraintViolations = getValidator().validate(diseaseSymptom);
         assertEquals(1, constraintViolations.size());
-        assertEquals("may not be null", constraintViolations.iterator().next().getMessage());
+        assertEquals("{NotNull.symptom}", constraintViolations.iterator().next().getMessage());
     }
     
     /**
@@ -53,7 +53,7 @@ public class DiseaseSymptomEntityTest extends EntityTest {
         diseaseSymptom.setFrequency(null);
         Set<ConstraintViolation<DiseaseSymptomEntity>> constraintViolations = getValidator().validate(diseaseSymptom);
         assertEquals(1, constraintViolations.size());
-        assertEquals("may not be null", constraintViolations.iterator().next().getMessage());
+        assertEquals("{NotBlank.frequency}", constraintViolations.iterator().next().getMessage());
     }
 
     /**
@@ -65,12 +65,12 @@ public class DiseaseSymptomEntityTest extends EntityTest {
         diseaseSymptom.setFrequency(new Short("-1"));
         Set<ConstraintViolation<DiseaseSymptomEntity>> constraintViolations = getValidator().validate(diseaseSymptom);
         assertEquals(1, constraintViolations.size());
-        assertEquals("must be between 0 and 100", constraintViolations.iterator().next().getMessage());
+        assertEquals("{Range.frequency}", constraintViolations.iterator().next().getMessage());
         
         diseaseSymptom.setFrequency(new Short("101"));
         constraintViolations = getValidator().validate(diseaseSymptom);
         assertEquals(1, constraintViolations.size());
-        assertEquals("must be between 0 and 100", constraintViolations.iterator().next().getMessage());
+        assertEquals("{Range.frequency}", constraintViolations.iterator().next().getMessage());
     }
 
     /**
@@ -82,7 +82,7 @@ public class DiseaseSymptomEntityTest extends EntityTest {
         diseaseSymptom.setRank(null);
         Set<ConstraintViolation<DiseaseSymptomEntity>> constraintViolations = getValidator().validate(diseaseSymptom);
         assertEquals(1, constraintViolations.size());
-        assertEquals("may not be null", constraintViolations.iterator().next().getMessage());
+        assertEquals("{NotBlank.rank}", constraintViolations.iterator().next().getMessage());
     }
 
     /**
@@ -94,12 +94,12 @@ public class DiseaseSymptomEntityTest extends EntityTest {
         diseaseSymptom.setRank(new Short("-1"));
         Set<ConstraintViolation<DiseaseSymptomEntity>> constraintViolations = getValidator().validate(diseaseSymptom);
         assertEquals(1, constraintViolations.size());
-        assertEquals("must be between 0 and 10", constraintViolations.iterator().next().getMessage());
+        assertEquals("{Range.rank}", constraintViolations.iterator().next().getMessage());
         
         diseaseSymptom.setRank(new Short("11"));
         constraintViolations = getValidator().validate(diseaseSymptom);
         assertEquals(1, constraintViolations.size());
-        assertEquals("must be between 0 and 10", constraintViolations.iterator().next().getMessage());
+        assertEquals("{Range.rank}", constraintViolations.iterator().next().getMessage());
     }
 
     @Override

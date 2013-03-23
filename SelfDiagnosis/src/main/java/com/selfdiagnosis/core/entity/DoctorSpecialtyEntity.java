@@ -39,7 +39,7 @@ public class DoctorSpecialtyEntity extends SelfDiagnosisEntity implements Serial
     /**
      * Name of the specialty.
      */
-    @NotBlank
+    @NotBlank(message = "{NotBlank.name}")
     @Length(max = SelfDiagnosisConstants.DOCTOR_SPECIALTY_NAME_LENGTH_MAX)
     @Column(name = "name", unique = false, nullable = false)
     private String name;

@@ -28,7 +28,7 @@ public class BodyPartEntityTest extends EntityTest {
         bodyPart.setName("");
         Set<ConstraintViolation<BodyPartEntity>> constraintViolations = getValidator().validate(bodyPart);
         assertEquals(1, constraintViolations.size());
-        assertEquals("may not be empty", constraintViolations.iterator().next().getMessage());
+        assertEquals("{NotBlank.name}", constraintViolations.iterator().next().getMessage());
     }
 
     /**
@@ -40,7 +40,7 @@ public class BodyPartEntityTest extends EntityTest {
         bodyPart.setName("Very long body part name that is longer than fifty characters");
         Set<ConstraintViolation<BodyPartEntity>> constraintViolations = getValidator().validate(bodyPart);
         assertEquals(1, constraintViolations.size());
-        assertEquals("length must be between 0 and 50", constraintViolations.iterator().next().getMessage());
+        assertEquals("{Length.name}", constraintViolations.iterator().next().getMessage());
     }
 
     @Override

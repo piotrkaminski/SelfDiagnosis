@@ -31,7 +31,7 @@ public class SymptomQuestionAnswerEntityTest extends EntityTest {
         Set<ConstraintViolation<SymptomQuestionAnswerEntity>> constraintViolations = getValidator().validate(
                 symptomQuestionAnswer);
         assertEquals(1, constraintViolations.size());
-        assertEquals("may not be null", constraintViolations.iterator().next().getMessage());
+        assertEquals("{NotNull.symptomQuestion}", constraintViolations.iterator().next().getMessage());
     }
 
     /**
@@ -44,7 +44,7 @@ public class SymptomQuestionAnswerEntityTest extends EntityTest {
         Set<ConstraintViolation<SymptomQuestionAnswerEntity>> constraintViolations = getValidator().validate(
                 symptomQuestionAnswer);
         assertEquals(1, constraintViolations.size());
-        assertEquals("may not be null", constraintViolations.iterator().next().getMessage());
+        assertEquals("{NotNull.answerNumber}", constraintViolations.iterator().next().getMessage());
     }
 
     /**
@@ -57,7 +57,7 @@ public class SymptomQuestionAnswerEntityTest extends EntityTest {
         Set<ConstraintViolation<SymptomQuestionAnswerEntity>> constraintViolations = getValidator().validate(
                 symptomQuestionAnswer);
         assertEquals(1, constraintViolations.size());
-        assertEquals("may not be empty", constraintViolations.iterator().next().getMessage());
+        assertEquals("{NotBlank.answer}", constraintViolations.iterator().next().getMessage());
     }
 
     /**
@@ -72,7 +72,7 @@ public class SymptomQuestionAnswerEntityTest extends EntityTest {
         Set<ConstraintViolation<SymptomQuestionAnswerEntity>> constraintViolations = getValidator().validate(
                 symptomQuestionAnswer);
         assertEquals(1, constraintViolations.size());
-        assertEquals("length must be between 0 and 200", constraintViolations.iterator().next().getMessage());
+        assertEquals("{Length.answer}", constraintViolations.iterator().next().getMessage());
     }
 
     @Override

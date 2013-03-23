@@ -42,8 +42,8 @@ public class SymptomEntity extends SelfDiagnosisEntity implements Serializable {
     /**
      * Name of the symptom..
      */
-    @NotBlank
-    @Length(max = SelfDiagnosisConstants.SYMPTOM_NAME_LENGTH_MAX)
+    @NotBlank(message = "{NotBlank.name}")
+    @Length(max = SelfDiagnosisConstants.SYMPTOM_NAME_LENGTH_MAX, message = "{Length.name}")
     @Column(name = "name", unique = false, nullable = false)
     private String name;
 
@@ -56,7 +56,7 @@ public class SymptomEntity extends SelfDiagnosisEntity implements Serializable {
     /**
      * Type of the symptom.
      */
-    @NotNull
+    @NotNull(message = "{NotNull.symptomType}")
     @ManyToOne
     @JoinColumn(name = "symptomType_id", nullable = false)
     private SymptomTypeEntity symptomType;

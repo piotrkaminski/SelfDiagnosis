@@ -43,8 +43,8 @@ public class TestEntity extends SelfDiagnosisEntity implements Serializable {
     /**
      * Name of the test.
      */
-    @NotBlank
-    @Length(max = SelfDiagnosisConstants.TEST_NAME_LENGTH_MAX)
+    @NotBlank(message = "{NotBlank.name}")
+    @Length(max = SelfDiagnosisConstants.TEST_NAME_LENGTH_MAX, message = "{Length.name}")
     @Column(name = "name", unique = false, nullable = false)
     private String name;
 
@@ -57,7 +57,7 @@ public class TestEntity extends SelfDiagnosisEntity implements Serializable {
     /**
      * Type of the test - i.e. blood, urine etc.
      */
-    @NotNull
+    @NotNull(message = "{NotNull.testType}")
     @ManyToOne
     @JoinColumn(name = "testType_id")
     private TestTypeEntity testType;
@@ -65,7 +65,7 @@ public class TestEntity extends SelfDiagnosisEntity implements Serializable {
     /**
      * For how many days, test result is valid.
      */
-    @Min(0)
+    @Min(value = 0, message = "{Min.validForDays}")
     @Column(name = "validForDays", unique = false, nullable = true)
     private Integer validForDays;
 

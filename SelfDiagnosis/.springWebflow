@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <webflow-project-description>
 	<version>1</version>
-	<pluginVersion><![CDATA[3.2.0.201211290605-M1]]></pluginVersion>
+	<pluginVersion><![CDATA[3.2.0.201303060654-RELEASE]]></pluginVersion>
 	<configs>
 		<config>
 			<file>src/main/webapp/WEB-INF/jsp/admin/parent-flow.xml</file>
@@ -30,6 +30,10 @@
 		<config>
 			<file>src/main/webapp/WEB-INF/jsp/admin/symptom.xml</file>
 			<name><![CDATA[symptom]]></name>
+		</config>
+		<config>
+			<file>src/main/webapp/WEB-INF/jsp/admin/parent-list-flow.xml</file>
+			<name><![CDATA[parent-list-flow]]></name>
 		</config>
 	</configs>
 </webflow-project-description>

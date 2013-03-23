@@ -11,30 +11,30 @@
     <fmt:message key="disease.form.title"/>  
 </h1>
 
-<div id="messages">
-    <c:if test="${not empty statusMessageKey}">
-       <p><fmt:message key="${statusMessageKey}"/></p>
-    </c:if>
-</div>
 
 <form:form commandName="entity">
     <form:hidden path="id" />
 
     <fieldset>
+	    <div id="messages" class="success">
+	        <c:if test="${not empty statusMessageKey}">
+	           <p><fmt:message key="${statusMessageKey}"/></p>
+	        </c:if>
+	    </div>
         <div class="form-row">
             <label for="name"><fmt:message key="form.name"/>:</label>
-            <span class="input"><form:input path="name" /></span>
-            <form:errors path="name"/>
+            <span class="input"><form:input path="name" cssErrorClass="error"/></span>
+            <form:errors path="name" cssClass="error"/>
         </div>  
         <div class="form-row">
             <label for="description"><fmt:message key="form.description"/>:</label>
-            <span class="input"><form:input path="description" /></span>
-            <form:errors path="description"/>
+            <span class="input"><form:input path="description" cssErrorClass="error"/></span>
+            <form:errors path="description" cssClass="error"/>
         </div>  
         <div class="form-row">
             <label for="frequency"><fmt:message key="form.frequency"/>:</label>
-            <span class="input"><form:input path="frequency" /></span>
-            <form:errors path="frequency"/>
+            <span class="input"><form:input path="frequency" cssErrorClass="error"/></span>
+            <form:errors path="frequency" cssClass="error"/>
         </div>  
         <div class="form-row">
         
@@ -51,10 +51,10 @@
 	                <span class="input"><form:select path="diseaseSymptom.symptom" items="${symptoms}" itemLabel="name" itemValue="id"/></span>
 	            </td>
 	            <td>
-	                <span class="input"><form:input path="diseaseSymptom.rank"/></span>
+	                <span class="input"><form:input path="diseaseSymptom.rank" cssErrorClass="error"/></span>
 	            </td>
 	            <td>
-	                <span class="input"><form:input path="diseaseSymptom.frequency"/></span>
+	                <span class="input"><form:input path="diseaseSymptom.frequency" cssErrorClass="error"/></span>
 	            </td>
 	            <td>
 	                <input type="submit" name="_eventId_addNewDiseaseSymptom" value="<fmt:message key="disease.form.addNewDiseaseSymptom"/>" />
@@ -62,13 +62,14 @@
 	        </tr>
 	        <tr>
 	            <td/>
-	            <td><form:errors path="diseaseSymptom.symptom"/></td>
-	            <td><form:errors path="diseaseSymptom.rank"/></td>
-	            <td><form:errors path="diseaseSymptom.frequency"/></td>
+	            <td><form:errors path="diseaseSymptom.symptom" cssClass="error" /></td>
+	            <td><form:errors path="diseaseSymptom.rank" cssClass="error"/></td>
+	            <td><form:errors path="diseaseSymptom.frequency" cssClass="error"/></td>
 	        </tr>
 	        <tr>
 	            <td/>
-	            <td><input type="submit" name="_eventId_addNewSymptom" value="<fmt:message key="disease.form.addNewSymptom" /> "/></td>
+	            <td><input type="image" name="_eventId_addNewSymptom" src="/images/button_add.jpg"/></td>
+	            <!--value="<fmt:message key="disease.form.addNewSymptom" /> "/></td> -->
 	        </tr>
 	    </table>
 	    </div> 
@@ -79,12 +80,15 @@
         <fmt:message key="disease.form.diseaseSymptomList" /> :  
     </h2>
     <table class="search">
+    <thead>
         <tr>
             <td><fmt:message key="form.id" /> </td>
             <td><fmt:message key="form.symptom" /> </td>
             <td><fmt:message key="form.rank" /></td>
             <td><fmt:message key="form.frequency" /></td>
         </tr>
+    </thead>
+    <tbody>
     <c:forEach var="diseaseSymptom" items="${diseaseSymptoms}" varStatus="counter">
         <tr>
             <td>${counter.index}</td>
@@ -94,8 +98,8 @@
             
             <td><a href="${flowExecutionUrl}&_eventId=deleteDiseaseSymptom&diseaseSymptom=${diseaseSymptom}">Delete</a></td>
         </tr>
-        <tr/>
     </c:forEach>
+    </tbody>
     </table>
     
 </form:form>

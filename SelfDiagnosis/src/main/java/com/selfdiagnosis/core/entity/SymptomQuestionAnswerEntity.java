@@ -43,7 +43,7 @@ public class SymptomQuestionAnswerEntity extends SelfDiagnosisEntity implements 
     /**
      * Question, this answer relates to.
      */
-    @NotNull
+    @NotNull(message = "{NotNull.symptomQuestion}")
     @ManyToOne
     @JoinColumn(name = "symptomQuestion_id", unique = false, nullable = false)
     private SymptomQuestionEntity symptomQuestion;
@@ -51,16 +51,16 @@ public class SymptomQuestionAnswerEntity extends SelfDiagnosisEntity implements 
     /**
      * Answers's number within given symptom question.
      */
-    @NotNull
-    @Min(0)
+    @NotNull(message = "{NotNull.answerNumber}")
+    @Min(value = 0, message = "{Min.answerNumber}")
     @Column(name = "answerNumber", unique = false, nullable = false)
     private Short answerNumber;
 
     /**
      * Answer's text.
      */
-    @NotBlank
-    @Length(max = SelfDiagnosisConstants.SYMPTOM_QUESTION_ANSWER_LENGTH_MAX)
+    @NotBlank(message = "{NotBlank.answer}")
+    @Length(max = SelfDiagnosisConstants.SYMPTOM_QUESTION_ANSWER_LENGTH_MAX, message = "{Length.answer}")
     @Column(name = "answer", unique = false, nullable = false)
     private String answer;
 

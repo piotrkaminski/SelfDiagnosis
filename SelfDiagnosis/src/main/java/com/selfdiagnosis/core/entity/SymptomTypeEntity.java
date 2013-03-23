@@ -39,8 +39,8 @@ public class SymptomTypeEntity extends SelfDiagnosisEntity implements Serializab
     /**
      * Name of the symptom type..
      */
-    @NotBlank
-    @Length(max = SelfDiagnosisConstants.SYMPTOM_TYPE_NAME_LENGTH_MAX)
+    @NotBlank(message = "{NotBlank.name}")
+    @Length(max = SelfDiagnosisConstants.SYMPTOM_TYPE_NAME_LENGTH_MAX, message = "{Length.name}")
     @Column(name = "name", unique = false, nullable = false)
     private String name;
 

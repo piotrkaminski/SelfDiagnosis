@@ -1,44 +1,46 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<html>
-<head>
-    <title>Edit Test</title>
-</head>
-<body>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
+<tiles:insertDefinition name="mainTemplate" >
+<tiles:putAttribute name="body">
 <h1>
-    Enter new Test!  
+    <fmt:message key="test.form.title"/>  
 </h1>
 <form:form commandName="entity">
-    <table>
-        <tr>
-            <td> Name: </td>
-            <td><form:input path="name"/></td>
-            <td><form:errors path="name"/></td>
-        </tr>
-        <tr>
-            <td> Description: </td>
-            <td><form:input path="description"/></td>
-            <td><form:errors path="description"/></td>
-        </tr>
-        <tr>
-            <td> Test type: </td>
-            <td>
-                <form:select path="testType" items="${testTypes}" itemLabel="name" itemValue="id"/>
-            </td>
-            <td><input type="submit" name="_eventId_addNewTestType" value="Add New Test Type"/></td>
-        </tr>
-        <tr>
-            <td> Valid for days: </td>
-            <td><form:input path="validForDays"/></td>
-            <td><form:errors path="validForDays"/></td>
-        </tr>
-        <tr>
-            <td><input type="submit" name="_eventId_back" value="Back"/></td>
-            <td><input type="submit" name="_eventId_save" value="Save"/></td>
-            <td><input type="submit" name="_eventId_saveAndNew" value="Save and New"/></td>
-            <td><input type="submit" name="_eventId_saveAndBack" value="Save and Back"/></td>
-        </tr>
-    </table>
+    <form:hidden path="id" />
+
+    <fieldset>
+        <div id="messages" class="success">
+            <c:if test="${not empty statusMessageKey}">
+               <p><fmt:message key="${statusMessageKey}"/></p>
+            </c:if>
+        </div>
+        <div class="form-row">
+            <label for="name"><fmt:message key="form.name"/>:</label>
+            <span class="input"><form:input path="name" cssErrorClass="error"/></span>
+            <form:errors path="name" cssClass="error"/>
+        </div>  
+        <div class="form-row">
+            <label for="description"><fmt:message key="form.description"/>:</label>
+            <span class="input"><form:input path="description" cssErrorClass="error"/></span>
+            <form:errors path="description" cssClass="error"/>
+        </div>
+        <div class="form-row">
+            <label for="testType"><fmt:message key="form.testType"/>:</label>
+            <form:select path="testType" items="${testTypes}" itemLabel="name" itemValue="id"/>
+            <input type="submit" name="_eventId_addNewTestType" value="<fmt:message key="test.form.addNewTestType" /> "/>
+            <form:errors path="testType" cssClass="error"/>
+        </div>  
+        <div class="form-row">
+            <label for="validForDays"><fmt:message key="form.validForDays"/>:</label>
+            <span class="input"><form:input path="validForDays" cssErrorClass="error"/></span>
+            <form:errors path="validForDays" cssClass="error"/>
+        </div>
+          
+        <br> 
+        <jsp:include page="buttons.jsp"></jsp:include>
+    </fieldset>
 </form:form>
-</body>
-</html>
+</tiles:putAttribute>
+</tiles:insertDefinition>

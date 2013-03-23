@@ -39,8 +39,8 @@ public class TreatmentTypeEntity extends SelfDiagnosisEntity implements Serializ
     /**
      * Name of the treatment type.
      */
-    @NotBlank
-    @Length(max = SelfDiagnosisConstants.TREATMENT_NAME_LENGTH_MAX)
+    @NotBlank(message = "{NotBlank.name}")
+    @Length(max = SelfDiagnosisConstants.TREATMENT_NAME_LENGTH_MAX, message = "{Length.name}")
     @Column(name = "name", unique = false, nullable = false)
     private String name;
 

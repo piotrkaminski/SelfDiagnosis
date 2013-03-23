@@ -49,7 +49,7 @@ table {
 }
 
 #menu {
-	width: 15em;
+	width: 20em;
 	float: left;
 	clear: left;
 	border-right: 1px solid rgb(153, 153, 153);
@@ -69,9 +69,9 @@ table {
   margin-right: 0pt;
   margin-bottom: 0pt;
   margin-left: 0pt;
-  padding-top: 0.75em;
+  padding-top: 0.25em;
   padding-right: 1ex;
-  padding-bottom: 0.75em;
+  padding-bottom: 0.25em;
   padding-left: 5mm;
   display: block;
 }
@@ -100,7 +100,6 @@ table {
 	margin: 0;
 	padding: 1em 2.5mm 2.5ex 2.5mm;
 	clear: both;
-	position: absolute;
 	bottom: 0;
 	left: 0;
 	right: 0;
@@ -122,10 +121,9 @@ table {
 #content {
   color: black;
   background-color: white;
-
-text-align: justify;
+  text-align: justify;
   line-height: 1.5em;
-  margin: 0 0 0 15em;
+  margin: 0 0 0 20em;
   padding: 2mm 5mm 5mm 5mm;
 }
 
@@ -143,7 +141,6 @@ text-align: justify;
   padding: 0.5ex 0 0.5ex 1ex;
 }
 
-
 table.search {
 	margin: 1em 1ex 2em 1ex;
 	font-size: 91%;
@@ -152,14 +149,23 @@ table.search {
 	border-style: solid solid solid solid;
 	border-color: black black black black;
 	border-collapse: separate;
-	background-color: white;
+}
+table.search thead tr:nth-child(1) {
+	background-color: #488214;
+	font-weight: bold;
+	color: white; 
+}
+table.search tbody tr:nth-child(even) {
+    background-color: rgb(206, 243, 164);
+}
+table.search tbody tr:nth-child(2n+1) {
+    background-color: #99D365;
 }
 table.search th {
 	border-width: 1px 1px 1px 1px;
 	padding: 1px 1px 1px 1px;
 	border-style: inset inset inset inset;
 	border-color: gray gray gray gray;
-	background-color: white;
 	-moz-border-radius: 0px 0px 0px 0px;
 }
 table.search td {
@@ -167,7 +173,6 @@ table.search td {
 	padding: 1px 1px 1px 1px;
 	border-style: inset inset inset inset;
 	border-color: gray gray gray gray;
-	background-color: white;
 	-moz-border-radius: 0px 0px 0px 0px;
 }
 
@@ -198,4 +203,11 @@ div.form-buttons {
 }
 div.form-buttons div.button {
   float: right;
+}
+.error {
+	color: #ff0000;
+}
+.success {
+	color: #009900;
+	font-weight: bold;
 }
