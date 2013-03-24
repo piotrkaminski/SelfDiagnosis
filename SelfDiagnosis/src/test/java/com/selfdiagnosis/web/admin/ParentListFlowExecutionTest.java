@@ -71,6 +71,33 @@ public abstract class ParentListFlowExecutionTest extends SpringWebContextTest {
     }
 
     /**
+     * Universal method for entity deletion.
+     * 
+     */
+    @Test
+    @Transactional
+    public void testFlowDeleteEntity() {
+        SelfDiagnosisEntity entity = createEntity();
+        adminServiceMock.deleteEntity(entity);
+//        entityListOnRender();
+        EasyMock.replay(getAdminServiceMock());
+
+        setCurrentState("entityList");
+        getFlowScope().put("entity", entity);
+
+        MockExternalContext context = new MockExternalContext();
+        context.setEventId("deleteEntity");
+        resumeFlow(context);
+
+        assertFlowExecutionActive();
+        assertCurrentStateEquals("entityList");
+        assertResponseWrittenEquals(getFormName(), context);
+
+        EasyMock.verify(getAdminServiceMock());
+        
+    }
+
+    /**
      * Universal method for subflow test.
      * 
      * @param subflow

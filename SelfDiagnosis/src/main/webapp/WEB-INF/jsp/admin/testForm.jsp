@@ -23,7 +23,7 @@
         </div>  
         <div class="form-row">
             <label for="description"><fmt:message key="form.description"/>:</label>
-            <span class="input"><form:input path="description" cssErrorClass="error"/></span>
+            <span class="input"><form:textarea path="description" cssErrorClass="error" rows="10" cols="70" /></span>
             <form:errors path="description" cssClass="error"/>
         </div>
         <div class="form-row">

@@ -57,6 +57,11 @@ SELECT @securityRole_id = id from [dbo].[SecurityRole] WHERE [roleName] = 'ROLE_
 INSERT INTO [dbo].[SystemUserSecurityRole](systemUser_id, securityRole_id) 
     VALUES (@user_id, @securityRole_id);
 
+SELECT @securityRole_id = id from [dbo].[SecurityRole] WHERE [roleName] = 'ROLE_ADMINISTRATOR';
+
+INSERT INTO [dbo].[SystemUserSecurityRole](systemUser_id, securityRole_id) 
+    VALUES (@user_id, @securityRole_id);
+    
 END
 GO
 
